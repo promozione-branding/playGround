@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-kalam: var(--font-kalam);
+  --font-quicksand: 'Quicksand', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-quicksand,
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* ==========================================
+   JODIT EDITOR & RENDERED CONTENT STYLES
+   ========================================== */
+
+/* 1. Editor Inside Styles (.jodit-wysiwyg) */
+.jodit-wysiwyg {
+  overflow-y: auto !important;
+  max-height: 100% !important;
+  overscroll-behavior: contain !important;
+}
+.jodit-container .jodit-workarea {
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+}
+.jodit-wysiwyg ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+.jodit-wysiwyg ol {
+  list-style: decimal;
+  padding-left: 20px;
+}
+.jodit-wysiwyg ul ul {
+  list-style: circle;
+}
+.jodit-wysiwyg ul ul ul {
+  list-style: square;
+}
+
+/* 2. Frontend Rendered Content Styles (.jodit-content) */
+.jodit-content {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+.jodit-content ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+.jodit-content ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+.jodit-content li {
+  margin: 5px 0;
+}
+
+
+
