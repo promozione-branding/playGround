@@ -221,17 +221,17 @@ export default function KidzaNavbar() {
 
               {/* Right: contact info */}
               <div className="hidden md:flex items-center gap-5 text-white/90 font-medium shrink-0">
-                <a href="mailto:kidza@gmail.com" className="flex items-center gap-1 hover:text-white transition-colors">
+                <a href="mailto:info@toyparkindia.com" className="flex items-center gap-1 hover:text-white transition-colors">
                   <Mail className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  <span className="text-xs">kidza@gmail.com</span>
+                  <span className="text-xs">info@toyparkindia.com</span>
                 </a>
-                <a href="tel:+004793948888" className="flex items-center gap-1 hover:text-white transition-colors">
+                <a href="tel:+919811117654" className="flex items-center gap-1 hover:text-white transition-colors">
                   <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  <span className="text-xs">+00 (47) 939 4888</span>
+                  <span className="text-xs">+919811117654</span>
                 </a>
                 <span className="hidden lg:flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  <span className="text-xs">Graaf Floris 22A, NY</span>
+                  <span className="text-xs">Karol Bagh New Delhi - 110005, India</span>
                 </span>
               </div>
             </div>

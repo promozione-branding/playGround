@@ -40,10 +40,10 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
   }, []);
 
   // Ref-based mouse parallax throttled with requestAnimationFrame (Desktop only)
-  const cloudsRef = useRef<{ 
-    c1: HTMLDivElement | null; 
-    c2: HTMLDivElement | null; 
-    c3: HTMLDivElement | null 
+  const cloudsRef = useRef<{
+    c1: HTMLDivElement | null;
+    c2: HTMLDivElement | null;
+    c3: HTMLDivElement | null
   }>({ c1: null, c2: null, c3: null });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -123,16 +123,18 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('/api/partner-form', {
+      const res = await fetch('https://brandbnalo.com/api/form/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          fullName: trimmedFullName,
+          platform: "Playground Home Page",
+          platformEmail: "info@toyparkindia.com",
+          name: trimmedFullName,
           email: trimmedEmail,
           company: trimmedCompany,
           phone: trimmedPhone,
-          state: trimmedState,
-          city: trimmedCity,
+          product: "N/A",
+          place: trimmedCity,
           message: trimmedMessage,
         }),
       });
@@ -152,24 +154,24 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
 
   return (
     <div className={`relative w-full overflow-visible font-sans antialiased ${className}`}>
-      
+
       {/* ═══ SCALLOP WAVE OVERLAY ═══ */}
       <div className="absolute top-0 left-0 w-full leading-none z-10 -translate-y-[99%] pointer-events-none">
-        <svg 
-          className="w-full h-24 sm:h-32 md:h-40 block" 
-          viewBox="0 0 1440 190" 
+        <svg
+          className="w-full h-24 sm:h-32 md:h-40 block"
+          viewBox="0 0 1440 190"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          <path 
-            d="M0,128L48,117.3C96,107,192,85,288,85.3C384,85,480,107,576,128C672,149,768,171,864,165.3C960,160,1056,128,1152,112C1248,96,1344,96,1392,96L1440,96L1440,190L0,190Z" 
-            fill="#BDECF0" 
+          <path
+            d="M0,128L48,117.3C96,107,192,85,288,85.3C384,85,480,107,576,128C672,149,768,171,864,165.3C960,160,1056,128,1152,112C1248,96,1344,96,1392,96L1440,96L1440,190L0,190Z"
+            fill="#BDECF0"
           />
         </svg>
       </div>
 
       {/* ═══ MAIN SECTION ═══ */}
-      <div 
+      <div
         id="contact"
         ref={sectionRef}
         onMouseMove={handleMouseMove}
@@ -177,46 +179,46 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
         className="relative w-full bg-[#BDECF0] text-[#0F2942] pt-6 pb-12 sm:pb-16 px-3 sm:px-12 z-20 scroll-mt-10 overflow-hidden"
         style={{ contain: 'paint' }}
       >
-        
+
         {/* Parallax Clouds */}
-        <div 
-          ref={(el) => { cloudsRef.current.c1 = el; }} 
+        <div
+          ref={(el) => { cloudsRef.current.c1 = el; }}
           className="absolute opacity-80 pointer-events-none z-10 left-[3%] sm:left-[10%] -top-2 md:top-0"
           aria-hidden="true"
         >
-          <Image 
-            src="/assets/upperFooter/cloud_string.webp" 
-            alt="" 
-            width={144} 
-            height={80} 
+          <Image
+            src="/assets/upperFooter/cloud_string.webp"
+            alt=""
+            width={144}
+            height={80}
             className="w-20 sm:w-28 md:w-36 h-auto object-contain"
             loading="lazy"
           />
         </div>
-        <div 
-          ref={(el) => { cloudsRef.current.c2 = el; }} 
+        <div
+          ref={(el) => { cloudsRef.current.c2 = el; }}
           className="hidden md:block absolute opacity-80 pointer-events-none z-10 left-[45%] top-10"
           aria-hidden="true"
         >
-          <Image 
-            src="/assets/upperFooter/cloud_string.webp" 
-            alt="" 
-            width={160} 
-            height={90} 
+          <Image
+            src="/assets/upperFooter/cloud_string.webp"
+            alt=""
+            width={160}
+            height={90}
             className="w-32 sm:w-40 h-auto object-contain"
             loading="lazy"
           />
         </div>
-        <div 
-          ref={(el) => { cloudsRef.current.c3 = el; }} 
+        <div
+          ref={(el) => { cloudsRef.current.c3 = el; }}
           className="absolute opacity-80 pointer-events-none z-10 right-[3%] sm:right-[10%] -top-4 md:-top-5"
           aria-hidden="true"
         >
-          <Image 
-            src="/assets/upperFooter/cloud_string.webp" 
-            alt="" 
-            width={192} 
-            height={100} 
+          <Image
+            src="/assets/upperFooter/cloud_string.webp"
+            alt=""
+            width={192}
+            height={100}
             className="w-24 sm:w-36 md:w-48 h-auto object-contain"
             loading="lazy"
           />
@@ -229,7 +231,7 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
         <div className="absolute top-[40%] right-[10%] text-[#70C1D6] opacity-70 w-5 h-5 select-none pointer-events-none" aria-hidden="true">✦</div>
 
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-20 mt-4">
-          
+
           {/* Left: Text & Video Container */}
           <div className="w-full lg:w-5/12 flex flex-col items-center lg:items-start justify-center font-quicksand z-20">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#4ECDC4] mb-3 text-center lg:text-left">
@@ -238,16 +240,16 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
             <p className="text-base sm:text-lg font-extrabold text-[#4ECDC4] mb-6 text-center lg:text-left">
               Have questions? We'd love to hear from you. Drop us a message below.
             </p>
-            
+
             {/* Playful Video Frame */}
             <div className="relative w-full max-w-[520px] aspect-video p-3 bg-white rounded-[2.5rem] shadow-sm z-10">
               {isVideoVisible ? (
-                <video 
-                  src="https://pub-eb2eff44950b4abfbe1564159bd1cbc8.r2.dev/video/toy_park_3.mp4%20(2).mp4" 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
+                <video
+                  src="https://pub-eb2eff44950b4abfbe1564159bd1cbc8.r2.dev/video/toy_park_3.mp4%20(2).mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   preload="none"
                   className="w-full h-full object-cover rounded-[2rem] bg-gray-100"
                 />
@@ -270,32 +272,32 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                 </p>
               </div>
             ) : (
-              <form 
-                onSubmit={handleSubmit} 
+              <form
+                onSubmit={handleSubmit}
                 className="w-full max-w-2xl flex flex-col gap-5 bg-white/35 p-8 sm:p-10 rounded-[2.5rem] border border-white/50 shadow-sm"
               >
                 {/* Row 1: Name & Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">Full Name</label>
-                    <input 
-                      type="text" 
-                      required 
+                    <input
+                      type="text"
+                      required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      placeholder="Enter your name" 
+                      placeholder="Enter your name"
                       className="w-full px-5 py-3.5 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">Email Address</label>
-                    <input 
-                      type="email" 
-                      required 
+                    <input
+                      type="email"
+                      required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="Enter your email" 
+                      placeholder="Enter your email"
                       className="w-full px-5 py-3.5 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50"
                     />
                   </div>
@@ -305,11 +307,11 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">Company Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Company name (optional)" 
+                      placeholder="Company name (optional)"
                       className="w-full px-5 py-3.5 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50"
                     />
                   </div>
@@ -320,13 +322,13 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                       <span className="pl-4 pr-3 py-3.5 text-[#0F2942]/60 font-semibold border-r border-[#0F2942]/10 select-none">
                         +91
                       </span>
-                      <input 
-                        type="tel" 
-                        required 
+                      <input
+                        type="tel"
+                        required
                         maxLength={10}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })}
-                        placeholder="Enter 10-digit number" 
+                        placeholder="Enter 10-digit number"
                         className="w-full px-4 py-3.5 bg-transparent text-[#0F2942] text-sm font-semibold focus:outline-none placeholder:text-[#0F2942]/50"
                       />
                     </div>
@@ -337,24 +339,24 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">State</label>
-                    <input 
-                      type="text" 
-                      required 
+                    <input
+                      type="text"
+                      required
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      placeholder="State" 
+                      placeholder="State"
                       className="w-full px-5 py-3.5 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">City</label>
-                    <input 
-                      type="text" 
-                      required 
+                    <input
+                      type="text"
+                      required
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      placeholder="City" 
+                      placeholder="City"
                       className="w-full px-5 py-3.5 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50"
                     />
                   </div>
@@ -363,19 +365,19 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                 {/* Row 4: Message */}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">Your Message</label>
-                  <textarea 
-                    rows={3} 
-                    required 
+                  <textarea
+                    rows={3}
+                    required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Write your message..." 
+                    placeholder="Write your message..."
                     className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-transparent text-[#0F2942] text-sm font-semibold focus:bg-white focus:outline-none focus:border-[#70C1D6] transition-colors placeholder:text-[#0F2942]/50 resize-none"
                   />
                 </div>
 
                 {/* Submit Button */}
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full mt-2 py-4 rounded-2xl bg-[#4ECDC4] text-white font-black text-sm tracking-widest uppercase hover:bg-[#3dbcb3] active:scale-[0.98] transition-colors duration-200 shadow-sm flex items-center justify-center gap-3 group disabled:opacity-50"
                 >

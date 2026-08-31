@@ -56,14 +56,18 @@ export default function ContactForm({ productName = '', className = '' }: Contac
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('/api/contact-form', {
+      const res = await fetch('https://brandbnalo.com/api/form/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: trimmedFullName,
+        body: JSON.stringify({  
+          platform: "Playground Contact Page",
+          platformEmail: "info@toyparkindia.com",
+          name: trimmedFullName,
           email: trimmedEmail,
+          company: 'NA',
           phone: trimmedPhone,
           product: trimmedProduct,
+          place: "N/A",
           message: trimmedMessage,
         }),
       });
@@ -92,14 +96,14 @@ export default function ContactForm({ productName = '', className = '' }: Contac
   return (
     <div id="contact-form-section" className={`bg-[#EAF8F9] border-3 border-[#2D3436] rounded-[2.5rem] p-8 md:p-12 shadow-[8px_8px_0px_0px_#2D3436] relative overflow-hidden ${className}`}>
       {/* Background Floating Clouds (Pure CSS Animated on Desktop, Static on Mobile) */}
-      <img 
-        src="/assets/cloud-svgrepo-com.svg" 
-        alt="Floating Cloud 1" 
+      <img
+        src="/assets/cloud-svgrepo-com.svg"
+        alt="Floating Cloud 1"
         className="hidden md:block absolute top-4 left-[-40px] w-32 md:w-44 opacity-35 pointer-events-none z-0 animate-cloud-float-slow"
       />
-      <img 
-        src="/assets/cloud-svgrepo-com.svg" 
-        alt="Floating Cloud 2" 
+      <img
+        src="/assets/cloud-svgrepo-com.svg"
+        alt="Floating Cloud 2"
         className="hidden md:block absolute bottom-6 right-[-20px] w-36 md:w-48 opacity-35 pointer-events-none z-0 animate-cloud-float-reverse"
       />
 

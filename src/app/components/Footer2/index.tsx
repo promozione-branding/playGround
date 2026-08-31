@@ -39,16 +39,16 @@ const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const Footer2 = () => {
   return (
     <footer className="relative bg-white pt-4 sm:pt-16 pb-[160px] sm:pb-48 md:pb-60 lg:pb-72 font-quicksand text-gray-600 overflow-hidden">
-      
+
       {/* ═══ TOP SCALLOPED FLUFFY CLOUD WAVE DIVIDER ═══ */}
       <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none -translate-y-[98%] text-white">
-        <svg 
-          className="relative block w-full h-10 sm:h-16 md:h-20 lg:h-24" 
-          viewBox="0 0 283.5 25" 
-          preserveAspectRatio="none" 
+        <svg
+          className="relative block w-full h-10 sm:h-16 md:h-20 lg:h-24"
+          viewBox="0 0 283.5 25"
+          preserveAspectRatio="none"
         >
-          <path 
-            className="fill-white" 
+          <path
+            className="fill-white"
             d="M265.8 3.5c-10.9 0-15.9 6.2-15.9 6.2s-3.6-3.5-9.2-.9c-9.1 4.1-4.4 13.4-4.4 13.4s-1.2.2-1.9.9c-.6.7-.5 1.9-.5 1.9s-1-.5-2.3-.2c-1.3.3-1.6 1.4-1.6 1.4s.4-3.4-1.5-5c-3.9-3.4-8.3-.2-8.3-.2s-.6-.7-.9-.9c-.4-.2-1.2-.2-1.2-.2s-4.4-3.6-11.5-2.6-10.4 7.9-10.4 7.9-.5-3.3-3.9-4.9c-4.8-2.4-7.4 0-7.4 0s2.4-4.1-1.9-6.4-6.2 1.2-6.2 1.2-.9-.5-2.1-.5-2.3 1.1-2.3 1.1.1-.7-1.1-1.1c-1.2-.4-2 0-2 0s3.6-6.8-3.5-8.9c-6-1.8-7.9 2.6-8.4 4-.1-.3-.4-.7-.9-1.1-1-.7-1.3-.5-1.3-.5s1-4-1.7-5.2c-2.7-1.2-4.2 1.1-4.2 1.1s-3.1-1-5.7 1.4-2.1 5.5-2.1 5.5-.9 0-2.1.7-1.4 1.7-1.4 1.7-1.7-1.2-4.3-1.2c-2.6 0-4.5 1.2-4.5 1.2s-.7-1.5-2.8-2.4c-2.1-.9-4 0-4 0s2.6-5.9-4.7-9c-7.3-3.1-12.6 3.3-12.6 3.3s-.9 0-1.9.2c-.9.2-1.5.9-1.5.9S99.4 3 94.9 3.9c-4.5.9-5.7 5.7-5.7 5.7s-2.8-5-12.3-3.9-11.1 6-11.1 6-1.2-1.4-4-.7c-.8.2-1.3.5-1.8.9-.9-2.1-2.7-4.9-6.2-4.4-3.2.4-4 2.2-4 2.2s-.5-.7-1.2-.7h-1.4s-.5-.9-1.7-1.4-2.4 0-2.4 0-2.4-1.2-4.7 0-3.1 4.1-3.1 4.1-1.7-1.4-3.6-.7c-1.9.7-1.9 2.8-1.9 2.8s-.5-.5-1.7-.2c-1.2.2-1.4.7-1.4.7s-.7-2.3-2.8-2.8c-2.1-.5-4.3.2-4.3.2s-1.7-5-11.1-6c-3.8-.4-6.6.2-8.5 1v21.2h283.5V11.1c-.9.2-1.6.4-1.6.4s-5.2-8-16.1-8z"
           />
         </svg>
@@ -76,17 +76,17 @@ const Footer2 = () => {
       {/* --- Top Content Section --- */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-4">
-          
+
           {/* Column 1: Brand & Contact Info */}
           <div className="space-y-1 sm:space-y-4 lg:col-span-3">
             {/* Logo */}
             <Link href="/" className="inline-block -mt-2 sm:-mt-5 mb-0 sm:mb-1">
-              <Image 
-                src="/assets/clean_logo_toypark.webp" 
-                alt="ToyPark Logo" 
+              <Image
+                src="/assets/clean_logo_toypark.webp"
+                alt="ToyPark Logo"
                 width={320}
                 height={120}
-                className="h-20 sm:h-28 md:h-34 w-auto max-w-[260px] sm:max-w-[320px] object-contain transform hover:scale-105 transition-transform" 
+                className="h-20 sm:h-28 md:h-34 w-auto max-w-[260px] sm:max-w-[320px] object-contain transform hover:scale-105 transition-transform"
               />
             </Link>
 
@@ -96,25 +96,26 @@ const Footer2 = () => {
                 <div className="w-7 h-7 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0 text-[#00C4B5] mt-0.5">
                   <MapPin size={15} />
                 </div>
-                <span className="font-semibold leading-snug">6391 Elgin St. Celina, Delaware 10299</span>
+                <span className="font-semibold leading-snug">17a/57, W.E.A., Karol Bagh
+                  New Delhi - 110005, India</span>
               </li>
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0 text-amber-500">
                   <Phone size={15} />
                 </div>
-                <span className="font-semibold">+000-1234-456789</span>
+                <span className="font-semibold">+919811117654</span>
               </li>
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-rose-50 flex items-center justify-center flex-shrink-0 text-[#FF6B6B]">
                   <Mail size={15} />
                 </div>
-                <span className="font-semibold">toypark@gmail.com</span>
+                <span className="font-semibold">info@toyparkindia.com</span>
               </li>
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500">
-                  <Printer size={15} />
+                  <Phone size={15} />
                 </div>
-                <span className="font-semibold">+000-1234-55000</span>
+                <span className="font-semibold">011-28759070</span>
               </li>
             </ul>
           </div>
@@ -172,10 +173,10 @@ const Footer2 = () => {
               </h3>
               <div className="w-8 sm:w-10 h-1 bg-[#00C4B5] mb-3 sm:mb-6 rounded-full"></div>
               <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5 sm:gap-3 text-sm sm:text-base">
-                {['Contact Us', 'Store List', 'Opening Hours', 'Returns & Exchanges', 'Refund & Returns', 'Privacy Policy'].map((link) => (
-                  <li key={link}>
-                    <Link href="#" className="text-gray-600 hover:text-[#00C4B5] font-bold transition-colors duration-200 inline-block hover:translate-x-1 transform">
-                      {link}
+                {[{ name: 'Contact Us', href: "/contact" }, { name: 'Partner with us', href: "/partner" }, { name: 'Returns & Exchanges', href: "/returns-and-exchanges" }, { name: 'Refund & Returns', href: "/refund-and-returns" }, { name: 'Privacy Policy', href: "/privacy-policy" }].map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className="text-gray-600 hover:text-[#00C4B5] font-bold transition-colors duration-200 inline-block hover:translate-x-1 transform">
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -195,19 +196,19 @@ const Footer2 = () => {
                 <h3 className="text-lg sm:text-[20px] font-black text-[#0F2942] mb-1 leading-tight">
                   Subscribe Our Newsletter
                 </h3>
-                
+
                 <p className="text-sm sm:text-base mb-3 text-[#0F2942]/80 leading-relaxed font-semibold">
                   Never miss our latest toy releases, deals, and play guides.
                 </p>
-                
+
                 {/* Input Form */}
                 <div className="relative flex items-center w-full mb-3">
                   <div className="absolute left-3 text-gray-400">
                     <Mail size={15} />
                   </div>
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email" 
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
                     className="w-full py-2.5 pl-9 pr-11 rounded-xl border border-white/60 focus:outline-none focus:bg-white bg-white text-slate-800 text-sm sm:text-base shadow-xs transition-all font-semibold placeholder:text-gray-400"
                   />
                   <button className="absolute right-1 top-1 bottom-1 bg-[#00C4B5] hover:bg-[#00b0a2] text-white px-3 rounded-lg transition-all flex items-center justify-center shadow-sm hover:scale-105 active:scale-95">
@@ -231,17 +232,17 @@ const Footer2 = () => {
 
       {/* --- Bottom Animated Grass & Children Section --- */}
       <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none">
-        
+
         {/* Animated Child 1 */}
-        <motion.div 
+        <motion.div
           className="absolute z-20 left-[2%] sm:left-[5%] lg:left-[5%] bottom-[15px] sm:bottom-[60px] md:bottom-[70px] lg:bottom-[83px] w-20 sm:w-32 md:w-36 lg:w-[177px]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Image 
-            src="/assets/Footer_images/Child1.svg" 
+          <Image
+            src="/assets/Footer_images/Child1.svg"
             alt=""
             width={177}
             height={200}
@@ -250,15 +251,15 @@ const Footer2 = () => {
         </motion.div>
 
         {/* Animated Child 2 */}
-        <motion.div 
+        <motion.div
           className="absolute z-20 right-[2%] sm:right-[5%] lg:right-[6%] bottom-[20px] sm:bottom-[70px] md:bottom-[85px] lg:bottom-[100px] w-20 sm:w-32 md:w-36 lg:w-[147px]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Image 
-            src="/assets/Footer_images/child2.svg" 
+          <Image
+            src="/assets/Footer_images/child2.svg"
             alt=""
             width={147}
             height={180}
@@ -267,8 +268,8 @@ const Footer2 = () => {
         </motion.div>
 
         {/* Static Grass Image */}
-        <Image 
-          src="/assets/Footer_images/greengrass.png" 
+        <Image
+          src="/assets/Footer_images/greengrass.png"
           alt=""
           width={1920}
           height={435}
@@ -277,7 +278,7 @@ const Footer2 = () => {
 
         {/* Copyright Bar */}
         <div className="absolute bottom-2 sm:bottom-3 w-full text-center z-30 pointer-events-auto text-white/90 text-[10px] sm:text-sm font-medium px-4">
-          © 2024 toyup. All Rights Reserved by RadiusTheme
+          © 2026 Toypark. All Rights Reserved by Toypark
         </div>
       </div>
 
