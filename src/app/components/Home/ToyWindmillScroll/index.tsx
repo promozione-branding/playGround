@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
+import PopupForm from "@/app/components/popup/PopupForm"
 
 export const ToyWindmillScroll: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   useEffect(() => {
     const section = sectionRef.current;
     const vid = videoRef.current;
@@ -17,12 +18,12 @@ export const ToyWindmillScroll: React.FC = () => {
     const playObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          vid.play().catch(() => {});
+          vid.play().catch(() => { });
         } else {
           vid.pause();
         }
       },
-      { 
+      {
         rootMargin: '0px',
         threshold: 0.15 // Play when 15% of the section is visible
       }
@@ -36,11 +37,11 @@ export const ToyWindmillScroll: React.FC = () => {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       className="relative w-full min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center pt-0 pb-10 lg:pb-16 px-6 sm:px-10 overflow-hidden bg-gradient-to-br from-[#93e2ec] via-[#93e2ec] to-[#c1f2eb] font-quicksand antialiased text-zinc-800"
     >
-      
+
       {/* ═══ BACKGROUND MEDIA ═══ */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         {/* Background Video */}
@@ -55,27 +56,27 @@ export const ToyWindmillScroll: React.FC = () => {
         />
         {/* Light Overlay */}
         <div className="absolute inset-0 bg-white/10 pointer-events-none" />
-        
+
         {/* Color Glow Overlay (#6DD2DB) */}
         <div className="absolute inset-0 bg-[#6DD2DB]/10 pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(109,210,219,0.3)_0%,transparent_45%)] pointer-events-none" />
-        
+
         {/* Top Blend Overlay (#6DD2DB to Transparent) */}
         <div className="absolute top-0 left-0 right-0 h-10 md:h-16 bg-gradient-to-b from-[#6DD2DB] to-transparent pointer-events-none z-10" />
-        
+
         {/* Bottom Blend Overlay (Transparent to Marquee Teal) */}
         <div className="absolute bottom-0 left-0 right-0 h-32 md:h-48 bg-gradient-to-t from-[#00C4B5] to-transparent pointer-events-none" />
       </div>
 
       {/* ═══ FOREGROUND CONTENT (GRID LAYOUT: WINDMILL SHIFTED LEFT, TEXT ON RIGHT) ═══ */}
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center font-quicksand">
-        
+
         {/* Spacer Column on Left — Keeps moving windmill 100% visible */}
         <div className="hidden lg:block lg:col-span-4 xl:col-span-5 h-full min-h-[300px]" />
 
         {/* Text & Stats Container — Shifted to Right Column */}
         <div className="lg:col-span-8 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8">
-          
+
           {/* Title and copy */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -87,7 +88,7 @@ export const ToyWindmillScroll: React.FC = () => {
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] font-black leading-snug tracking-tight text-white font-quicksand drop-shadow-md">
               <span>Made for Little Hands.</span><br />
-              <span 
+              <span
                 className="text-white font-black inline-block"
                 style={{ WebkitTextStroke: "0px transparent" }}
               >
@@ -102,7 +103,7 @@ export const ToyWindmillScroll: React.FC = () => {
 
             {/* B2B Action Buttons */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-              <button className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#00C4B5] to-[#0284C7] hover:from-[#00a89b] hover:to-[#026fa8] text-white font-extrabold text-xs sm:text-sm px-6 py-3 shadow-lg shadow-[#00C4B5]/25 hover:shadow-xl hover:scale-105 transition-[transform,background-color,box-shadow] duration-300 cursor-pointer whitespace-nowrap font-quicksand">
+              <button onClick={() => setIsPopupOpen(true)} className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#00C4B5] to-[#0284C7] hover:from-[#00a89b] hover:to-[#026fa8] text-white font-extrabold text-xs sm:text-sm px-6 py-3 shadow-lg shadow-[#00C4B5]/25 hover:shadow-xl hover:scale-105 transition-[transform,background-color,box-shadow] duration-300 cursor-pointer whitespace-nowrap font-quicksand">
                 <span>Request B2B Wholesale Quote</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -185,7 +186,11 @@ export const ToyWindmillScroll: React.FC = () => {
           </motion.div>
 
         </div>
-
+        <PopupForm
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          productName="Toy Product"
+        />
       </div>
     </section>
   );

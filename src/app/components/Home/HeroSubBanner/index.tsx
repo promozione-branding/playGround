@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const BANNERS = [
   {
@@ -9,7 +10,7 @@ const BANNERS = [
     title: 'Kids Table & Play Sets',
     subtitle: 'Discover Amazing Offers!',
     buttonText: 'See Collection',
-    href: '#shop',
+    href: '/products',
     bgColor: 'bg-[#FFD400]',
     btnTextColor: 'text-[#FFB800]',
     image: '/assets/heroSubBanner/table.png',
@@ -21,7 +22,7 @@ const BANNERS = [
     title: 'Children Day Collection 2023',
     subtitle: "15% Off on Kids' Toys and Gifts!",
     buttonText: 'See Collection',
-    href: '#shop',
+    href: '/products',
     bgColor: 'bg-[#F83B58]',
     btnTextColor: 'text-[#F83B58]',
     image: '/assets/heroSubBanner/kids_1.png',
@@ -48,7 +49,7 @@ export const HeroSubBanner: React.FC = () => {
       <div className="max-w-[1400px] mx-auto">
 
         {/* ═══ MOBILE VIEW: RECTANGLE CARD AUTO-SWIPE CAROUSEL (< md) ═══ */}
-        <div 
+        <div
           className="block md:hidden relative w-full overflow-hidden"
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
@@ -109,11 +110,10 @@ export const HeroSubBanner: React.FC = () => {
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === idx
-                    ? 'w-6 bg-slate-800'
-                    : 'w-2 bg-slate-300 hover:bg-slate-400'
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx
+                  ? 'w-6 bg-slate-800'
+                  : 'w-2 bg-slate-300 hover:bg-slate-400'
+                  }`}
               />
             ))}
           </div>
@@ -121,7 +121,7 @@ export const HeroSubBanner: React.FC = () => {
 
         {/* ═══ DESKTOP VIEW: 2-COLUMN GRID (>= md) ═══ */}
         <div className="hidden md:grid grid-cols-2 gap-6 md:gap-8">
-          
+
           {/* LEFT BANNER */}
           <div
             className="relative group overflow-hidden rounded-[2.2rem] bg-[#FFD400] p-7 sm:p-10 flex flex-row items-center justify-between min-h-[260px] sm:min-h-[290px] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
@@ -133,13 +133,12 @@ export const HeroSubBanner: React.FC = () => {
               <p className="text-sm sm:text-base font-semibold !text-white/95 drop-shadow-sm mb-6">
                 Discover Amazing Offers!
               </p>
-              <a
-                href="#shop"
+              <Link href={"/products"}
                 className="inline-flex items-center gap-2 bg-white text-[#FFB800] hover:bg-slate-50 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-105 active:scale-95"
               >
                 <span>See Collection</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />
-              </a>
+              </Link>
             </div>
 
             <div className="relative mt-0 flex-1 h-full w-full max-w-[220px] sm:max-w-[260px] flex items-center justify-center">
@@ -164,13 +163,12 @@ export const HeroSubBanner: React.FC = () => {
               <p className="text-sm sm:text-base font-semibold text-white/90 mb-6">
                 15% Off on Kids&apos; Toys and Gifts!
               </p>
-              <a
-                href="#shop"
+              <Link href={"/products"}
                 className="inline-flex items-center gap-2 bg-white text-[#F83B58] hover:bg-slate-50 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-105 active:scale-95"
               >
                 <span>See Collection</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />
-              </a>
+              </Link>
             </div>
 
             <div className="relative mt-0 flex-1 h-full w-full max-w-[220px] sm:max-w-[280px] flex items-center justify-center">

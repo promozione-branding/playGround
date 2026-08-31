@@ -186,7 +186,7 @@ export default function KidzaNavbar() {
       {/* Search Modal */}
       {isSearchOpen && <SearchModal onClose={() => setIsSearchOpen(false)} />}
 
-      <header className="w-full font-quicksand relative z-50">
+      <header className="w-full font-quicksand relative z-40">
 
         {/* ═══ 1. ANNOUNCEMENT BAR ═══ */}
         {announcementVisible && (
@@ -240,7 +240,7 @@ export default function KidzaNavbar() {
 
         {/* ═══ 2. MAIN NAVBAR ═══ */}
         <nav
-          className={`px-4 sm:px-6 lg:px-12 py-1 flex items-center justify-between sticky top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
+          className={`px-4 sm:px-6 lg:px-12 py-1 flex items-center justify-between sticky top-0 z-40 transition-[background-color,box-shadow] duration-300 ${
             scrolled
               ? 'bg-white shadow-md border-b border-gray-100'
               : 'bg-white shadow-sm'
@@ -285,7 +285,7 @@ export default function KidzaNavbar() {
                 {/* Categories Dropdown */}
                 {isCategoriesOpen && (
                   <div
-                    className="absolute left-0 mt-3 w-60 z-50"
+                    className="absolute left-0 mt-3 w-60 z-40"
                     style={{ animation: 'dropIn 0.2s cubic-bezier(0.34,1.56,0.64,1) both' }}
                   >
                     <div className="bg-white rounded-2xl shadow-xl shadow-black/12 border border-gray-100/80 py-2 overflow-hidden">
@@ -338,7 +338,7 @@ export default function KidzaNavbar() {
 
                   {/* Dropdown */}
                   {item.children && (
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-40"
                       style={{ transitionProperty: 'opacity, visibility, transform' }}
                     >
                       <div
@@ -423,7 +423,7 @@ export default function KidzaNavbar() {
           {/* ═══ MOBILE DRAWER ═══ */}
           {isMobileMenuOpen && (
             <div
-              className="xl:hidden absolute top-full left-0 right-0 z-50 overflow-hidden"
+              className="xl:hidden absolute top-full left-0 right-0 z-40 overflow-hidden"
               style={{ animation: 'drawerSlideIn 0.3s cubic-bezier(0.34,1.2,0.64,1) both' }}
             >
               {/* Glassmorphism panel */}

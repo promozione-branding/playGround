@@ -59,7 +59,7 @@ export default function ContactForm({ productName = '', className = '' }: Contac
       const res = await fetch('https://brandbnalo.com/api/form/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({  
+        body: JSON.stringify({
           platform: "Playground Contact Page",
           platformEmail: "info@toyparkindia.com",
           name: trimmedFullName,

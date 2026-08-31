@@ -60,7 +60,7 @@ export default function AdminLayout({
 
             {/* SIDEBAR */}
             <aside
-                className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out ${
+                className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out ${
                     mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
                 }`}
             >

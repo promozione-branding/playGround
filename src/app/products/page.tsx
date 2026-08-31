@@ -74,8 +74,8 @@ export default function ProductListing() {
     visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
   };
 
-  const filteredProducts = activeTab === 'All' 
-    ? PRODUCTS 
+  const filteredProducts = activeTab === 'All'
+    ? PRODUCTS
     : PRODUCTS.filter((p) => p.category.toLowerCase().includes(activeTab.toLowerCase()));
 
   return (
@@ -120,11 +120,10 @@ export default function ProductListing() {
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`relative px-6 py-2.5 rounded-full text-sm sm:text-base font-black transition-all cursor-pointer ${
-                activeTab === cat
-                  ? 'bg-[#00C4B5] text-white shadow-md scale-105'
-                  : 'bg-white text-[#636E72] hover:bg-gray-50 border border-gray-200/80'
-              }`}
+              className={`relative px-6 py-2.5 rounded-full text-sm sm:text-base font-black transition-all cursor-pointer ${activeTab === cat
+                ? 'bg-[#00C4B5] text-white shadow-md scale-105'
+                : 'bg-white text-[#636E72] hover:bg-gray-50 border border-gray-200/80'
+                }`}
             >
               {cat}
             </button>
@@ -150,7 +149,7 @@ export default function ProductListing() {
                     {product.badge}
                   </div>
                 )}
-                <button 
+                <button
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
                   className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 rounded-full border border-gray-100 flex items-center justify-center text-[#2D3436] hover:bg-[#FF6B6B] hover:text-white transition-colors shadow-sm"
                 >
@@ -176,7 +175,7 @@ export default function ProductListing() {
                   <h3 className="font-black text-lg text-[#2D3436] leading-tight mb-2 line-clamp-2">
                     {product.title}
                   </h3>
-                  
+
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
                     <div className="flex text-[#FFE66D]">
@@ -195,16 +194,25 @@ export default function ProductListing() {
                         <span className="text-xs font-bold text-gray-400 line-through">{product.originalPrice}</span>
                       )}
                     </div>
-                    <button 
-                      onClick={(e) => { 
-                        e.preventDefault(); 
-                        e.stopPropagation(); 
-                        window.location.href = '/#contact';
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = "tel:+919811117654";
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.location.href = "tel:+919811117654";
+                        }
                       }}
                       className="px-4 py-2 bg-[#00C4B5] rounded-full text-white font-black text-xs uppercase tracking-wider hover:bg-[#FFE66D] hover:text-[#2D3436] shadow-md transition-all cursor-pointer"
                     >
                       Enquire Now
-                    </button>
+                    </span>
                   </div>
                 </div>
               </motion.div>

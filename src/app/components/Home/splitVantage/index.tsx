@@ -14,6 +14,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 
 interface Project {
   id: string;
@@ -109,7 +110,7 @@ function MobileView() {
   return (
     <div className="w-full bg-[#FFFFFF] px-4 py-4 font-quicksand antialiased text-[#2D3436]">
       <div className="max-w-md mx-auto">
-        
+
         <div className="flex items-center justify-between mb-4">
           <span className="bg-[#FFE66D] border-2 border-[#2D3436] px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-[#2D3436]">
             FEATURED COLLECTIONS
@@ -172,13 +173,12 @@ function MobileView() {
                 </div>
 
                 {/* Button */}
-                <button
-                  type="button"
+                <Link href={"/products"}
                   className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-between border-2 border-[#2D3436] cursor-pointer ${proj.btnColor}`}
                 >
                   <span>EXPLORE COLLECTION</span>
                   <ArrowRight className="w-4 h-4 stroke-[3]" />
-                </button>
+                </Link>
               </div>
             </SwiperSlide>
           ))}
@@ -237,18 +237,16 @@ function DesktopView() {
                   {projects.map((proj, idx) => (
                     <div key={proj.id} className="flex items-center gap-3">
                       <div
-                        className={`w-3.5 h-3.5 rounded-full border-2 border-[#2D3436] transition-all duration-300 ${
-                          activeIndex === idx
-                            ? 'bg-[#FF6B6B] scale-110'
-                            : 'bg-[#FFFFFF] scale-90'
-                        }`}
+                        className={`w-3.5 h-3.5 rounded-full border-2 border-[#2D3436] transition-all duration-300 ${activeIndex === idx
+                          ? 'bg-[#FF6B6B] scale-110'
+                          : 'bg-[#FFFFFF] scale-90'
+                          }`}
                       />
                       <span
-                        className={`text-xs font-black uppercase tracking-wider transition-colors duration-300 ${
-                          activeIndex === idx
-                            ? 'text-[#2D3436]'
-                            : 'text-[#636E72]'
-                        }`}
+                        className={`text-xs font-black uppercase tracking-wider transition-colors duration-300 ${activeIndex === idx
+                          ? 'text-[#2D3436]'
+                          : 'text-[#636E72]'
+                          }`}
                       >
                         {proj.name}
                       </span>
@@ -256,13 +254,12 @@ function DesktopView() {
                   ))}
                 </div>
 
-                <a
-                  href="#"
+                <Link href={"/products"}
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFE66D] border-2 border-[#2D3436] text-[#2D3436] text-xs font-black uppercase tracking-wider hover:-translate-y-0.5 active:translate-y-0.5 transition-all shrink-0"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#2D3436]" />
                   <span>All Collections</span>
-                </a>
+                </Link>
               </div>
 
               {/* Dynamic Text Content */}
@@ -323,13 +320,12 @@ function DesktopView() {
               </div>
 
               {/* CTA Button */}
-              <button
-                type="button"
+              <Link href={"/products"}
                 className={`w-full py-4 px-6 rounded-2xl font-black text-sm uppercase tracking-wider flex items-center justify-between border-3 border-[#2D3436] hover:-translate-y-1 active:translate-y-0.5 transition-all duration-200 group mt-4 cursor-pointer ${projects[activeIndex].btnColor}`}
               >
                 <span>EXPLORE COLLECTION</span>
                 <ArrowRight className="w-5 h-5 stroke-[3] transform group-hover:translate-x-1.5 transition-transform duration-200" />
-              </button>
+              </Link>
             </div>
 
             {/* Right Column - Image Reveal Container */}
@@ -351,7 +347,8 @@ function DesktopView() {
       </div>
 
       {/* Lightweight Keyframe Animations */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes balloonFloat {
           0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
           50% { transform: translate3d(0, -14px, 0) rotate(6deg); }

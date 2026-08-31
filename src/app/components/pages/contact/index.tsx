@@ -7,21 +7,21 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 const CONTACT_CARDS = [
   {
     title: 'Call / WhatsApp',
-    detail: '+91 98765 43210',
+    detail: '+91 9811117654',
     icon: Phone,
     bgColor: 'bg-[#FFE66D]',
     textColor: 'text-[#0F2942]',
   },
   {
     title: 'Email Us',
-    detail: 'support@toypark.com',
+    detail: 'info@toypark.com',
     icon: Mail,
     bgColor: 'bg-[#FF6B6B]',
     textColor: 'text-white',
   },
   {
     title: 'Location',
-    detail: 'Mumbai, Maharashtra, India',
+    detail: '17a/57, W.E.A., Karol Bagh New Delhi - 110005, India',
     icon: MapPin,
     bgColor: 'bg-[#4ECDC4]',
     textColor: 'text-[#0F2942]',
@@ -38,16 +38,16 @@ const CONTACT_CARDS = [
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#F7FDFF] text-[#0F2942] font-quicksand overflow-x-hidden selection:bg-[#4ECDC4] selection:text-white">
-      
+
       {/* ═══ TOP HERO SECTION ═══ */}
       <section className="relative pt-12 pb-6 sm:pt-16 sm:pb-8 md:pt-20 md:pb-10 px-4 sm:px-12 max-w-7xl mx-auto">
-        
+
         {/* Decorative Stars (Desktop only to save mobile GPU paints) */}
         <div className="hidden sm:block absolute top-10 left-5 text-[#70C1D6] opacity-40 text-2xl select-none animate-pulse">✦</div>
         <div className="hidden sm:block absolute top-24 right-10 text-[#70C1D6] opacity-50 text-xl select-none">✦</div>
 
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10">
-          
+
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#BDECF0]/50 border border-[#70C1D6]/30 text-[#0F2942] text-xs sm:text-sm font-extrabold tracking-widest uppercase mb-4 sm:mb-6 shadow-xs">
             <span>💬</span> We'd Love To Hear From You <span>💬</span>
@@ -69,7 +69,7 @@ export default function ContactPage() {
       {/* ═══ SIDE-BY-SIDE CONTENT: CARDS ON LEFT, FORM ON RIGHT ═══ */}
       <section className="px-4 sm:px-12 max-w-7xl mx-auto pb-16 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-          
+
           {/* LEFT SIDE: CONTACT CARDS */}
           <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-5">
             {CONTACT_CARDS.map((card, idx) => {

@@ -8,32 +8,33 @@ import Lenis from "lenis";
 import { Sparkles, Star, Zap, Rocket, Gamepad2, Heart, ArrowRight } from "lucide-react";
 
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const reasons = [
-  { 
-    title: "Wholesale-Friendly", 
-    desc: "Flexible quantities that make bulk buying easier for businesses of every size.", 
-    color: "bg-pink-500", 
+  {
+    title: "Wholesale-Friendly",
+    desc: "Flexible quantities that make bulk buying easier for businesses of every size.",
+    color: "bg-pink-500",
     top: "22%"
   },
-  { 
-    title: "Built for Everyday Play", 
-    desc: "Durable, child-friendly furniture designed to handle busy classrooms and active little learners.", 
-    color: "bg-cyan-500", 
+  {
+    title: "Built for Everyday Play",
+    desc: "Durable, child-friendly furniture designed to handle busy classrooms and active little learners.",
+    color: "bg-cyan-500",
     top: "42%"
   },
-  { 
-    title: "Custom Ready", 
-    desc: "OEM, private-label, colours, and customization options available for your requirements.", 
-    color: "bg-amber-500", 
+  {
+    title: "Custom Ready",
+    desc: "OEM, private-label, colours, and customization options available for your requirements.",
+    color: "bg-amber-500",
     top: "62%"
   },
-  { 
-    title: "One Partner. Less Hassle.", 
-    desc: "From choosing the right products to getting your order dispatched, we keep sourcing simple.", 
-    color: "bg-emerald-500", 
+  {
+    title: "One Partner. Less Hassle.",
+    desc: "From choosing the right products to getting your order dispatched, we keep sourcing simple.",
+    color: "bg-emerald-500",
     top: "82%"
   },
 ];
@@ -191,7 +192,7 @@ export default function WhyChooseUsPageContent() {
           opacity: 1;
         }
       `}</style>
-      
+
       {/* ─── 1. HERO ─────────────────────────────────────── */}
       <section
         ref={heroRef}
@@ -284,8 +285,8 @@ export default function WhyChooseUsPageContent() {
         {/* Perk stations */}
         {reasons.map((reason, i) => {
           const isRight = i % 2 === 1;
-          const positionStyles = isRight 
-            ? { top: reason.top, right: "8%" } 
+          const positionStyles = isRight
+            ? { top: reason.top, right: "8%" }
             : { top: reason.top, left: "8%" };
 
           return (
@@ -302,7 +303,7 @@ export default function WhyChooseUsPageContent() {
                     {reason.title}
                   </span>
                   <p className="text-white/90 text-sm sm:text-base font-semibold leading-relaxed text-center select-none">
-                    {reason.desc} 
+                    {reason.desc}
                   </p>
                 </div>
               </div>
@@ -355,7 +356,7 @@ export default function WhyChooseUsPageContent() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-2xl flex items-center justify-center border border-white/30 mb-4">
                     <Zap className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-black text-white leading-none">{pillar.label1}<br/>{pillar.label2}</h3>
+                  <h3 className="text-3xl font-black text-white leading-none">{pillar.label1}<br />{pillar.label2}</h3>
                 </div>
                 <p className="text-center text-white/50 font-bold uppercase text-xs tracking-widest">
                   Hover to Open ↑
@@ -363,13 +364,13 @@ export default function WhyChooseUsPageContent() {
               </div>
             </div>
           ))}
-        </div>  
+        </div>
       </section>
 
       {/* ─── 4. QUALITY & SAFETY SECTION ─────────────────── */}
       <section className="relative py-24 px-6 md:px-12 bg-[#082f49] z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Text Column */}
           <div className="lg:col-span-6 flex flex-col gap-6 text-left reveal-up">
             <span className="text-[#00C4B5] font-black uppercase tracking-widest text-sm">
@@ -390,7 +391,7 @@ export default function WhyChooseUsPageContent() {
           {/* Right Image/Illustration Column */}
           <div className="lg:col-span-6 flex justify-center items-center reveal-up w-full">
             <div className="relative w-full h-[240px] sm:h-[340px] rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
-              <Image 
+              <Image
                 src="/assets/WHOWEARE/Organized_playroom_with_toys_2K_202608081617.jpeg"
                 alt="Quality Checked Safety Certified Kids Furniture"
                 fill
@@ -419,12 +420,12 @@ export default function WhyChooseUsPageContent() {
             From your first bulk order to your next big idea, ToyPark is here with the products, experience, and support to help you make it happen.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="/whoweare#contact" className="inline-block bg-white text-[#0284c7] px-8 py-4 rounded-full font-black text-base sm:text-lg shadow-[0_5px_0_rgb(2,132,199)] hover:translate-y-0.5 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all duration-200 uppercase tracking-wide">
+            <Link href="/contact" className="inline-block bg-white text-[#0284c7] px-8 py-4 rounded-full font-black text-base sm:text-lg shadow-[0_5px_0_rgb(2,132,199)] hover:translate-y-0.5 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all duration-200 uppercase tracking-wide">
               Start a Conversation
-            </a>
-            <a href="/products" className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-wide">
+            </Link>
+            <Link href="/products" className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-wide">
               Explore Wholesale
-            </a>
+            </Link>
           </div>
         </div>
       </section>

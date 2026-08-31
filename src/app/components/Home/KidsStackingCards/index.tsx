@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 
 const kidsActivities = [
   {
@@ -138,15 +139,15 @@ function MobileView() {
                   <p className="text-white/90 text-xs leading-relaxed font-medium mb-3">
                     {project.description}
                   </p>
-                  <a
-                    href="#"
+                  <Link
+                    href="/products"
                     className="self-start inline-flex items-center gap-2 bg-white text-[#2D3436] font-black px-4 py-2 rounded-xl shadow-[0_3px_0_0_rgba(0,0,0,0.15)] text-xs uppercase tracking-wide"
                   >
                     <span>Explore Collection</span>
                     <svg width="14" height="10" viewBox="0 0 22 12" fill="none">
                       <path d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 16.4645 11.5962 16.7574 11.3033C16.4645 11.5962 15.9896 11.5962 15.6967 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z" fill="#2D3436" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </SwiperSlide>
@@ -282,12 +283,13 @@ const DesktopCard: React.FC<DesktopCardProps> = ({
             <p className="text-white/90 text-base leading-relaxed font-medium">{description}</p>
           </div>
           <div className="pt-4">
-            <a href="#" className="inline-flex items-center gap-3 bg-white text-[#2D3436] font-black px-6 py-3 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.15)] hover:bg-yellow-300 hover:scale-105 transition-transform text-sm uppercase tracking-wide group">
+            <Link
+              href="/products" className="inline-flex items-center gap-3 bg-white text-[#2D3436] font-black px-6 py-3 rounded-2xl shadow-[0_4px_0_0_rgba(0,0,0,0.15)] hover:bg-yellow-300 hover:scale-105 transition-transform text-sm uppercase tracking-wide group">
               <span>Explore Collection</span>
               <svg width="20" height="12" viewBox="0 0 22 12" fill="none" className="group-hover:translate-x-1 transition-transform">
                 <path d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 15.6967 11.5962 16.7574 11.3033C16.4645 11.5962 15.9896 11.5962 15.6967 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z" fill="#2D3436" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative w-[55%] h-full rounded-2xl overflow-hidden shadow-md border-2 border-white/30 transform-gpu">

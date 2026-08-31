@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Star, Cloud } from 'lucide-react';
+import Link from 'next/link';
 
 const categories = [
   { title: 'Games and puzzle', image: '/assets/favcategories/hero6a.png', bg: 'bg-[#FFE66D]' },
@@ -76,28 +77,30 @@ export const ShopByCategories: React.FC = () => {
               {categories.map((cat, index) => {
                 if (index !== currentIndex) return null;
                 return (
-                  <motion.div
-                    key={cat.title}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -30 }}
-                    transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="w-[90%] max-w-[340px] bg-white rounded-[1.75rem] py-5 px-6 flex flex-col items-center justify-center cursor-pointer shadow-md mx-auto"
-                  >
-                    <div className={`w-[100px] h-[100px] rounded-full flex items-center justify-center mb-4 relative z-10 ${cat.bg}`}>
-                      <Image
-                        src={cat.image}
-                        alt={cat.title}
-                        width={64}
-                        height={64}
-                        className="object-contain drop-shadow-sm"
-                        priority={index === 0}
-                      />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#0D1C3A] text-center">
-                      {cat.title}
-                    </h3>
-                  </motion.div>
+                  <Link href={"/products"}>
+                    <motion.div
+                      key={cat.title}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -30 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      className="w-[90%] max-w-[340px] bg-white rounded-[1.75rem] py-5 px-6 flex flex-col items-center justify-center cursor-pointer shadow-md mx-auto"
+                    >
+                      <div className={`w-[100px] h-[100px] rounded-full flex items-center justify-center mb-4 relative z-10 ${cat.bg}`}>
+                        <Image
+                          src={cat.image}
+                          alt={cat.title}
+                          width={64}
+                          height={64}
+                          className="object-contain drop-shadow-sm"
+                          priority={index === 0}
+                        />
+                      </div>
+                      <h3 className="text-lg font-bold text-[#0D1C3A] text-center">
+                        {cat.title}
+                      </h3>
+                    </motion.div>
+                  </Link>
                 );
               })}
             </AnimatePresence>
@@ -109,9 +112,8 @@ export const ShopByCategories: React.FC = () => {
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to category ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === idx ? 'w-6 bg-white' : 'w-2 bg-white/40'
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx ? 'w-6 bg-white' : 'w-2 bg-white/40'
+                  }`}
               />
             ))}
           </div>
@@ -120,6 +122,7 @@ export const ShopByCategories: React.FC = () => {
         {/* Desktop View: Pure GPU Grid (Eliminated JS Stagger Overheads) */}
         <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {categories.map((cat, index) => (
+            <Link href={"/products"}>
             <div
               key={index}
               className="group bg-white rounded-[1.75rem] p-5 flex flex-col items-center justify-center cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
@@ -137,6 +140,7 @@ export const ShopByCategories: React.FC = () => {
                 {cat.title}
               </h3>
             </div>
+            </Link>
           ))}
         </div>
       </div>

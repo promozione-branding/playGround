@@ -262,7 +262,7 @@ export default function GalleryLightboxZoom() {
             role="dialog"
             aria-modal="true"
             aria-label={`${active.title}, ${active.location}`}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-8"
+            className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
