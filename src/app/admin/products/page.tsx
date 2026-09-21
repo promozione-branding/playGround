@@ -38,8 +38,8 @@ interface Product {
 }
 
 interface ProductsResponse {
-    success: boolean;
-    products: Product[];
+    success?: boolean;
+    products?: Product[];
     count?: number;
     message?: string;
 }
@@ -63,15 +63,38 @@ export default function ProductsPage() {
                 cache: "no-store",
             });
 
-            const data: ProductsResponse = await response.json();
+            const data = await response.json();
 
-            if (!response.ok || !data.success) {
+            if (!response.ok) {
                 throw new Error(
-                    data.message || "Failed to fetch products"
+                    data?.message || "Failed to fetch products"
                 );
             }
 
-            setProducts(data.products || []);
+            /*
+             * Supports:
+             *
+             * {
+             *   success: true,
+             *   products: [...]
+             * }
+             *
+             * OR
+             *
+             * [...]
+             */
+
+            if (Array.isArray(data)) {
+                setProducts(data);
+            } else {
+                if (data.success === false) {
+                    throw new Error(
+                        data.message || "Failed to fetch products"
+                    );
+                }
+
+                setProducts(data.products || []);
+            }
         } catch (error) {
             console.error("Get products error:", error);
 
@@ -130,14 +153,47 @@ export default function ProductsPage() {
         try {
             setDeletingSlug(slug);
 
+            console.log("Deleting product:", slug);
+
             const response = await fetch(
                 `/api/product/${encodeURIComponent(slug)}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        Accept: "application/json",
+                    },
                 }
             );
 
-            const data = await response.json();
+            /*
+             * First get the response as text.
+             *
+             * This prevents:
+             *
+             * Unexpected token '<'
+             *
+             * when Next.js returns an HTML 404 page.
+             */
+
+            const responseText = await response.text();
+
+            let data: {
+                success?: boolean;
+                message?: string;
+            } = {};
+
+            try {
+                data = JSON.parse(responseText);
+            } catch {
+                console.error(
+                    "API returned non-JSON response:",
+                    responseText
+                );
+
+                throw new Error(
+                    `Delete API returned ${response.status} ${response.statusText}`
+                );
+            }
 
             if (!response.ok || !data.success) {
                 throw new Error(
@@ -145,15 +201,20 @@ export default function ProductsPage() {
                 );
             }
 
-            // Remove deleted product immediately from UI
+            // ==========================================
+            // REMOVE FROM UI
+            // ==========================================
+
             setProducts((currentProducts) =>
                 currentProducts.filter(
                     (product) => product.slug !== slug
                 )
             );
 
-            alert("Product deleted successfully.");
-
+            alert(
+                data.message ||
+                    "Product deleted successfully."
+            );
         } catch (error) {
             console.error("Delete product error:", error);
 
@@ -174,15 +235,12 @@ export default function ProductsPage() {
     if (loading) {
         return (
             <div className="min-h-screen bg-neutral-100">
-
                 <main className="p-6 md:p-8">
-
                     <div className="max-w-7xl mx-auto">
 
-                        {/* Header skeleton */}
+                        {/* HEADER SKELETON */}
 
                         <div className="flex items-center justify-between mb-8">
-
                             <div>
                                 <div className="h-8 w-48 bg-neutral-200 rounded-lg animate-pulse" />
 
@@ -190,44 +248,36 @@ export default function ProductsPage() {
                             </div>
 
                             <div className="h-11 w-36 bg-neutral-200 rounded-xl animate-pulse" />
-
                         </div>
 
-
-                        {/* Search skeleton */}
+                        {/* SEARCH SKELETON */}
 
                         <div className="h-12 bg-neutral-200 rounded-xl animate-pulse mb-8" />
 
-
-                        {/* Product skeletons */}
+                        {/* PRODUCT SKELETONS */}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                            {Array.from({ length: 6 }).map(
+                                (_, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-white rounded-2xl overflow-hidden shadow-sm"
+                                    >
+                                        <div className="h-64 bg-neutral-200 animate-pulse" />
 
-                            {Array.from({ length: 6 }).map((_, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white rounded-2xl overflow-hidden shadow-sm"
-                                >
-                                    <div className="h-64 bg-neutral-200 animate-pulse" />
+                                        <div className="p-5 space-y-4">
+                                            <div className="h-6 bg-neutral-200 rounded animate-pulse w-3/4" />
 
-                                    <div className="p-5 space-y-4">
+                                            <div className="h-4 bg-neutral-200 rounded animate-pulse w-1/2" />
 
-                                        <div className="h-6 bg-neutral-200 rounded animate-pulse w-3/4" />
-
-                                        <div className="h-4 bg-neutral-200 rounded animate-pulse w-1/2" />
-
-                                        <div className="h-10 bg-neutral-200 rounded-xl animate-pulse" />
-
+                                            <div className="h-10 bg-neutral-200 rounded-xl animate-pulse" />
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-
+                                )
+                            )}
                         </div>
-
                     </div>
-
                 </main>
-
             </div>
         );
     }
@@ -238,9 +288,7 @@ export default function ProductsPage() {
 
     return (
         <div className="min-h-screen bg-neutral-100">
-
             <main className="p-6 md:p-8">
-
                 <div className="max-w-7xl mx-auto">
 
                     {/* ==========================================
@@ -248,9 +296,7 @@ export default function ProductsPage() {
                     ========================================== */}
 
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
-
                         <div>
-
                             <h1 className="text-3xl md:text-4xl font-bold text-neutral-900">
                                 All Products
                             </h1>
@@ -258,34 +304,25 @@ export default function ProductsPage() {
                             <p className="text-neutral-500 mt-2">
                                 Manage your Toy Park products
                             </p>
-
                         </div>
-
-
-                        {/* ADD PRODUCT */}
 
                         <Link
                             href="/admin/add-product"
                             className="inline-flex items-center justify-center gap-2 bg-black text-white px-5 py-3 rounded-xl font-medium hover:bg-neutral-800 transition"
                         >
                             <Plus size={19} />
-
                             Add Product
                         </Link>
-
                     </div>
-
 
                     {/* ==========================================
                         SEARCH BAR
                     ========================================== */}
 
                     <div className="bg-white border border-neutral-200 rounded-2xl p-4 mb-8">
-
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                             <div className="relative w-full md:max-w-md">
-
                                 <Search
                                     size={19}
                                     className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
@@ -296,7 +333,9 @@ export default function ProductsPage() {
                                     placeholder="Search products..."
                                     value={searchQuery}
                                     onChange={(e) =>
-                                        setSearchQuery(e.target.value)
+                                        setSearchQuery(
+                                            e.target.value
+                                        )
                                     }
                                     className="w-full h-11 pl-11 pr-10 rounded-xl border border-neutral-200 bg-neutral-50 text-sm outline-none focus:border-black focus:bg-white transition"
                                 />
@@ -312,9 +351,7 @@ export default function ProductsPage() {
                                         ×
                                     </button>
                                 )}
-
                             </div>
-
 
                             <div className="text-sm text-neutral-500">
                                 {filteredProducts.length}{" "}
@@ -322,29 +359,22 @@ export default function ProductsPage() {
                                     ? "product"
                                     : "products"}
                             </div>
-
                         </div>
-
                     </div>
-
 
                     {/* ==========================================
                         NO PRODUCTS
                     ========================================== */}
 
                     {filteredProducts.length === 0 ? (
-
                         <div className="bg-white border border-neutral-200 rounded-2xl p-12 text-center">
 
                             <div className="w-16 h-16 mx-auto rounded-2xl bg-neutral-100 flex items-center justify-center mb-5">
-
                                 <Package
                                     size={30}
                                     className="text-neutral-500"
                                 />
-
                             </div>
-
 
                             <h2 className="text-xl font-semibold text-neutral-900">
                                 {searchQuery
@@ -352,13 +382,11 @@ export default function ProductsPage() {
                                     : "No products yet"}
                             </h2>
 
-
                             <p className="text-neutral-500 mt-2">
                                 {searchQuery
                                     ? `No products match "${searchQuery}".`
                                     : "Create your first Toy Park product to get started."}
                             </p>
-
 
                             {!searchQuery && (
                                 <Link
@@ -366,13 +394,10 @@ export default function ProductsPage() {
                                     className="inline-flex items-center gap-2 mt-6 bg-black text-white px-5 py-3 rounded-xl font-medium hover:bg-neutral-800 transition"
                                 >
                                     <Plus size={18} />
-
                                     Add Product
                                 </Link>
                             )}
-
                         </div>
-
                     ) : (
 
                         /* ==========================================
@@ -392,19 +417,24 @@ export default function ProductsPage() {
                                     deletingSlug === product.slug;
 
                                 const categoryName =
-                                    typeof product.category === "object"
+                                    typeof product.category ===
+                                    "object"
                                         ? product.category?.name
-                                        : null;
+                                        : typeof product.category ===
+                                            "string"
+                                          ? product.category
+                                          : null;
 
                                 return (
                                     <div
                                         key={product._id}
                                         className="group bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col justify-between"
                                     >
-                                        {/* ==========================================
-                                            IMAGE
-                                        ========================================== */}
+
+                                        {/* IMAGE */}
+
                                         <div className="relative h-64 bg-neutral-100 overflow-hidden">
+
                                             {firstImage ? (
                                                 <img
                                                     src={firstImage}
@@ -423,10 +453,15 @@ export default function ProductsPage() {
                                                 </div>
                                             )}
 
-                                            {/* CATEGORY BADGE */}
+                                            {/* CATEGORY */}
+
                                             {categoryName ? (
                                                 <div className="absolute top-4 left-4 bg-black/70 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-md border border-white/20">
-                                                    <Tag size={12} className="text-amber-400" />
+                                                    <Tag
+                                                        size={12}
+                                                        className="text-amber-400"
+                                                    />
+
                                                     {categoryName}
                                                 </div>
                                             ) : (
@@ -436,46 +471,54 @@ export default function ProductsPage() {
                                             )}
 
                                             {/* IMAGE COUNT */}
+
                                             <div className="absolute top-4 right-4 bg-black/75 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
                                                 <ImageIcon size={13} />
                                                 {imageCount}
                                             </div>
                                         </div>
 
-                                        {/* ==========================================
-                                            CONTENT
-                                        ========================================== */}
+                                        {/* CONTENT */}
+
                                         <div className="p-5 flex-1 flex flex-col justify-between">
+
                                             <div>
+
                                                 <h2 className="text-xl font-semibold text-neutral-900 line-clamp-1">
                                                     {product.productName}
                                                 </h2>
 
                                                 <p className="text-xs text-neutral-400 mt-1">
-                                                    {`/${product.slug}`}
+                                                    /{product.slug}
                                                 </p>
-
 
                                                 <p className="text-sm text-neutral-500 mt-3 line-clamp-2 min-h-[40px]">
                                                     {product.shortDescription ||
                                                         "No description available."}
                                                 </p>
 
+                                                {/* CATEGORY */}
 
-                                                {/* CATEGORY INFO */}
                                                 <div className="flex items-center gap-2 mt-4 text-sm font-medium text-neutral-700">
-                                                    <Tag size={16} className="text-amber-500" />
+                                                    <Tag
+                                                        size={16}
+                                                        className="text-amber-500"
+                                                    />
+
                                                     <span>
                                                         Category:{" "}
                                                         <span className="text-neutral-900 font-semibold">
-                                                            {categoryName || "Uncategorized"}
+                                                            {categoryName ||
+                                                                "Uncategorized"}
                                                         </span>
                                                     </span>
                                                 </div>
 
                                                 {/* IMAGE COUNT */}
+
                                                 <div className="flex items-center gap-2 mt-2 text-sm text-neutral-500">
                                                     <ImageIcon size={16} />
+
                                                     <span>
                                                         {imageCount}{" "}
                                                         {imageCount === 1
@@ -483,11 +526,10 @@ export default function ProductsPage() {
                                                             : "images"}
                                                     </span>
                                                 </div>
-                                        </div>
 
-                                        {/* ==========================================
-                                                ACTION BUTTONS
-                                            ========================================== */}
+                                            </div>
+
+                                            {/* ACTION BUTTONS */}
 
                                             <div className="grid grid-cols-2 gap-3 mt-5">
 
@@ -499,13 +541,9 @@ export default function ProductsPage() {
                                                     )}`}
                                                     className="h-11 rounded-xl bg-neutral-100 text-neutral-800 flex items-center justify-center gap-2 hover:bg-neutral-200 transition font-medium"
                                                 >
-
                                                     <Edit size={17} />
-
                                                     Edit
-
                                                 </Link>
-
 
                                                 {/* DELETE */}
 
@@ -519,31 +557,23 @@ export default function ProductsPage() {
                                                     }
                                                     className="h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center gap-2 hover:bg-red-100 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                                                 >
-
                                                     <Trash2 size={17} />
 
                                                     {isDeleting
                                                         ? "Deleting..."
                                                         : "Delete"}
-
                                                 </button>
 
                                             </div>
-
                                         </div>
-
                                     </div>
                                 );
                             })}
 
                         </div>
-
                     )}
-
                 </div>
-
             </main>
-
         </div>
     );
 }

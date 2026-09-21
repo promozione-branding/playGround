@@ -417,115 +417,939 @@ export async function PUT(
     }
 }
 
+// export async function PUT(
+//     req: Request,
+//     { params }: RouteParams
+// ) {
+//     // Keep track of images uploaded during this request.
+//     // If anything fails, we can remove them from R2.
+//     let newUploadedImages: ProductImage[] = [];
+
+//     try {
+//         // ==========================================
+//         // CONNECT DATABASE
+//         // ==========================================
+
+//         await connectDB();
+
+//         // ==========================================
+//         // GET CURRENT SLUG
+//         // ==========================================
+
+//         const { slug: currentSlug } = await params;
+
+//         if (!currentSlug) {
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message: "Product slug is required",
+//                 },
+//                 { status: 400 }
+//             );
+//         }
+
+//         const normalizedCurrentSlug =
+//             currentSlug.trim().toLowerCase();
+
+//         // ==========================================
+//         // FIND PRODUCT
+//         // ==========================================
+
+//         const product = await Product.findOne({
+//             slug: normalizedCurrentSlug,
+//         });
+
+//         if (!product) {
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message: "Product not found",
+//                 },
+//                 { status: 404 }
+//             );
+//         }
+
+//         // ==========================================
+//         // READ FORM DATA
+//         // ==========================================
+
+//         const formData = await req.formData();
+
+//         // ==========================================
+//         // PRODUCT DETAILS
+//         // ==========================================
+
+//         const productNameInput =
+//             formData.get("productName");
+
+//         const productName =
+//             typeof productNameInput === "string"
+//                 ? productNameInput.trim()
+//                 : undefined;
+
+//         const slugInput =
+//             formData.get("slug");
+
+//         const newSlug =
+//             typeof slugInput === "string"
+//                 ? slugInput.trim().toLowerCase()
+//                 : undefined;
+
+//         const categoryInput =
+//             formData.get("category");
+
+//         const category =
+//             typeof categoryInput === "string"
+//                 ? categoryInput.trim()
+//                 : undefined;
+
+//         const shortDescriptionInput =
+//             formData.get("shortDescription");
+
+//         const shortDescription =
+//             typeof shortDescriptionInput === "string"
+//                 ? shortDescriptionInput.trim()
+//                 : undefined;
+
+//         const longDescriptionInput =
+//             formData.get("longDescription");
+
+//         const longDescription =
+//             typeof longDescriptionInput === "string"
+//                 ? longDescriptionInput.trim()
+//                 : undefined;
+
+//         const metaTitleInput =
+//             formData.get("metaTitle");
+
+//         const metaTitle =
+//             typeof metaTitleInput === "string"
+//                 ? metaTitleInput.trim()
+//                 : undefined;
+
+//         const metaDescriptionInput =
+//             formData.get("metaDescription");
+
+//         const metaDescription =
+//             typeof metaDescriptionInput === "string"
+//                 ? metaDescriptionInput.trim()
+//                 : undefined;
+
+//         // ==========================================
+//         // VALIDATE PRODUCT NAME
+//         // ==========================================
+
+//         if (
+//             productName !== undefined &&
+//             !productName
+//         ) {
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message: "Product name is required",
+//                 },
+//                 { status: 400 }
+//             );
+//         }
+
+//         // ==========================================
+//         // VALIDATE SLUG
+//         // ==========================================
+
+//         if (
+//             newSlug !== undefined &&
+//             !newSlug
+//         ) {
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message: "Product slug is required",
+//                 },
+//                 { status: 400 }
+//             );
+//         }
+
+//         // ==========================================
+//         // CATEGORY VALIDATION
+//         // ==========================================
+
+//         if (category !== undefined && category) {
+//             const categoryExists =
+//                 await Category.findById(category);
+
+//             if (!categoryExists) {
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "Selected category does not exist",
+//                     },
+//                     { status: 400 }
+//                 );
+//             }
+//         }
+
+//         // ==========================================
+//         // CHECK SLUG DUPLICATE
+//         // ==========================================
+
+//         if (
+//             newSlug &&
+//             newSlug !== normalizedCurrentSlug
+//         ) {
+//             const existingProduct =
+//                 await Product.findOne({
+//                     slug: newSlug,
+//                     _id: {
+//                         $ne: product._id,
+//                     },
+//                 });
+
+//             if (existingProduct) {
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "A product with this slug already exists",
+//                     },
+//                     { status: 400 }
+//                 );
+//             }
+//         }
+
+//         // ==========================================
+//         // SPECIFICATIONS
+//         // ==========================================
+
+//         let specifications =
+//             product.specifications || [];
+
+//         const specificationsInput =
+//             formData.get("specifications");
+
+//         if (
+//             specificationsInput !== null
+//         ) {
+//             if (
+//                 typeof specificationsInput !==
+//                 "string"
+//             ) {
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "Invalid specifications format",
+//                     },
+//                     { status: 400 }
+//                 );
+//             }
+
+//             try {
+//                 const parsedSpecifications =
+//                     JSON.parse(
+//                         specificationsInput
+//                     );
+
+//                 if (
+//                     !Array.isArray(
+//                         parsedSpecifications
+//                     )
+//                 ) {
+//                     return NextResponse.json(
+//                         {
+//                             success: false,
+//                             message:
+//                                 "Specifications must be an array",
+//                         },
+//                         { status: 400 }
+//                     );
+//                 }
+
+//                 specifications =
+//                     parsedSpecifications;
+//             } catch {
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "Invalid specifications JSON",
+//                     },
+//                     { status: 400 }
+//                 );
+//             }
+//         }
+
+//         // ==========================================
+//         // CURRENT PRODUCT IMAGES
+//         // ==========================================
+
+//         const currentImages: ProductImage[] =
+//             Array.isArray(product.images)
+//                 ? product.images.filter(
+//                       (image: ProductImage) =>
+//                           image?.imageKey
+//                   )
+//                 : [];
+
+//         // ==========================================
+//         // GET DELETED IMAGE KEYS
+//         // ==========================================
+
+//         let requestedDeleteKeys: string[] = [];
+
+//         const deletedKeysInput =
+//             formData.get(
+//                 "deletedImageKeys"
+//             );
+
+//         if (
+//             deletedKeysInput !== null
+//         ) {
+//             if (
+//                 typeof deletedKeysInput ===
+//                 "string"
+//             ) {
+//                 try {
+//                     const parsedKeys =
+//                         JSON.parse(
+//                             deletedKeysInput
+//                         );
+
+//                     if (
+//                         Array.isArray(
+//                             parsedKeys
+//                         )
+//                     ) {
+//                         requestedDeleteKeys =
+//                             parsedKeys.filter(
+//                                 (
+//                                     key
+//                                 ): key is string =>
+//                                     typeof key ===
+//                                     "string" &&
+//                                     key.trim()
+//                                         .length > 0
+//                             );
+//                     } else {
+//                         requestedDeleteKeys = [
+//                             deletedKeysInput,
+//                         ];
+//                     }
+//                 } catch {
+//                     requestedDeleteKeys = [
+//                         deletedKeysInput,
+//                     ];
+//                 }
+//             }
+//         } else {
+//             const singleDeletedKey =
+//                 formData.get(
+//                     "deletedImageKey"
+//                 );
+
+//             if (
+//                 typeof singleDeletedKey ===
+//                     "string" &&
+//                 singleDeletedKey.trim()
+//             ) {
+//                 requestedDeleteKeys = [
+//                     singleDeletedKey.trim(),
+//                 ];
+//             }
+//         }
+
+//         // Remove duplicates
+//         requestedDeleteKeys = [
+//             ...new Set(
+//                 requestedDeleteKeys
+//             ),
+//         ];
+
+//         // ==========================================
+//         // SECURITY CHECK
+//         // ONLY DELETE IMAGES BELONGING TO PRODUCT
+//         // ==========================================
+
+//         const productKeys =
+//             currentImages.map(
+//                 (image) =>
+//                     image.imageKey
+//             );
+
+//         const validDeleteKeys =
+//             requestedDeleteKeys.filter(
+//                 (key) =>
+//                     productKeys.includes(key)
+//             );
+
+//         // ==========================================
+//         // CREATE IMAGE LIST WITHOUT DELETED IMAGES
+//         // ==========================================
+
+//         const existingImages =
+//             currentImages.filter(
+//                 (image) =>
+//                     !validDeleteKeys.includes(
+//                         image.imageKey
+//                     )
+//             );
+
+//         // ==========================================
+//         // UPLOAD NEW IMAGES
+//         // ==========================================
+
+//         const files =
+//             formData.getAll(
+//                 "newImages"
+//             );
+
+//         for (const file of files) {
+//             if (!(file instanceof File)) {
+//                 continue;
+//             }
+
+//             // Ignore empty file inputs
+//             if (file.size === 0) {
+//                 continue;
+//             }
+
+//             const bytes =
+//                 await file.arrayBuffer();
+
+//             const buffer =
+//                 Buffer.from(bytes);
+
+//             const extension =
+//                 file.name
+//                     .split(".")
+//                     .pop()
+//                     ?.toLowerCase() ||
+//                 "jpg";
+
+//             const fileName =
+//                 `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+
+//             const uploadedImage =
+//                 await uploadToR2({
+//                     file: buffer,
+//                     folder: "products",
+//                     fileName,
+//                     contentType:
+//                         file.type ||
+//                         "application/octet-stream",
+//                 });
+
+//             newUploadedImages.push({
+//                 url: uploadedImage.url,
+//                 imageKey: uploadedImage.key,
+//             });
+//         }
+
+//         // ==========================================
+//         // FINAL IMAGE LIST
+//         // ==========================================
+
+//         const finalImages: ProductImage[] = [
+//             ...existingImages,
+//             ...newUploadedImages,
+//         ];
+
+//         // ==========================================
+//         // PRODUCT MUST HAVE ONE IMAGE
+//         // ==========================================
+
+//         if (finalImages.length === 0) {
+//             // Remove newly uploaded images
+//             // because update cannot continue.
+//             if (
+//                 newUploadedImages.length > 0
+//             ) {
+//                 await Promise.all(
+//                     newUploadedImages.map(
+//                         async (image) => {
+//                             await deleteFromR2(
+//                                 image.imageKey
+//                             );
+//                         }
+//                     )
+//                 );
+//             }
+
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message:
+//                         "Product must have at least one image",
+//                 },
+//                 { status: 400 }
+//             );
+//         }
+
+//         // ==========================================
+//         // DELETE REMOVED IMAGES FROM R2
+//         // ==========================================
+
+//         if (
+//             validDeleteKeys.length > 0
+//         ) {
+//             const deletionResults =
+//                 await Promise.all(
+//                     validDeleteKeys.map(
+//                         async (key) => {
+//                             try {
+//                                 const result =
+//                                     await deleteFromR2(
+//                                         key
+//                                     );
+
+//                                 return {
+//                                     key,
+//                                     success:
+//                                         result ===
+//                                         true,
+//                                 };
+//                             } catch {
+//                                 return {
+//                                     key,
+//                                     success:
+//                                         false,
+//                                 };
+//                             }
+//                         }
+//                     )
+//                 );
+
+//             const failedDeletions =
+//                 deletionResults.filter(
+//                     (result) =>
+//                         !result.success
+//                 );
+
+//             // ==========================================
+//             // R2 DELETE FAILED
+//             // DO NOT UPDATE MONGODB
+//             // ==========================================
+
+//             if (
+//                 failedDeletions.length > 0
+//             ) {
+//                 console.error(
+//                     "Failed R2 deletions:",
+//                     failedDeletions
+//                 );
+
+//                 // Remove newly uploaded images
+//                 // because update failed.
+//                 if (
+//                     newUploadedImages.length >
+//                     0
+//                 ) {
+//                     await Promise.all(
+//                         newUploadedImages.map(
+//                             async (image) => {
+//                                 await deleteFromR2(
+//                                     image.imageKey
+//                                 );
+//                             }
+//                         )
+//                     );
+//                 }
+
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "Some images could not be deleted from Cloudflare R2. Product was not updated.",
+//                     },
+//                     { status: 500 }
+//                 );
+//             }
+//         }
+
+//         // ==========================================
+//         // UPDATE PRODUCT FIELDS
+//         // ==========================================
+
+//         if (
+//             productName !== undefined
+//         ) {
+//             product.productName =
+//                 productName;
+//         }
+
+//         if (
+//             newSlug !== undefined
+//         ) {
+//             product.slug =
+//                 newSlug;
+//         }
+
+//         if (
+//             category !== undefined
+//         ) {
+//             product.category =
+//                 category;
+//         }
+
+//         if (
+//             shortDescription !==
+//             undefined
+//         ) {
+//             product.shortDescription =
+//                 shortDescription;
+//         }
+
+//         if (
+//             longDescription !==
+//             undefined
+//         ) {
+//             product.longDescription =
+//                 longDescription;
+//         }
+
+//         if (
+//             metaTitle !== undefined
+//         ) {
+//             product.metaTitle =
+//                 metaTitle;
+//         }
+
+//         if (
+//             metaDescription !==
+//             undefined
+//         ) {
+//             product.metaDescription =
+//                 metaDescription;
+//         }
+
+//         product.specifications =
+//             specifications;
+
+//         product.images =
+//             finalImages;
+
+//         // ==========================================
+//         // SAVE PRODUCT
+//         // ==========================================
+
+//         await product.save();
+
+//         // ==========================================
+//         // SUCCESS
+//         // ==========================================
+
+//         return NextResponse.json(
+//             {
+//                 success: true,
+//                 message:
+//                     "Product updated successfully",
+//                 product,
+//             },
+//             { status: 200 }
+//         );
+//     } catch (error: unknown) {
+//         console.error(
+//             "Update product error:",
+//             error
+//         );
+
+//         // ==========================================
+//         // CLEANUP NEW R2 IMAGES
+//         // ==========================================
+
+//         if (
+//             newUploadedImages.length > 0
+//         ) {
+//             const cleanupResults =
+//                 await Promise.all(
+//                     newUploadedImages.map(
+//                         async (image) => {
+//                             try {
+//                                 return await deleteFromR2(
+//                                     image.imageKey
+//                                 );
+//                             } catch {
+//                                 return false;
+//                             }
+//                         }
+//                     )
+//                 );
+
+//             const cleanupFailed =
+//                 cleanupResults.filter(
+//                     (result) =>
+//                         result === false
+//                 );
+
+//             if (
+//                 cleanupFailed.length > 0
+//             ) {
+//                 console.error(
+//                     "Some newly uploaded images could not be cleaned up from R2:",
+//                     cleanupFailed
+//                 );
+//             }
+//         }
+
+//         return NextResponse.json(
+//             {
+//                 success: false,
+//                 message:
+//                     error instanceof Error
+//                         ? error.message
+//                         : "Failed to update product",
+//             },
+//             { status: 500 }
+//         );
+//     }
+// }
+
 
 // ==========================================
 // DELETE PRODUCT
 // ==========================================
 
+// export async function DELETE(
+//     req: Request,
+//     { params }: { params: Promise<{ slug: string }> }
+// ) {
+//     try {
+//         await connectDB();
+
+//         const { slug } = await params;
+
+//         // Find product
+//         const product = await Product.findOne({
+//             slug: slug.toLowerCase(),
+//         });
+
+//         if (!product) {
+//             return NextResponse.json(
+//                 {
+//                     success: false,
+//                     message: "Product not found",
+//                 },
+//                 { status: 404 }
+//             );
+//         }
+
+
+//         // ==========================================
+//         // GET IMAGES SAFELY
+//         // ==========================================
+
+//         const imagesToDelete = (product.images || []).filter(
+//             (image: { imageKey: string }) => image?.imageKey
+//         );
+
+
+//         // ==========================================
+//         // DELETE ALL IMAGES FROM R2
+//         // ==========================================
+
+//         if (imagesToDelete.length > 0) {
+
+//             const deletionResults = await Promise.allSettled(
+//                 imagesToDelete.map((image: { imageKey: string }) =>
+//                     deleteFromR2(image.imageKey)
+//                 )
+//             );
+
+//             const failedDeletions = deletionResults.filter(
+//                 (result) => result.status === "rejected"
+//             );
+
+
+//             // Do NOT delete MongoDB product
+//             // if R2 deletion failed
+//             if (failedDeletions.length > 0) {
+
+//                 console.error(
+//                     "Some R2 image deletions failed:",
+//                     failedDeletions
+//                 );
+
+//                 return NextResponse.json(
+//                     {
+//                         success: false,
+//                         message:
+//                             "Some images could not be deleted from Cloudflare R2. Product was not deleted.",
+//                     },
+//                     { status: 500 }
+//                 );
+//             }
+//         }
+
+
+//         // ==========================================
+//         // DELETE PRODUCT FROM MONGODB
+//         // ==========================================
+
+//         await Product.deleteOne({
+//             _id: product._id,
+//         });
+
+
+//         // ==========================================
+//         // SUCCESS
+//         // ==========================================
+
+//         return NextResponse.json(
+//             {
+//                 success: true,
+//                 message:
+//                     "Product and all images deleted successfully",
+//             },
+//             { status: 200 }
+//         );
+
+//     } catch (error) {
+
+//         console.error("Delete product error:", error);
+
+//         return NextResponse.json(
+//             {
+//                 success: false,
+//                 message: "Failed to delete product",
+//             },
+//             { status: 500 }
+//         );
+//     }
+// }
+
 export async function DELETE(
-    req: Request,
-    { params }: { params: Promise<{ slug: string }> }
+  req: Request,
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-    try {
-        await connectDB();
+  try {
+    await connectDB();
 
-        const { slug } = await params;
+    const { slug } = await params;
 
-        // Find product
-        const product = await Product.findOne({
-            slug: slug.toLowerCase(),
-        });
-
-        if (!product) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: "Product not found",
-                },
-                { status: 404 }
-            );
-        }
-
-
-        // ==========================================
-        // GET IMAGES SAFELY
-        // ==========================================
-
-        const imagesToDelete = (product.images || []).filter(
-            (image: { imageKey: string }) => image?.imageKey
-        );
-
-
-        // ==========================================
-        // DELETE ALL IMAGES FROM R2
-        // ==========================================
-
-        if (imagesToDelete.length > 0) {
-
-            const deletionResults = await Promise.allSettled(
-                imagesToDelete.map((image: { imageKey: string }) =>
-                    deleteFromR2(image.imageKey)
-                )
-            );
-
-            const failedDeletions = deletionResults.filter(
-                (result) => result.status === "rejected"
-            );
-
-
-            // Do NOT delete MongoDB product
-            // if R2 deletion failed
-            if (failedDeletions.length > 0) {
-
-                console.error(
-                    "Some R2 image deletions failed:",
-                    failedDeletions
-                );
-
-                return NextResponse.json(
-                    {
-                        success: false,
-                        message:
-                            "Some images could not be deleted from Cloudflare R2. Product was not deleted.",
-                    },
-                    { status: 500 }
-                );
-            }
-        }
-
-
-        // ==========================================
-        // DELETE PRODUCT FROM MONGODB
-        // ==========================================
-
-        await Product.deleteOne({
-            _id: product._id,
-        });
-
-
-        // ==========================================
-        // SUCCESS
-        // ==========================================
-
-        return NextResponse.json(
-            {
-                success: true,
-                message:
-                    "Product and all images deleted successfully",
-            },
-            { status: 200 }
-        );
-
-    } catch (error) {
-
-        console.error("Delete product error:", error);
-
-        return NextResponse.json(
-            {
-                success: false,
-                message: "Failed to delete product",
-            },
-            { status: 500 }
-        );
+    if (!slug) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Product slug is required",
+        },
+        { status: 400 }
+      );
     }
+
+    console.log("Deleting product:", slug);
+
+    // ==========================================
+    // FIND PRODUCT
+    // ==========================================
+
+    const product = await Product.findOne({
+      slug: slug.toLowerCase(),
+    });
+
+    if (!product) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Product not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    // ==========================================
+    // GET IMAGES
+    // ==========================================
+
+    const imagesToDelete = (product.images || []).filter(
+      (image: { imageKey?: string }) => image?.imageKey
+    );
+
+    console.log(
+      "Images to delete:",
+      imagesToDelete.map(
+        (image: { imageKey?: string }) => image.imageKey
+      )
+    );
+
+    // ==========================================
+    // DELETE IMAGES FROM R2
+    // ==========================================
+
+    if (imagesToDelete.length > 0) {
+      const deletionResults = await Promise.all(
+        imagesToDelete.map(async (image: { imageKey?: string }) => {
+          if (!image.imageKey) {
+            return false;
+          }
+
+          console.log("Deleting R2 image:", image.imageKey);
+
+          const result = await deleteFromR2(image.imageKey);
+
+          console.log(
+            `R2 delete result for ${image.imageKey}:`,
+            result
+          );
+
+          return result;
+        })
+      );
+
+      // ==========================================
+      // CHECK R2 DELETE RESULTS
+      // ==========================================
+
+      const failedDeletions = deletionResults.filter(
+        (result) => result === false
+      );
+
+      if (failedDeletions.length > 0) {
+        console.error(
+          "Some R2 images failed to delete:",
+          failedDeletions
+        );
+
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              "Some images could not be deleted from Cloudflare R2. Product was not deleted.",
+          },
+          { status: 500 }
+        );
+      }
+    }
+
+    // ==========================================
+    // DELETE PRODUCT FROM MONGODB
+    // ==========================================
+
+    await Product.deleteOne({
+      _id: product._id,
+    });
+
+    console.log("Product deleted successfully:", slug);
+
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Product and all images deleted successfully",
+      },
+      { status: 200 }
+    );
+  } catch (error: unknown) {
+    console.error("Delete product error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to delete product",
+      },
+      { status: 500 }
+    );
+  }
 }
