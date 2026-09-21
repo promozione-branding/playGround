@@ -37,6 +37,7 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         await connectDB();
+        console.log("api call")
 
         const formData = await req.formData();
         
