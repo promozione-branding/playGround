@@ -117,7 +117,7 @@ export default function AboutUsScrollAnimation() {
         >
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
-              src="/assets/aboutus/who_We_are.jpeg"
+              src="/about/1.webp"
               alt="Who We Are"
               width={800}
               height={500}
@@ -226,7 +226,7 @@ export default function AboutUsScrollAnimation() {
         >
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
-              src="/assets/aboutus/why_choose_us.jpeg"
+              src="/about/2.webp"
               alt="Leadership"
               width={800}
               height={500}
