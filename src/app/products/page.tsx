@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { motion, Variants } from "framer-motion";
 import {
@@ -172,17 +172,6 @@ const SkeletonCard = () => {
 
 export default function ProductsPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  /*
-   * Get category from:
-   *
-   * /products?cat=toys
-   *
-   * Returns:
-   * toys
-   */
-  const categorySlugFromURL = searchParams.get("cat");
 
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -320,9 +309,26 @@ export default function ProductsPage() {
     }
 
     /*
-     * No ?cat=
+     * IMPORTANT:
      *
+     * Do NOT use useSearchParams().
+     *
+     * Reading window.location.search inside
+     * useEffect prevents the Next.js prerender
+     * / Suspense error.
+     */
+
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    const categorySlugFromURL =
+      params.get("cat");
+
+    /*
      * /products
+     *
+     * No ?cat=
      *
      * => All
      */
@@ -359,11 +365,7 @@ export default function ProductsPage() {
      * => All
      */
     setActiveCategorySlug("all");
-  }, [
-    categorySlugFromURL,
-    categories,
-    loadingCategories,
-  ]);
+  }, [categories, loadingCategories]);
 
   /* =========================================================
      CATEGORY TABS
@@ -398,7 +400,7 @@ export default function ProductsPage() {
     /*
      * CATEGORY PRODUCTS
      *
-     * Match using category.slug
+     * Match product category by slug.
      */
     return products.filter((product) => {
       const productCategorySlug =
@@ -409,10 +411,7 @@ export default function ProductsPage() {
         activeCategorySlug.toLowerCase()
       );
     });
-  }, [
-    products,
-    activeCategorySlug,
-  ]);
+  }, [products, activeCategorySlug]);
 
   /* =========================================================
      CATEGORY CLICK
@@ -429,11 +428,11 @@ export default function ProductsPage() {
     /*
      * Update URL.
      *
-     * category:
-     * /products?cat=toys
-     *
-     * all:
+     * All:
      * /products
+     *
+     * Category:
+     * /products?cat=toys
      */
     if (categorySlug === "all") {
       router.push("/products");
