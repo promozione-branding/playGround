@@ -7,10 +7,10 @@ import { Sparkles, Star, Cloud } from 'lucide-react';
 import Link from 'next/link';
 
 const categories = [
-  { title: 'Games and puzzle', image: '/assets/favcategories/hero6a.png', bg: 'bg-[#FFE66D]' },
-  { title: 'Indoor Play', image: '/assets/favcategories/hero6b.png', bg: 'bg-[#FF6B6B]' },
-  { title: 'Kids Books', image: '/assets/favcategories/hero6c.png', bg: 'bg-[#4ECDC4]' },
-  { title: 'Rockers & Rides', image: '/assets/favcategories/hero6d.png', bg: 'bg-[#9B59B6]' },
+  { title: 'Table & Board Games' ,href:"/products?cat=table-board-games" ,image: '/cat/board-games.webp', bg: 'bg-[#FFE66D]' },
+  { title: 'Trampoline & Spares', href:"/products?cat=trampoline-spares", image: '/cat/tampoline.webp', bg: 'bg-[#FF6B6B]' },
+  { title: 'Soft Play & Equipments', href:"products?cat=soft-play-exercising-equipment", image: '/cat/softplay.webp', bg: 'bg-[#4ECDC4]' },
+  { title: 'Educational Ais', href:"/products?cat=educational-aids" ,image: '/cat/education.webp', bg: 'bg-[#9B59B6]' },
 ];
 
 export const ShopByCategories: React.FC = () => {
@@ -77,7 +77,7 @@ export const ShopByCategories: React.FC = () => {
               {categories.map((cat, index) => {
                 if (index !== currentIndex) return null;
                 return (
-                  <Link href={"/products"}>
+                  <Link href={cat.href}>
                     <motion.div
                       key={cat.title}
                       initial={{ opacity: 0, x: 30 }}
@@ -86,13 +86,13 @@ export const ShopByCategories: React.FC = () => {
                       transition={{ duration: 0.3, ease: 'easeOut' }}
                       className="w-[90%] max-w-[340px] bg-white rounded-[1.75rem] py-5 px-6 flex flex-col items-center justify-center cursor-pointer shadow-md mx-auto"
                     >
-                      <div className={`w-[100px] h-[100px] rounded-full flex items-center justify-center mb-4 relative z-10 ${cat.bg}`}>
+                      <div className={`w-[full w-full rounded-full flex items-center justify-center mb-4 relative z-10 `}>
                         <Image
                           src={cat.image}
                           alt={cat.title}
-                          width={64}
-                          height={64}
-                          className="object-contain drop-shadow-sm"
+                          width={100}
+                          height={100}
+                          className="object-cover rounded-3xl drop-shadow-sm"
                           priority={index === 0}
                         />
                       </div>
@@ -122,18 +122,18 @@ export const ShopByCategories: React.FC = () => {
         {/* Desktop View: Pure GPU Grid (Eliminated JS Stagger Overheads) */}
         <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {categories.map((cat, index) => (
-            <Link href={"/products"}>
+            <Link href={cat.href}>
             <div
               key={index}
               className="group bg-white rounded-[1.75rem] p-5 flex flex-col items-center justify-center cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
             >
-              <div className={`w-[95px] h-[95px] md:w-[110px] md:h-[110px] rounded-full flex items-center justify-center mb-3.5 ${cat.bg} group-hover:scale-105 transition-transform duration-300`}>
+              <div className={`w-[95px] h-[95px] md:w-[110px] md:h-[110px] rounded-full flex items-center justify-center mb-3.5  group-hover:scale-105 transition-transform duration-300`}>
                 <Image
                   src={cat.image}
                   alt={cat.title}
-                  width={72}
-                  height={72}
-                  className="object-contain drop-shadow-sm"
+                  width={100}
+                  height={100}
+                  className="object-contain rounded-3xl drop-shadow-sm"
                 />
               </div>
               <h3 className="text-base md:text-lg font-bold text-[#0D1C3A] text-center group-hover:text-[#FF6B6B] transition-colors duration-200">

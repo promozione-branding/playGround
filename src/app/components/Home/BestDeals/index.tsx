@@ -8,12 +8,14 @@ import { Autoplay, Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 
 // Product type definition
 interface Product {
   id: string;
   title: string;
   category: string;
+  href:string;
   price: string;
   originalPrice?: string;
   rating: number;
@@ -26,120 +28,132 @@ interface Product {
 const SPECIAL_ITEMS: Product[] = [
   {
     id: 's1',
-    category: 'Kids Furniture',
-    title: 'Harbors: Where Young Musicians Find Melody!',
+    category: 'Table & Board Games',
+    title: 'Foosball Table',
     price: '$33.00',
     originalPrice: '$54.00',
+    href:"/products/foosball-table",
     rating: 5,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Furniture.png',
+    image: '/product/1.webp',
   },
   {
     id: 's2',
-    category: 'Playshouse',
-    title: 'Wondear Dolls: Where Imagination Plays',
+    category: 'Soft Play & Exercising Equipment',
+    title: 'Soft Play Series',
     price: '$33.00 – $72.00',
+    href:"/products/soft-play-series",
     rating: 5,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/kids_playsHouse.png',
+    image: '/product/2.webp',
   },
   {
     id: 's3',
-    category: 'Trampoline',
-    title: 'Galore: Rev Up The Playtimes Joy',
+    category: 'Educational Aids',
+    title: 'Puppet & Role Play',
+    href:"/products/puppet-role-play",
     price: '$30.00',
     rating: 5,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Trampoline.png',
+    image: '/product/3.webp',
   },
   {
     id: 's4',
-    category: 'Kids Furniture',
-    title: 'Echwizs Marvels: Electronic Playtime Fun',
+    category: 'Flooring & Play Mats',
+    title: 'Themed Velvet Carpets',
     price: '$56.00',
+    href:"/products/themed-velvet-carpets",
     rating: 5,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Furniture.png',
+      image: '/product/4.webp',
   },
 ];
 
 const HOT_DEALS: Product[] = [
   {
     id: 'h1',
-    category: 'Trampoline',
-    title: 'Becca: Rev Up the Playtime Excitement!',
+    category: 'Trampoline & Spares',
+    title: 'Trampoline with Enclosure',
     price: '$54.00',
+    href:"/products/trampoline-with-enclosure",
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Trampoline.png',
+    image: '/product/5.webp',
   },
   {
     id: 'h2',
-    category: 'Playshouse',
-    title: 'Culinary Creations: Where Mini Chefs Cook...',
+    category: 'Playschool Furniture',
+    title: 'Swings',
     price: '$42.00',
+    href:"/products/swings",
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/kids_playsHouse.png',
+    image: '/product/6.webp',
   },
   {
     id: 'h3',
-    category: 'Kids Furniture',
-    title: 'EchWiz Marvels: Electronic Playtime...',
+    category: 'Soft Play & Exercising Equipment',
+    title: 'Kids Exercise Equipment',
     price: '$56.00',
+    href:"/products/kids-exercise-equipment",
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Furniture.png',
+    image: '/product/7.webp',
   },
   {
     id: 'h4',
-    category: 'Trampoline',
-    title: 'Harbors: Where Young Musicians Find Melody!',
+    category: 'Educational Aids',
+    title: 'Wall Toys & Cutouts',
     price: '$33.00',
     originalPrice: '$54.00',
+    href:"/products/wall-toys-cutouts",
     discountBadge: '-39%',
     rating: 4.0,
     reviewCount: 4,
-    image: '/assets/split_vantage_images/Kids_Trampoline.png',
+    image: '/product/8.webp',
   },
   {
     id: 'h5',
-    category: 'Playshouse',
-    title: 'Enchanted Dolls: A World of Glamour and...',
+    category: 'Playschool Furniture',
+    title: 'Play School Safety Essentials',
+    href:"products/play-school-safety-essentials",
     price: '$58.00',
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/kids_playsHouse.png',
+    image: '/product/9.webp',
   },
   {
     id: 'h6',
-    category: 'Kids Furniture',
-    title: 'Galore: Rev Up the Playtime Excitement!',
+    category: 'Playschool Furniture',
+    title: 'Themed Wooden Tables',
+    href:"/products/themed-wooden-tables",
     price: '$47.00',
     originalPrice: '$51.00',
     discountBadge: '-8%',
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Furniture.png',
+    image: '/product/10.webp',
   },
   {
     id: 'h7',
-    category: 'Trampoline',
-    title: 'Wondear Dolls: Where Imagination Comes to...',
+    category: 'Outdoor Playground Equipment',
+    title: 'Themed Multi playstation',
+    href:"/products/themed-multi-playstation",
     price: '$33.00 – $72.00',
     discountBadge: '-25%',
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/Kids_Trampoline.png',
+    image: '/product/11.webp',
   },
   {
     id: 'h8',
-    category: 'Playshouse',
-    title: 'Enchanted Dolls: A World of Glamour and...',
+    category: 'Outdoor Playground Equipment',
+    title: 'Merry Go Round',
     price: '$58.00',
+    href:"/products/merry-go-round",
     rating: 5.0,
     reviewCount: 5,
-    image: '/assets/split_vantage_images/kids_playsHouse.png',
+    image: '/product/12.webp',
   },
 ];
 
@@ -274,7 +288,7 @@ export const DealsSection: React.FC = () => {
 // Reusable Product Card Component
 const ProductCard: React.FC<{ deal: Product }> = ({ deal }) => {
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl border border-slate-100 p-2.5 sm:p-4 flex flex-col justify-between relative hover:shadow-xl hover:border-slate-200 transition-all duration-300 group cursor-pointer h-full">
+    <Link href={deal.href} className="bg-white rounded-xl sm:rounded-2xl border border-slate-100 p-2.5 sm:p-4 flex flex-col justify-between relative hover:shadow-xl hover:border-slate-200 transition-all duration-300 group cursor-pointer h-full">
       {/* Discount Badge */}
       {deal.discountBadge && (
         <span className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-[#FF4D4F] text-white text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-md z-10">
@@ -321,24 +335,19 @@ const ProductCard: React.FC<{ deal: Product }> = ({ deal }) => {
 
         {/* Pricing */}
         <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
-          <span className="text-xs sm:text-base font-extrabold text-[#00C4B5]">
-            {deal.price}
-          </span>
-          {deal.originalPrice && (
-            <span className="text-[10px] sm:text-xs text-slate-400 line-through">
-              {deal.originalPrice}
-            </span>
-          )}
+          
+          <button className='bg-[#00C4B5] flex justify-center text-sm items-center text-white px-2 py-2 font-bold rounded-3xl'>Contact Now  <ArrowRight className="w-3 h-3 sm:w-4.5 sm:h-4.5" /></button>
+          
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 // Reusable Special Item Card Component
 const SpecialItemCard: React.FC<{ item: Product }> = ({ item }) => {
   return (
-    <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#00C4B5]/40 transition-all cursor-pointer group">
+    <Link href={item.href} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-[#ff3b30]/80 shadow-sm hover:shadow-md hover:border-[#00C4B5]/40 transition-all cursor-pointer group">
       {/* Thumbnail Box */}
       <div className="w-24 h-24 sm:w-28 sm:h-28 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-100 flex-shrink-0 overflow-hidden shadow-sm">
         <img 
@@ -357,17 +366,11 @@ const SpecialItemCard: React.FC<{ item: Product }> = ({ item }) => {
           {item.title}
         </h4>
         <div className="flex items-center gap-1.5 mt-1">
-          <span className="text-sm sm:text-base font-black text-[#00C4B5]">
-            {item.price}
-          </span>
-          {item.originalPrice && (
-            <span className="text-[10px] sm:text-xs font-bold text-slate-400 line-through">
-              {item.originalPrice}
-            </span>
-          )}
+                   <button className='bg-[#ff3b30] flex justify-center text-sm items-center text-white px-2 py-2 font-bold rounded-3xl'>Grab Now  <ArrowRight className="w-3 h-3 sm:w-4.5 sm:h-4.5" /></button>
+
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -18,12 +18,14 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Link from "next/link";
 
 interface ToyCardData {
   cat: string;
   age: string;
   sub: string;
   title: string;
+  href:string;
   desc: string;
   img: string;
   fallback: string;
@@ -34,60 +36,65 @@ interface ToyCardData {
 
 const CARDS: ToyCardData[] = [
   {
-    cat: "Creativity",
+    cat: "Table & Board Games",
     age: "3–8 yrs",
+    href:"/products/air-hockey",
     sub: "Easels, Drawers & Playhouses",
-    title: "Creativity & Imagination",
-    desc: "Art stations and play spaces that spark endless childhood imagination.",
-    img: "/assets/ToysEveryNeed/kids1.webp",
+    title: "Air Hockey",
+    desc: "Bring fast-paced indoor entertainment to recreational spaces with Toy Park’s Air Hockey Table.",
+    img: "/product/13.webp",
     fallback: "#b2ede6",
     emoji: "🎨",
     stars: "★★★★★",
     reviews: "(2.4k)",
   },
   {
-    cat: "Balance",
+    cat: "Playing Equipments",
     age: "2–6 yrs",
     sub: "Swings, Boards & Active Play",
-    title: "Balance & Coordination",
-    desc: "Indoor swings and rockers designed to develop core stability.",
-    img: "/assets/ToysEveryNeed/kids2.webp",
+    href:"/products/climber-wire-ropes-attachments",
+    title: "Climber Wire Ropes & Attachments",
+    desc: "Upgrade playgrounds with Toy Park’s Climber Wire Ropes & Attachments, designed to add climbing.",
+    img: "/product/14.webp",
     fallback: "#7de8f4",
     emoji: "⚖️",
     stars: "★★★★★",
     reviews: "(1.8k)",
   },
   {
-    cat: "Motor Skills",
+    cat: "Soft Play Equipment",
     age: "1–5 yrs",
     sub: "Slides, Blocks & Towers",
-    title: "Fine Motor Skills",
-    desc: "Slides and stacking sets built to hone hand-eye coordination.",
-    img: "/assets/ToysEveryNeed/kids3.webp",
+    title: "Exercising Equipment",
+    href:"/products/exercising-equipment",
+    desc: "Keep children active and engaged with Toy Park’s Exercising Equipment range.",
+    img: "/product/15.webp",
     fallback: "#a7f3d0",
     emoji: "🧱",
     stars: "★★★★☆",
     reviews: "(3.1k)",
   },
   {
-    cat: "Cognitive",
+    cat: "Playschool Furniture",
     age: "4–10 yrs",
     sub: "Puzzles & Memory Kits",
-    title: "Cognitive Development",
-    desc: "Engaging brain puzzles tailored for early childhood problem solving.",
-    img: "/assets/ToysEveryNeed/kids4.webp",
+    title: "Play School Chair",
+    href:"/products/play-school-chair",
+    desc: "Create comfortable, welcoming learning spaces with Toy Park’s Play School Chair.",
+    img: "/product/16.webp",
     fallback: "#c4b5fd",
     emoji: "🧩",
     stars: "★★★★★",
     reviews: "(980)",
   },
   {
-    cat: "Sensory",
+    cat: "Playschool Furniture",
     age: "0–3 yrs",
     sub: "Tactile Kits & Soft Play",
-    title: "Sensory Exploration",
-    desc: "Textured exploration kits designed for safe tactile discovery.",
-    img: "/assets/ToysEveryNeed/kids5.webp",
+    title: "Play School Safety Essentials",
+    href:"/products/play-school-safety-essentials",
+    desc: "Create safer, more comfortable learning environments with Toy Park’s Play School Safety Essentials",
+    img: "/product/17.webp",
     fallback: "#fca5a5",
     emoji: "🌈",
     stars: "★★★★★",
@@ -206,7 +213,8 @@ function ToyCard({ card }: { card: ToyCardData }) {
       </div>
 
       <div className="px-4 pb-4 flex gap-2">
-        <button
+        <Link
+        href={card.href}
           type="button"
           className="
             flex-1
@@ -224,7 +232,7 @@ function ToyCard({ card }: { card: ToyCardData }) {
         >
           Shop now
           <ArrowRight className="h-3.5 w-3.5" />
-        </button>
+        </Link>
 
         <button
           type="button"

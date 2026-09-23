@@ -13,6 +13,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const kidsActivities = [
   {
@@ -20,7 +21,7 @@ const kidsActivities = [
     subtitle: 'Ages 2-10 • Ergonomic & Safe',
     description:
       'From study tables and chairs to clever storage, our Play School Furniture is designed to make learning spaces more comfortable, functional, and inspiring—while standing up to everyday use.',
-    link: '/assets/split_vantage_images/Kids_Furniture.png',
+    link: '/scroll/kids-furniture.webp',
     color: '#00C4B5',
     badge: 'Kids Furniture',
   },
@@ -29,16 +30,16 @@ const kidsActivities = [
     subtitle: 'Ages 3-9 • Imaginative Play',
     description:
       'From vibrant playhouses to exciting slides and adventure towers, create a play space where every climb, slide, and little adventure becomes a story of its own.',
-    link: '/assets/split_vantage_images/kids_playsHouse.png',
+    link: '/split/playstaion.webp',
     color: '#0284C7',
     badge: 'Playhouse',
   },
   {
-    title: '🤸 Active Fitness Trampoline',
+    title: '🌊 Water Bouncy Pools',
     subtitle: 'Ages 4-12 • Physical Health',
     description:
-      'Safe, durable trampolines and bouncing sets that turn energy into action—helping kids build balance, coordination, confidence, and a love for staying active.',
-    link: '/assets/split_vantage_images/Kids_Trampoline.png',
+      'Bring splash-filled fun to playtime with Toy Park’s Water Bouncy & Play Pools range. Designed to add excitement to outdoor activities, these products create engaging spaces for children to bounce, splash, and enjoy playful moments.',
+     link: '/scroll/pool.webp',
     color: '#FF7A59',
     badge: 'Active Bouncer',
   },
@@ -115,7 +116,9 @@ function MobileView() {
               >
                 {/* IMAGE */}
                 <div className="w-full h-[200px] rounded-xl overflow-hidden shadow-inner border border-white/20 relative z-10">
-                  <img
+                  <Image
+                    height={100}
+                    width={100}
                     src={project.link}
                     alt={project.title}
                     loading={i === 0 ? 'eager' : 'lazy'}
