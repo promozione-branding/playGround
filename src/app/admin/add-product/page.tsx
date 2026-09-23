@@ -94,11 +94,12 @@ export default function AddProductPage() {
             spellcheck: true,
             overflowY: "auto",
             buttons: [
-                "source", "|",
+                 "source", "|",
                 "bold", "italic", "underline", "strikethrough", "|",
                 "font", "fontsize", "brush", "paragraph", "|",
                 "image", "table", "link", "|",
-                "align", "undo", "redo", "hr", "|",
+                "align", "ul", "ol", "|",
+                "undo", "redo", "hr", "|",
                 "fullsize"
             ],
             statusbar: true,
