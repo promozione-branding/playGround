@@ -48,7 +48,7 @@ const announcements = [
   {
     text: "🎨 Kindergarten is an early childhood educational environment",
     cta: "Learn More",
-    href: "#learn-more",
+    href: "/products",
   },
 ];
 

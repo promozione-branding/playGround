@@ -84,7 +84,7 @@ export default function PartnerPage() {
       </div>
 
       {/* ═══ 3. WHY PARTNER WITH US (BENEFITS) ═══ */}
-      <section id="benefits" className="py-16 md:py-24 px-6 sm:px-12 bg-white relative">
+      <section id="benefits" className="py-6 md:py-13 px-6 sm:px-12 bg-white relative">
         <div className="max-w-7xl mx-auto">
           
           {/* Section Header */}

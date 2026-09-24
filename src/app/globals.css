@@ -75,6 +75,8 @@ body {
   font-family: Arial, sans-serif;
   font-size: 18px !important;
   line-height: 1.5;
+  padding-top: 8px;
+  padding-bottom: 8px;
   color: #333;
 }
 .jodit-content ul {

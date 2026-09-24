@@ -360,7 +360,7 @@ With <span className='font-bold'> bulk orders, wholesale supply, and custom solu
               href="/products" 
               className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-extrabold text-[#0F2228] border-b-2 border-[#0F2228] pb-1 hover:text-[#00A89B] hover:border-[#00A89B] transition-colors w-fit pt-2"
             >
-              <span>ALL PROJECTS</span>
+              <span>ALL PRODUCTS</span>
               <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
             </a>
           </div>

@@ -202,7 +202,7 @@ const handleNewsletterSubmit = async () => {
             {/* Contact Info List */}
             <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base">
 
-              <li className="flex items-start gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
+              <Link href="https://share.google/ZKTuBiSjPJKVsqoIi" className="flex items-start gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0 text-[#00C4B5] mt-0.5">
                   <MapPin size={15} />
                 </div>
@@ -212,9 +212,9 @@ const handleNewsletterSubmit = async () => {
                   <br />
                   New Delhi - 110005, India
                 </span>
-              </li>
+              </Link>
 
-              <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
+              <Link  href="tel:+919811117654" className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0 text-amber-500">
                   <Phone size={15} />
                 </div>
@@ -222,9 +222,9 @@ const handleNewsletterSubmit = async () => {
                 <span className="font-semibold">
                   +919811117654
                 </span>
-              </li>
+              </Link>
 
-              <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
+              <Link  href="mailto:info@toyparkindia.com" className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-rose-50 flex items-center justify-center flex-shrink-0 text-[#FF6B6B]">
                   <Mail size={15} />
                 </div>
@@ -232,7 +232,7 @@ const handleNewsletterSubmit = async () => {
                 <span className="font-semibold">
                   info@toyparkindia.com
                 </span>
-              </li>
+              </Link>
 
              
 
