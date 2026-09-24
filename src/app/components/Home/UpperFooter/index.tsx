@@ -102,10 +102,10 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
       alert('Please enter a valid Full Name.');
       return;
     }
-    if (!trimmedEmail) {
-      alert('Please enter a valid Email Address.');
-      return;
-    }
+    // if (!trimmedEmail) {
+    //   alert('Please enter a valid Email Address.');
+    //   return;
+    // }
     const cleanPhone = trimmedPhone.replace(/\D/g, '');
     if (cleanPhone.length !== 10) {
       alert('Phone number must be exactly 10 digits.');
@@ -130,7 +130,7 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
           platform: "Playground Home Page",
           platformEmail: "info@toyparkindia.com",
           name: trimmedFullName,
-          email: trimmedEmail,
+          email: trimmedEmail || "N/A",
           company: trimmedCompany,
           phone: trimmedPhone,
           product: "N/A",
@@ -294,7 +294,7 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
                     <label className="text-[11px] font-extrabold text-[#4ECDC4] uppercase tracking-widest pl-1">Email Address</label>
                     <input
                       type="email"
-                      required
+                      
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="Enter your email"

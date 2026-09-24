@@ -859,7 +859,7 @@ export default function ProductDetail() {
               </h3>
 
               <div
-                className="prose prose-sm max-w-none text-gray-700 sm:prose-base jodit-content md:prose-lg"
+                className=" max-w-none text-gray-700  jodit-content "
                 dangerouslySetInnerHTML={{
                   __html:
                     product.longDescription,

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Mail, MessageSquare, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface ContactFormProps {
   productName?: string;
@@ -35,10 +36,10 @@ export default function ContactForm({ productName = '', className = '' }: Contac
       return;
     }
 
-    if (!trimmedEmail) {
-      setErrorMessage('Please enter a valid Email Address.');
-      return;
-    }
+    // if (!trimmedEmail) {
+    //   setErrorMessage('Please enter a valid Email Address.');
+    //   return;
+    // }
 
     if (trimmedPhone) {
       const cleanPhone = trimmedPhone.replace(/\D/g, '');
@@ -63,7 +64,7 @@ export default function ContactForm({ productName = '', className = '' }: Contac
           platform: "Playground Contact Page",
           platformEmail: "info@toyparkindia.com",
           name: trimmedFullName,
-          email: trimmedEmail,
+          email: trimmedEmail || "N/A",
           company: 'NA',
           phone: trimmedPhone,
           product: trimmedProduct,
@@ -131,12 +132,12 @@ export default function ContactForm({ productName = '', className = '' }: Contac
             <p className="text-gray-700 font-extrabold text-base sm:text-lg max-w-md mx-auto">
               Your inquiry has been submitted successfully. Our support team will get back to you right away!
             </p>
-            <button
-              onClick={() => setIsSubmitted(false)}
+            <Link
+              href="tel:+919811117654"
               className="mt-4 px-6 py-3 bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-black text-xs uppercase tracking-wider rounded-2xl border-2 border-[#2D3436] shadow-[3px_3px_0px_0px_#2D3436] hover:-translate-y-0.5 transition-all cursor-pointer"
             >
-              SEND ANOTHER INQUIRY
-            </button>
+              Contact Us
+            </Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -157,17 +158,17 @@ export default function ContactForm({ productName = '', className = '' }: Contac
                   required
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  placeholder="e.g. Sarah Jenkins"
+                  placeholder="e.g. Sarah Kumar"
                   className="w-full bg-white border-2 border-[#2D3436] rounded-2xl px-4 py-3 text-sm font-bold text-[#2D3436] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00C4B5] shadow-[2px_2px_0px_0px_#2D3436]"
                 />
               </div>
               <div>
                 <label className="block text-xs font-black text-[#2D3436] uppercase tracking-wider mb-2">
-                  EMAIL ADDRESS *
+                  EMAIL ADDRESS 
                 </label>
                 <input
                   type="email"
-                  required
+                  
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="e.g. sarah@example.com"
@@ -179,7 +180,7 @@ export default function ContactForm({ productName = '', className = '' }: Contac
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-xs font-black text-[#2D3436] uppercase tracking-wider mb-2">
-                  PHONE / WHATSAPP NUMBER
+                  PHONE / WHATSAPP NUMBER *
                 </label>
                 <input
                   type="tel"

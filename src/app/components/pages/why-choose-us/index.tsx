@@ -313,7 +313,7 @@ export default function WhyChooseUsPageContent() {
       </section>
 
       {/* ─── 3. TOY BOX PILLARS ──────────────────────────── */}
-      <section className="relative py-32 px-6 md:px-12 bg-[#082f49] z-10" style={{ perspective: "1000px" }}>
+      <section className="relative py-13 px-6 md:px-12 bg-[#082f49] z-10" style={{ perspective: "1000px" }}>
         <div className="text-center mb-20 reveal-up">
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight inline-block mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-amber-400">
@@ -368,7 +368,7 @@ export default function WhyChooseUsPageContent() {
       </section>
 
       {/* ─── 4. QUALITY & SAFETY SECTION ─────────────────── */}
-      <section className="relative py-24 px-6 md:px-12 bg-[#082f49] z-10">
+      <section className="relative py-12 px-6 md:px-12 bg-[#082f49] z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
           {/* Left Text Column */}
@@ -404,7 +404,7 @@ export default function WhyChooseUsPageContent() {
       </section>
 
       {/* ─── 4. BOTTOM CTA ───────────────────────────────── */}
-      <section className="py-28 px-6 bg-gradient-to-br from-[#0ea5e9] to-[#0284c7] text-center relative overflow-hidden rounded-t-[3rem]">
+      <section className="py-13 px-6 bg-gradient-to-br from-[#0ea5e9] to-[#0284c7] text-center relative overflow-hidden rounded-t-[3rem]">
         <div
           className="absolute inset-0 opacity-20"
           style={{

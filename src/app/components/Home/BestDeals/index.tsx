@@ -592,13 +592,14 @@ const ProductCard: React.FC<{
         ================================================= */}
 
         <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
-          <button
+          <Link
             type="button"
+            href="tel:+919811117654"
             onClick={(e) => {
-              e.preventDefault();
+             
               e.stopPropagation();
 
-              onEnquiry(deal);
+              // onEnquiry(deal);
             }}
             className="
               bg-[#00C4B5]
@@ -622,7 +623,7 @@ const ProductCard: React.FC<{
             <ArrowRight
               className="w-3 h-3 sm:w-4 sm:h-4"
             />
-          </button>
+          </Link>
         </div>
       </div>
     </Link>

@@ -70,11 +70,12 @@ function HeroSection() {
       <div className="absolute inset-0 z-0 overflow-hidden rounded-b-2xl md:rounded-b-[5rem] m-2 md:m-8">
         <div className="absolute inset-0 w-full h-full md:h-[120%] md:-top-[10%] md:parallax-target">
           <Image
-            src="/product/9.webp"
+            src="/12.png"
             alt="ToyPark Exhibition Hall"
             fill
             priority
-            quality={70}
+            
+            quality={100}
             sizes="(max-width: 768px) 100vw, 100vw"
             className="object-cover"
           />

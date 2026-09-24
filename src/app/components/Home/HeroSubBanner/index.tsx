@@ -158,7 +158,7 @@ export const HeroSubBanner: React.FC = () => {
           >
             <div className="z-10 flex-1 max-w-[280px] sm:max-w-[320px]">
               <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white leading-[1.15] mb-2 tracking-tight">
-                Children Day Collection 2023
+                Children Day Collection 2026
               </h2>
               <p className="text-sm sm:text-base font-semibold text-white/90 mb-6">
                 15% Off on Kids&apos; Toys and Gifts!

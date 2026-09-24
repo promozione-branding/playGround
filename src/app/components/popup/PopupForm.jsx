@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { X, Mail, MessageSquare, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function PopupForm({
     isOpen,
@@ -90,10 +91,10 @@ export default function PopupForm({
             return;
         }
 
-        if (!trimmedEmail) {
-            setErrorMessage("Please enter your email address.");
-            return;
-        }
+        // if (!trimmedEmail) {
+        //     setErrorMessage("Please enter your email address.");
+        //     return;
+        // }
 
         if (trimmedPhone) {
             const cleanPhone = trimmedPhone.replace(/\D/g, "");
@@ -122,8 +123,8 @@ export default function PopupForm({
                     body: JSON.stringify({
                         platform: "Playground Popup form",
                         platformEmail: "info@toyparkindia.com",
-                        name: trimmedFullName,
-                        email: trimmedEmail,
+                        name: trimmedFullName ,
+                        email: trimmedEmail || "N/A",
                         company: "NA",
                         phone: trimmedPhone,
                         product: trimmedProduct,
@@ -220,13 +221,13 @@ export default function PopupForm({
                                 Our support team will get back to you soon.
                             </p>
 
-                            <button
-                                type="button"
-                                onClick={() => setIsSubmitted(false)}
+                            <Link
+                                href="tel:+919811117654"
+                                
                                 className="mt-7 rounded-2xl border-2 border-[#17292B] bg-[#FF6B6B] px-6 py-3 text-xs font-black uppercase tracking-wider text-white shadow-[3px_3px_0px_0px_#17292B] transition hover:-translate-y-0.5"
                             >
-                                Send Another Inquiry
-                            </button>
+                                Contact Us
+                            </Link>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-5">
@@ -262,12 +263,12 @@ export default function PopupForm({
 
                                 <div>
                                     <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
-                                        Email Address *
+                                        Email Address 
                                     </label>
 
                                     <input
                                         type="email"
-                                        required
+                                        
                                         value={formData.email}
                                         onChange={(e) =>
                                             setFormData({
@@ -285,7 +286,7 @@ export default function PopupForm({
                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                 <div>
                                     <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
-                                        Phone / WhatsApp
+                                        Phone / WhatsApp *
                                     </label>
 
                                     <input

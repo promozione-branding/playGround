@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "./components/SmoothScroll";
+import FloatingContactButtons from "./components/FloatingContactButtons";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <FloatingContactButtons></FloatingContactButtons>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

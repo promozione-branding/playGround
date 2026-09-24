@@ -854,7 +854,7 @@ export default function KidzaNavbar() {
       <div
         className="overflow-y-auto overscroll-contain"
         style={{
-          maxHeight: "360px",
+          
           scrollbarWidth: "thin",
         }}
         onWheel={(e) => {
