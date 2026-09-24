@@ -19,7 +19,7 @@ interface Photo {
 const PHOTOS: Photo[] = [
   {
     id: 1,
-    src: "/assets/split_vantage_images/kids_playsHouse.png",
+    src: "/product/11.webp",
     title: "Wonderland Play Tent & Cottage",
     category: "Playhouses",
     caption: "Premium child-safe playhouse with mesh windows and durable wooden frame.",
@@ -28,7 +28,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 2,
-    src: "/assets/split_vantage_images/Kids_Furniture.png",
+    src: "/product/16.webp",
     title: "Ergonomic Activity Study Set",
     category: "Furniture",
     caption: "Sustainably crafted birch study table and chair set engineered for healthy posture.",
@@ -37,7 +37,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 3,
-    src: "/assets/split_vantage_images/Kids_Trampoline.png",
+    src: "/product/5.webp",
     title: "Safety Enclosed Jump Trampoline",
     category: "Active Play",
     caption: "360-degree padded safety net and heavy-duty steel frame for outdoor active play.",
@@ -46,7 +46,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=75",
+    src: "/product/8.webp",
     title: "Montessori Wooden Learning Blocks",
     category: "Learning",
     caption: "Non-toxic organic dyed wooden building blocks nurturing spatial skills.",
@@ -55,7 +55,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1566454544259-f4b94c96758f?auto=format&fit=crop&w=800&q=75",
+    src: "/product/2.webp",
     title: "Adventure Climber & Slide Unit",
     category: "Active Play",
     caption: "All-weather indoor/outdoor slide set built for gross motor development.",
@@ -64,7 +64,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=75",
+    src: "/product/18.webp",
     title: "Pastel Preschool Activity Rug",
     category: "Classroom",
     caption: "Anti-skid washable plush play mat designed for classroom group activities.",
@@ -73,7 +73,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=75",
+    src: "/product/17.webp",
     title: "Creative Soft Play Blocks",
     category: "Soft Play",
     caption: "High-density foam play cushions for toddler obstacle courses and building.",
@@ -82,7 +82,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 8,
-    src: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=75",
+    src: "/product/14.webp",
     title: "Wooden Rainbow Stacker Toy",
     category: "Learning",
     caption: "Handcrafted natural wood arc set fostering open-ended creative play.",
@@ -91,7 +91,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 9,
-    src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=75",
+    src: "/product/1.webp",
     title: "Sensory Wooden Activity Board",
     category: "Montessori",
     caption: "Tactile fine-motor skill board with gear wheels, latches, and wooden beads.",
@@ -100,7 +100,7 @@ const PHOTOS: Photo[] = [
   },
   {
     id: 10,
-    src: "https://images.unsplash.com/photo-1618842676088-c4d48a6a7c9d?auto=format&fit=crop&w=800&q=75",
+    src: "/product/4.webp",
     title: "Eco Wooden Toy Train Set",
     category: "Play Sets",
     caption: "Smooth sanded beechwood track set with magnetic train cars and wooden trees.",

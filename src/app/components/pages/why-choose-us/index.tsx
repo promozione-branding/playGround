@@ -204,7 +204,7 @@ export default function WhyChooseUsPageContent() {
           className="absolute inset-0 w-full h-[130%] -top-[15%] will-change-transform"
         >
           <Image
-            src="/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg"
+            src="/split/playstaion.webp"
             alt="ToyPark Design Lab"
             fill
             className="object-cover saturate-150 brightness-[0.35]"
@@ -392,7 +392,7 @@ export default function WhyChooseUsPageContent() {
           <div className="lg:col-span-6 flex justify-center items-center reveal-up w-full">
             <div className="relative w-full h-[240px] sm:h-[340px] rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
               <Image
-                src="/assets/WHOWEARE/Organized_playroom_with_toys_2K_202608081617.jpeg"
+                src="/about/9.webp"
                 alt="Quality Checked Safety Certified Kids Furniture"
                 fill
                 className="object-cover"

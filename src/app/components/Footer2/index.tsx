@@ -134,7 +134,7 @@ const Footer2 = () => {
                   { name: 'Our Story', href: '/ourstory' },
                   { name: 'Who We Are', href: '/whoweare' },
                   { name: 'Why Choose Us', href: '/why-choose-us' },
-                  { name: 'Careers', href: '/careers' },
+                  // { name: 'Careers', href: '/careers' },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className="text-gray-600 hover:text-[#FF6B6B] font-extrabold transition-colors duration-200 inline-block hover:translate-x-1 transform">

@@ -39,10 +39,10 @@ const EXHIBITION_ZONES_DATA = [
 ];
 
 const DAILY_ACTIVITIES_DATA = [
-  { title: "The Great Toy Unboxing", img: "/assets/WHOWEARE/Empty_children_playroom_with_toys_202608081653.jpeg" },
-  { title: "Indoor Adventure Forts", img: "/assets/WHOWEARE/Playroom_with_castle_and_toys_202608081652.jpeg" },
-  { title: "Sustainable Crafts Workshop", img: "/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg" },
-  { title: "Teddy Bear & Play House Party", img: "/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg" },
+  { title: "The Great Toy Unboxing", img: "/product/12.webp" },
+  { title: "Indoor Adventure Forts", img: "/about/10.webp" },
+  { title: "Sustainable Crafts Workshop", img: "/about/2.webp" },
+  { title: "Teddy Bear & Play House Party", img: "/about/11.webp" },
 ];
 
 const HIGHLIGHT_ICONS = [Gamepad2, Sparkles, Rocket, Smile, Puzzle, Star, Shapes, Ticket];
@@ -70,7 +70,7 @@ function HeroSection() {
       <div className="absolute inset-0 z-0 overflow-hidden rounded-b-2xl md:rounded-b-[5rem] m-2 md:m-8">
         <div className="absolute inset-0 w-full h-full md:h-[120%] md:-top-[10%] md:parallax-target">
           <Image
-            src="/assets/WHOWEARE/Empty_children_playroom_with_toys_202608081653.jpeg"
+            src="/product/9.webp"
             alt="ToyPark Exhibition Hall"
             fill
             priority
@@ -123,7 +123,7 @@ function WelcomeSection() {
         <div className="w-full md:w-5/12 h-[260px] md:h-[50vh] relative overflow-hidden group rounded-2xl md:rounded-3xl border border-cyan-100">
           <div className="absolute inset-0 w-full h-full md:h-[120%] md:-top-[10%] md:parallax-target">
             <Image
-              src="/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg"
+              src="/product/6.webp"
               alt="ToyPark Exhibition Playroom"
               fill
               loading="lazy"

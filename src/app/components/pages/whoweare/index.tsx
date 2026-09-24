@@ -13,22 +13,22 @@ const concepts = [
   {
     title: "playful spaces",
     desc: "By merging ergonomic safety with vibrant imaginative designs, ToyPark creates playrooms and kids' spaces that welcome, inspire, and nurture young minds. Years of dedicated craft guide every furniture piece we build.",
-    image: "/assets/WHOWEARE/Empty_children_playroom_with_toys_202608081653.jpeg",
+    image: "/about/5.webp",
   },
   {
     title: "modular furniture",
     desc: "ToyPark's innovative modular kids furniture redefines children's spaces—combining multi-functional storage, active play elements, and Scandinavian minimalism tailored for growing families.",
-    image: "/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg",
+    image: "/about/6.webp",
   },
   {
     title: "eco-friendly craft",
     desc: "Child safety is at the heart of our design. Crafted using sustainably sourced non-toxic wood, smooth rounded edges, and certified eco-paints, our furniture offers durability you can trust.",
-    image: "/assets/WHOWEARE/Playroom_with_castle_and_toys_202608081652.jpeg",
+      image: "/about/7.webp",
   },
   {
     title: "active play design",
     desc: "Encouraging movement, creativity, and exploration. From indoor play castles to climbing frames and reading nooks, ToyPark turns everyday rooms into magical playgrounds.",
-    image: "/assets/WHOWEARE/Playroom_with_toys_and_furniture_202608081652.jpeg",
+      image: "/about/8.webp",
   }
 ];
 

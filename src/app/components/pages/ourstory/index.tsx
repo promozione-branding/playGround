@@ -313,7 +313,7 @@ export default function OurStoryComponent() {
         
         {/* Full Width Background Image */}
         <img
-          src="/assets/ourStory/Children_playroom_interior_design_2K_202608081257.jpeg"
+          src="/about/4.webp"
           alt="Featured Playroom Interior Design"
           className="absolute inset-0 w-full h-full object-cover block group-hover:scale-[1.02] transition-transform duration-1000 z-0"
         />

@@ -67,7 +67,7 @@ const desktopNav = [
       { label: "Our Story", href: "/ourstory" },
       { label: "Who We Are", href: "/whoweare" },
       { label: "Why Choose Us", href: "/why-choose-us" },
-      { label: "Careers", href: "/careers" },
+      // { label: "Careers", href: "/careers" },
     ],
   },
   {
@@ -728,7 +728,7 @@ export default function KidzaNavbar() {
               </button>
 
               {/* Wishlist */}
-              <button
+              {/* <button
                 className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-[#94A3B8]/50 flex items-center justify-center text-[#334155] hover:border-[#FF6B6B] hover:text-[#FF6B6B] hover:bg-[#FF6B6B]/5 transition-all duration-200 group"
                 aria-label="Wishlist"
               >
@@ -739,7 +739,7 @@ export default function KidzaNavbar() {
                   3
                 </span>
 
-              </button>
+              </button> */}
 
               {/* All Products */}
               <a

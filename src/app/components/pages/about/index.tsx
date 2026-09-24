@@ -187,7 +187,7 @@ export default function AboutUsScrollAnimation() {
         >
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
-              src="/assets/aboutus/what_makes_us different_aboutus.jpeg"
+              src="/cat/softplay.webp"
               alt="Warehouse"
               width={800}
               height={500}

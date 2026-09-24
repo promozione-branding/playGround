@@ -15,7 +15,7 @@ const CERTIFICATIONS = [
     desc: "Our products undergo strict testing to meet the comprehensive safety and quality requirements set by the Bureau of Indian Standards, ensuring complete peace of mind.",
     color: "bg-[#FF5A5F]",
     icon: <Award className="w-10 h-10 md:w-12 md:h-12 text-white" />,
-    image: "/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg",
+    image: "/about/4.webp",
   },
   {
     id: "fsc",
@@ -24,7 +24,7 @@ const CERTIFICATIONS = [
     desc: "We exclusively use timber from responsibly managed forests. The FSC certification guarantees our wood is harvested sustainably, protecting global ecosystems.",
     color: "bg-[#00C4B5]",
     icon: <Leaf className="w-10 h-10 md:w-12 md:h-12 text-white" />,
-    image: "/assets/WHOWEARE/Empty_children_playroom_with_toys_202608081653.jpeg",
+    image: "/product/16.webp",
   },
   {
     id: "en71",
@@ -33,7 +33,7 @@ const CERTIFICATIONS = [
     desc: "Tested for mechanical, physical, and chemical properties. Our products contain absolutely zero toxic paints or heavy metals, far exceeding EN71 baseline requirements.",
     color: "bg-[#0284C7]",
     icon: <ShieldCheck className="w-10 h-10 md:w-12 md:h-12 text-white" />,
-    image: "/assets/WHOWEARE/Playroom_with_castle_and_toys_202608081652.jpeg",
+    image: "/product/8.webp",
   },
   {
     id: "ce",
@@ -42,7 +42,7 @@ const CERTIFICATIONS = [
     desc: "A testament to our uncompromising dedication to health, safety, and environmental protection standards within the European Economic Area and globally.",
     color: "bg-[#FF7A59]",
     icon: <CheckCircle className="w-10 h-10 md:w-12 md:h-12 text-white" />,
-    image: "/assets/WHOWEARE/Playroom_with_toys_and_furniture_202608081652.jpeg",
+    image: "/product/17.webp",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function CertificationPageContent() {
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg"
+            src="/about/10.webp"
             alt="Bright Safe Play Area"
             fill
             sizes="100vw"

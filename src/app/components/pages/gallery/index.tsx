@@ -19,7 +19,7 @@ export interface GalleryItem {
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
-    url: '/assets/split_vantage_images/kids_playsHouse.png',
+    url: '/product/11.webp',
     title: 'Wondear Dreamhouse Play Tent',
     description: 'A magical retreat crafted with durable ABS polymer and breathable mesh windows for endless roleplay.',
     tags: ['Playhouse', 'Indoor', 'Ages 3-6', 'Roleplay'],
@@ -27,7 +27,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 2,
-    url: '/assets/split_vantage_images/Kids_Furniture.png',
+    url: '/product/10.webp',
     title: 'Modern Ergonomic Kids Furniture Set',
     description: 'Sustainably sourced birch wood study & activity table set designed for comfort, safety, and creative sessions.',
     tags: ['Furniture', 'Wooden', 'Activity', 'Ergonomic'],
@@ -35,7 +35,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 3,
-    url: '/assets/split_vantage_images/Kids_Trampoline.png',
+    url: '/product/5.webp',
     title: 'Safety Enclosed Active Trampoline',
     description: 'Heavy-duty steel framed active jump arena featuring 360-degree safety netting and padded spring guards.',
     tags: ['Trampoline', 'Outdoor', 'Active Play', 'Safety Certified'],
@@ -43,7 +43,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 4,
-    url: '/assets/WHOWEARE/Organized_playroom_with_toys_2K_202608081617.jpeg',
+    url: '/product/8.webp',
     title: 'Interactive Wooden Learning Blocks',
     description: 'Vibrant non-toxic organic dyed Montessori building blocks that nurture spatial thinking and fine motor skills.',
     tags: ['Learning', 'Montessori', 'Blocks', 'Non-Toxic'],
@@ -51,7 +51,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 5,
-    url: '/assets/WHOWEARE/Playroom_with_castle_and_toys_202608081652.jpeg',
+    url: '/about/6.webp',
     title: 'Adventure Climber & Play Slide',
     description: 'All-weather modular indoor/outdoor slide unit engineered for smooth playdates and active coordination.',
     tags: ['Slide', 'Active', 'Climber', 'EN71 Certified'],
