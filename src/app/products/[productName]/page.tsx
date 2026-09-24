@@ -526,7 +526,7 @@ export default function ProductDetail() {
 
               {product.shortDescription && (
                 <div
-                  className="prose prose-sm jodit-content max-w-none text-sm font-medium leading-relaxed text-gray-600 sm:prose-base md:text-lg"
+                  className="prose prose-sm jodit-content max-w-none  font-medium leading-relaxed text-gray-600 sm:prose-base md:text-lg"
                   dangerouslySetInnerHTML={{
                     __html:
                       product.shortDescription,
