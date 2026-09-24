@@ -11,23 +11,23 @@ gsap.registerPlugin(ScrollTrigger);
 // --- Data ---
 const concepts = [
   {
-    title: "playful spaces",
-    desc: "By merging ergonomic safety with vibrant imaginative designs, ToyPark creates playrooms and kids' spaces that welcome, inspire, and nurture young minds. Years of dedicated craft guide every furniture piece we build.",
+    title: "Playground Equipment",
+    desc: "From slides and swings to climbers and multiplay systems, we create playground solutions that bring movement, adventure, and everyday excitement to kids’ spaces.",
     image: "/about/5.webp",
   },
   {
-    title: "modular furniture",
-    desc: "ToyPark's innovative modular kids furniture redefines children's spaces—combining multi-functional storage, active play elements, and Scandinavian minimalism tailored for growing families.",
+    title: "Play School Furniture",
+    desc: "Tables, chairs, storage, and learning furniture designed to make educational spaces comfortable, practical, playful, and ready for busy little learners.",
     image: "/about/6.webp",
   },
   {
-    title: "eco-friendly craft",
+    title: "Eco-Friendly Craft",
     desc: "Child safety is at the heart of our design. Crafted using sustainably sourced non-toxic wood, smooth rounded edges, and certified eco-paints, our furniture offers durability you can trust.",
       image: "/about/7.webp",
   },
   {
-    title: "active play design",
-    desc: "Encouraging movement, creativity, and exploration. From indoor play castles to climbing frames and reading nooks, ToyPark turns everyday rooms into magical playgrounds.",
+    title: "Active & Creative Play",
+    desc: "From ride-ons and activity products to games and sensory play, our range keeps children moving, exploring, creating, and discovering through play.",
       image: "/about/8.webp",
   }
 ];

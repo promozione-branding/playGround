@@ -1,10 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Printer, ArrowRight, Cloud, Send } from 'lucide-react';
+import {
+  MapPin,
+  Phone,
+  Mail,
+  ArrowRight,
+  Cloud,
+  Send,
+} from 'lucide-react';
+import axios from 'axios';
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <a
@@ -13,7 +21,13 @@ const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
     rel="noopener noreferrer"
     aria-label="Facebook"
   >
-    <svg {...props} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      {...props}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     </svg>
   </a>
@@ -26,7 +40,13 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
     rel="noopener noreferrer"
     aria-label="Instagram"
   >
-    <svg {...props} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      {...props}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
     </svg>
   </a>
@@ -39,13 +59,77 @@ const YoutubeIcon = (props: React.SVGProps<SVGSVGElement>) => (
     rel="noopener noreferrer"
     aria-label="YouTube"
   >
-    <svg {...props} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <svg
+      {...props}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.376.55A3.016 3.016 0 0 0 .502 6.186C0 8.064 0 12 0 12s0 3.936.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.376-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.936 24 12 24 12s0-3.936-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z" />
     </svg>
   </a>
 );
 
 const Footer2 = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
+  const [newsletterMessage, setNewsletterMessage] = useState('');
+
+const handleNewsletterSubmit = async () => {
+  const trimmedEmail = newsletterEmail.trim();
+
+  if (!trimmedEmail) {
+    setNewsletterMessage("Please enter your email.");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(trimmedEmail)) {
+    setNewsletterMessage("Please enter a valid email address.");
+    return;
+  }
+
+  if (newsletterLoading) return;
+
+  setNewsletterLoading(true);
+  setNewsletterMessage("");
+
+  try {
+    const response = await axios.post(
+      "https://brandbnalo.com/api/form/add",
+      {
+        platform: "Playground Popup form",
+        platformEmail: "info@toyparkindia.com",
+        name: "N/A",
+        email: trimmedEmail,
+        phone: "N/A",
+        product: "N/A",
+        place: "N/A",
+        priceRange:"N/A",
+        message: "N/A",
+      },
+    );
+
+    console.log("Newsletter response:", response);
+
+    setNewsletterMessage("Subscribed successfully!");
+    setNewsletterEmail("");
+  } catch (error: any) {
+    console.error(
+      "Newsletter subscription error:",
+      error
+    );
+
+    setNewsletterMessage(
+      error?.response?.data?.message ||
+      "Unable to subscribe. Please try again."
+    );
+  } finally {
+    setNewsletterLoading(false);
+  }
+};
   return (
     <footer className="relative bg-white pt-4 sm:pt-16 pb-[160px] sm:pb-48 md:pb-60 lg:pb-72 font-quicksand text-gray-600 overflow-hidden">
 
@@ -63,11 +147,18 @@ const Footer2 = () => {
         </svg>
       </div>
 
-      {/* ═══ FLOATING BACKGROUND CLOUDS (MOBILE + DESKTOP) ═══ */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+      {/* ═══ FLOATING BACKGROUND CLOUDS ═══ */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none"
+      >
         <motion.div
           animate={{ x: ['-30vw', '115vw'] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
           className="absolute top-6 sm:top-10 left-0 text-[#38BDF8]/20"
         >
           <Cloud className="w-12 h-12 sm:w-20 sm:h-20 stroke-[1.8] fill-[#38BDF8]/5" />
@@ -75,7 +166,12 @@ const Footer2 = () => {
 
         <motion.div
           animate={{ x: ['-35vw', '115vw'] }}
-          transition={{ duration: 32, repeat: Infinity, ease: 'linear', delay: 8 }}
+          transition={{
+            duration: 32,
+            repeat: Infinity,
+            ease: 'linear',
+            delay: 8,
+          }}
           className="absolute top-20 sm:top-28 left-0 text-[#00C4B5]/15"
         >
           <Cloud className="w-16 h-16 sm:w-28 sm:h-28 stroke-[1.8] fill-[#00C4B5]/5" />
@@ -88,8 +184,12 @@ const Footer2 = () => {
 
           {/* Column 1: Brand & Contact Info */}
           <div className="space-y-1 sm:space-y-4 lg:col-span-3">
+
             {/* Logo */}
-            <Link href="/" className="inline-block -mt-2 sm:-mt-5 mb-0 sm:mb-1">
+            <Link
+              href="/"
+              className="inline-block -mt-2 sm:-mt-5 mb-0 sm:mb-1"
+            >
               <Image
                 src="/assets/clean_logo_toypark.webp"
                 alt="ToyPark Logo"
@@ -101,52 +201,75 @@ const Footer2 = () => {
 
             {/* Contact Info List */}
             <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base">
+
               <li className="flex items-start gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0 text-[#00C4B5] mt-0.5">
                   <MapPin size={15} />
                 </div>
-                <span className="font-semibold leading-snug">17a/57, W.E.A., Karol Bagh
-                  New Delhi - 110005, India</span>
+
+                <span className="font-semibold leading-snug">
+                  17a/57, W.E.A., Karol Bagh
+                  <br />
+                  New Delhi - 110005, India
+                </span>
               </li>
+
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0 text-amber-500">
                   <Phone size={15} />
                 </div>
-                <span className="font-semibold">+919811117654</span>
+
+                <span className="font-semibold">
+                  +919811117654
+                </span>
               </li>
+
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-rose-50 flex items-center justify-center flex-shrink-0 text-[#FF6B6B]">
                   <Mail size={15} />
                 </div>
-                <span className="font-semibold">info@toyparkindia.com</span>
+
+                <span className="font-semibold">
+                  info@toyparkindia.com
+                </span>
               </li>
+
               <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
                 <div className="w-7 h-7 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500">
                   <Phone size={15} />
                 </div>
-                <span className="font-semibold">011-28759070</span>
+
+                <span className="font-semibold">
+                  011-28759070
+                </span>
               </li>
+
             </ul>
           </div>
 
           {/* Quick Links Group Container */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:col-span-6 gap-6 sm:gap-4 lg:grid-cols-6">
+
             {/* Column 2: About Us */}
             <div className="lg:col-span-2">
               <h3 className="text-lg sm:text-[20px] font-black text-gray-900 mb-1.5 sm:mb-2 flex items-center gap-2">
                 <span>About Us</span>
               </h3>
-              <div className="w-8 sm:w-10 h-1 bg-[#FF6B6B] mb-3 sm:mb-6 rounded-full"></div>
+
+              <div className="w-8 sm:w-10 h-1 bg-[#FF6B6B] mb-3 sm:mb-6 rounded-full" />
+
               <ul className="space-y-2.5 sm:space-y-3 text-sm sm:text-base">
                 {[
                   { name: 'About Us', href: '/about' },
                   { name: 'Our Story', href: '/ourstory' },
                   { name: 'Who We Are', href: '/whoweare' },
                   { name: 'Why Choose Us', href: '/why-choose-us' },
-                  // { name: 'Careers', href: '/careers' },
                 ].map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-gray-600 hover:text-[#FF6B6B] font-extrabold transition-colors duration-200 inline-block hover:translate-x-1 transform">
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-[#FF6B6B] font-extrabold transition-colors duration-200 inline-block hover:translate-x-1 transform"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -159,7 +282,9 @@ const Footer2 = () => {
               <h3 className="text-lg sm:text-[20px] font-black text-gray-900 mb-1.5 sm:mb-2 flex items-center gap-2">
                 <span>News &amp; Events</span>
               </h3>
-              <div className="w-8 sm:w-10 h-1 bg-amber-400 mb-3 sm:mb-6 rounded-full"></div>
+
+              <div className="w-8 sm:w-10 h-1 bg-amber-400 mb-3 sm:mb-6 rounded-full" />
+
               <ul className="space-y-2.5 sm:space-y-3 text-sm sm:text-base">
                 {[
                   { name: 'Exhibition', href: '/exhibition' },
@@ -167,7 +292,10 @@ const Footer2 = () => {
                   { name: 'Gallery Showcase', href: '/gallery' },
                 ].map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-gray-600 hover:text-amber-400 font-extrabold transition-colors duration-200 inline-block hover:translate-x-1 transform">
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-amber-400 font-extrabold transition-colors duration-200 inline-block hover:translate-x-1 transform"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -180,11 +308,22 @@ const Footer2 = () => {
               <h3 className="text-lg sm:text-[20px] font-black text-gray-900 mb-1.5 sm:mb-2 flex items-center gap-2">
                 <span>Customer Support</span>
               </h3>
-              <div className="w-8 sm:w-10 h-1 bg-[#00C4B5] mb-3 sm:mb-6 rounded-full"></div>
+
+              <div className="w-8 sm:w-10 h-1 bg-[#00C4B5] mb-3 sm:mb-6 rounded-full" />
+
               <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5 sm:gap-3 text-sm sm:text-base">
-                {[{ name: 'Contact Us', href: "/contact" }, { name: 'Partner with us', href: "/partner" }, { name: 'Returns & Exchanges', href: "/returns-and-exchanges" }, { name: 'Refund & Returns', href: "/refund-and-returns" }, { name: 'Privacy Policy', href: "/privacy-policy" }].map((link) => (
+                {[
+                  { name: 'Contact Us', href: '/contact' },
+                  { name: 'Partner with us', href: '/partner' },
+                  { name: 'Returns & Exchanges', href: '/returns-and-exchanges' },
+                  { name: 'Refund & Returns', href: '/refund-and-returns' },
+                  { name: 'Privacy Policy', href: '/privacy-policy' },
+                ].map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-gray-600 hover:text-[#00C4B5] font-bold transition-colors duration-200 inline-block hover:translate-x-1 transform">
+                    <Link
+                      href={link.href}
+                      className="text-gray-600 hover:text-[#00C4B5] font-bold transition-colors duration-200 inline-block hover:translate-x-1 transform"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -195,7 +334,9 @@ const Footer2 = () => {
 
           {/* Column 5: Newsletter Card */}
           <div className="lg:col-span-3 flex flex-col lg:mb-4 bg-[#BDECF0] px-4 pt-4 pb-6 sm:px-5 sm:pt-5 sm:pb-8 rounded-2xl sm:rounded-3xl text-[#0F2942] shadow-sm relative overflow-hidden border border-[#00C4B5]/20">
+
             <div className="relative z-10 flex-1 flex flex-col">
+
               <div>
                 <div className="inline-flex items-center gap-1.5 bg-[#00C4B5] text-white px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-2 shadow-xs">
                   <Send className="w-3 h-3 text-white" />
@@ -210,30 +351,94 @@ const Footer2 = () => {
                   Never miss our latest toy releases, deals, and play guides.
                 </p>
 
-                {/* Input Form */}
-                <div className="relative flex items-center w-full mb-3">
-                  <div className="absolute left-3 text-gray-400">
+                {/* Newsletter Form */}
+                <div className="relative flex items-center w-full mb-2">
+
+                  <div className="absolute left-3 text-gray-400 pointer-events-none">
                     <Mail size={15} />
                   </div>
+
                   <input
                     type="email"
+                    value={newsletterEmail}
+                    onChange={(e) => {
+                      setNewsletterEmail(e.target.value);
+                      setNewsletterMessage('');
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleNewsletterSubmit();
+                      }
+                    }}
                     placeholder="Enter your email"
-                    className="w-full py-2.5 pl-9 pr-11 rounded-xl border border-white/60 focus:outline-none focus:bg-white bg-white text-slate-800 text-sm sm:text-base shadow-xs transition-all font-semibold placeholder:text-gray-400"
+                    disabled={newsletterLoading}
+                    className="w-full py-2.5 pl-9 pr-11 rounded-xl border border-white/60 focus:outline-none focus:bg-white bg-white text-slate-800 text-sm sm:text-base shadow-xs transition-all font-semibold placeholder:text-gray-400 disabled:opacity-70"
                   />
-                  <button className="absolute right-1 top-1 bottom-1 bg-[#00C4B5] hover:bg-[#00b0a2] text-white px-3 rounded-lg transition-all flex items-center justify-center shadow-sm hover:scale-105 active:scale-95">
-                    <ArrowRight size={15} />
+
+                  <button
+                    type="button"
+                    onClick={handleNewsletterSubmit}
+                    disabled={newsletterLoading}
+                    aria-label="Subscribe to newsletter"
+                    className="absolute right-1 top-1 bottom-1 bg-[#00C4B5] hover:bg-[#00b0a2] disabled:opacity-60 disabled:cursor-not-allowed text-white px-3 rounded-lg transition-all flex items-center justify-center shadow-sm hover:scale-105 active:scale-95"
+                  >
+                    {newsletterLoading ? (
+                      <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <ArrowRight size={15} />
+                    )}
                   </button>
                 </div>
+
+                {/* Success / Error Message */}
+                {newsletterMessage && (
+                  <p
+                    className={`text-xs font-semibold ${
+                      newsletterMessage.includes('successfully')
+                        ? 'text-green-600'
+                        : 'text-red-500'
+                    }`}
+                  >
+                    {newsletterMessage}
+                  </p>
+                )}
               </div>
 
               {/* Social Icons */}
               <div className="flex items-center gap-2 mt-auto pt-4">
-                {[FacebookIcon, YoutubeIcon, InstagramIcon].map((Icon, idx) => (
-                  <a key={idx} href="#" className="w-8 h-8 rounded-xl bg-white hover:bg-[#00C4B5] text-[#0F2942] hover:text-white flex items-center justify-center transition-all duration-200 shadow-xs">
-                    <Icon />
-                  </a>
-                ))}
+
+                <a
+                  href="https://www.facebook.com/toyparkdelhi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="ToyPark Facebook"
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-[#00C4B5] text-[#0F2942] hover:text-white flex items-center justify-center transition-all duration-200 shadow-xs"
+                >
+                  <FacebookIcon />
+                </a>
+
+                <a
+                  href="https://youtube.com/@toyparkdelhi?si=-hST7jIeIYuhfQao"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="ToyPark YouTube"
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-[#00C4B5] text-[#0F2942] hover:text-white flex items-center justify-center transition-all duration-200 shadow-xs"
+                >
+                  <YoutubeIcon />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/toypark.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="ToyPark Instagram"
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-[#00C4B5] text-[#0F2942] hover:text-white flex items-center justify-center transition-all duration-200 shadow-xs"
+                >
+                  <InstagramIcon />
+                </a>
+
               </div>
+
             </div>
           </div>
         </div>
@@ -289,8 +494,8 @@ const Footer2 = () => {
         <div className="absolute bottom-2 sm:bottom-3 w-full text-center z-30 pointer-events-auto text-white/90 text-[10px] sm:text-sm font-medium px-4">
           © 2026 Toypark. All Rights Reserved by Toypark
         </div>
-      </div>
 
+      </div>
     </footer>
   );
 };

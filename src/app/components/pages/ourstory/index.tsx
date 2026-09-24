@@ -238,17 +238,16 @@ export default function OurStoryComponent() {
               : 'text-gray-400 opacity-40 scale-95'
           }`}
         >
-          For those who make play their destination
+          For Those Who Make Play Their Destination
         </h1>
 
         {/* 1st Story Text Paragraph */}
         <div className="max-w-4xl w-full text-center space-y-4 sm:space-y-6 text-base sm:text-lg md:text-xl leading-relaxed text-[#475569] font-medium mb-10 sm:mb-16">
           <p>
-            Toy Park is a premier playground & interactive play studio based in Delhi since 2002, where ergonomic safety and vibrant aesthetics develop as one unified vision. Every line is intentional; every climb, slide, and structure is engineered to move, play, and endure.
+            Since 2002, <span className='font-bold'> Toy Park has been a trusted playground equipment and Play School Furniture manufacturer,</span> creating products where fun meets smart design, everyday durability, and kid-friendly functionality. From playgrounds and play structures to furniture and activity products, we make spaces that keep little minds moving and imaginations growing.
+With <span className='font-bold'> bulk orders, wholesale supply, and custom solutions </span>, we help schools, play schools, daycares, institutions, and business buyers bring their ideas to life.<span className='font-bold'> Made for little hands. Built for big plans. Ready to play.</span>
           </p>
-          <p>
-            We build immersive environments using premium sustainable wood, non-toxic finishes, and weather-resistant polymers. True innovation is our tool to create distinction, delivering spaces where communities gather and children set their own standard of play.
-          </p>
+          
         </div>
 
         {/* Interactive Link Button */}
