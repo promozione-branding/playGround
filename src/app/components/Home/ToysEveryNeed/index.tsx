@@ -94,7 +94,7 @@ const CARDS: ToyCardData[] = [
     href: "/products/play-school-safety-essentials",
     sub: "Tactile Kits & Soft Play",
     title: "Play School Safety Essentials",
-    desc: "Create safer, more comfortable learning environments with Toy Park’s Play School Safety Essentials",
+    desc: "Create safer, more comfortable learning environments with Toy Park’s Play School Safety Essentials.",
     img: "/product/17.webp",
     fallback: "#fca5a5",
     emoji: "🌈",
@@ -118,19 +118,20 @@ function ToyCard({
 
   return (
     <Link
-    href={card.href}
+      href={card.href}
       className="
-        group relative w-full overflow-hidden
+        group relative flex h-full w-full flex-col
+        justify-between overflow-hidden
         rounded-[22px]
         border border-[#b2ede6]
         bg-white
         transition-transform duration-200
         hover:-translate-y-1
-        h-full flex flex-col justify-between
       "
     >
       <div>
         {/* ================= IMAGE ================= */}
+
         <div
           className="
             relative flex h-[210px]
@@ -165,6 +166,7 @@ function ToyCard({
           )}
 
           {/* Category */}
+
           <span
             className="
               absolute left-3 top-3
@@ -172,8 +174,10 @@ function ToyCard({
               border border-[#2cbfb3]/40
               bg-white/95
               px-2.5 py-1
-              text-[10px] font-extrabold
-              uppercase tracking-wider
+              text-[10px]
+              font-extrabold
+              uppercase
+              tracking-wider
               text-[#1f4e4b]
             "
           >
@@ -181,13 +185,15 @@ function ToyCard({
           </span>
 
           {/* Age */}
+
           <span
             className="
               absolute right-3 top-3
               rounded-full
               bg-[#2cbfb3]
               px-2.5 py-1
-              text-[10px] font-extrabold
+              text-[10px]
+              font-extrabold
               text-white
             "
           >
@@ -196,13 +202,17 @@ function ToyCard({
         </div>
 
         {/* ================= CONTENT ================= */}
+
         <div className="p-4">
           {/* Sub Category */}
+
           <span
             className="
               mb-1 block
-              text-[10px] font-extrabold
-              uppercase tracking-widest
+              text-[10px]
+              font-extrabold
+              uppercase
+              tracking-widest
               text-[#1a9e93]
             "
           >
@@ -210,6 +220,7 @@ function ToyCard({
           </span>
 
           {/* Title */}
+
           <h3
             className="
               mb-1.5
@@ -223,6 +234,7 @@ function ToyCard({
           </h3>
 
           {/* Rating */}
+
           <div className="mb-3 flex items-center gap-1.5">
             <span
               className="
@@ -246,6 +258,7 @@ function ToyCard({
           </div>
 
           {/* Description */}
+
           <p
             className="
               mb-4
@@ -262,15 +275,19 @@ function ToyCard({
       </div>
 
       {/* ================= BUTTON ================= */}
-      <div className="px-4 pb-4 flex gap-2">
+
+      <div className="flex gap-2 px-4 pb-4">
         <button
           type="button"
-          onClick={(e) => {e.preventDefault();
-        e.stopPropagation();
- onEnquiry(card); }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onEnquiry(card);
+          }}
           className="
-            flex-1
             inline-flex
+            flex-1
+            cursor-pointer
             items-center
             justify-center
             gap-1.5
@@ -284,14 +301,11 @@ function ToyCard({
             text-white
             transition-colors
             hover:bg-[#1a9e93]
-            cursor-pointer
           "
         >
-          Enquiry now
+          Enquiry Now
 
-          <ArrowRight
-            className="h-3.5 w-3.5"
-          />
+          <ArrowRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </Link>
@@ -303,11 +317,9 @@ function ToyCard({
 ========================================================= */
 
 export default function ToysEveryNeed() {
-  const [isPopupOpen, setIsPopupOpen] =
-    useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const [selectedProduct, setSelectedProduct] =
-    useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
 
   /* =======================================================
      OPEN ENQUIRY POPUP
@@ -368,6 +380,14 @@ export default function ToysEveryNeed() {
 
               .toys-swiper .swiper-pagination-bullet {
                 background: #2cbfb3;
+              }
+
+              .toys-swiper .swiper-pagination-bullet-active {
+                background: #1a9e93;
+              }
+
+              .toys-swiper {
+                overflow: visible;
               }
             `,
           }}
@@ -514,7 +534,8 @@ export default function ToysEveryNeed() {
               md:text-5xl
             "
           >
-            Toys for{" "}
+            Toys{" "}
+            for{" "}
             <span className="text-[#1a9e93]">
               Every
             </span>{" "}
@@ -559,29 +580,67 @@ export default function ToysEveryNeed() {
             spaceBetween={24}
             slidesPerView={1}
             loop={true}
-            autoplay={false}
+            speed={700}
+            grabCursor={true}
+
+            /* ================================
+               AUTO SLIDE
+            ================================= */
+
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+
+            /* ================================
+               PAGINATION
+            ================================= */
+
             pagination={{
               clickable: true,
               dynamicBullets: true,
             }}
+
+            /* ================================
+               NAVIGATION
+            ================================= */
+
             navigation={{
               prevEl: ".custom-prev-btn",
               nextEl: ".custom-next-btn",
             }}
+
+            /* ================================
+               RESPONSIVE SLIDES
+            ================================= */
+
             breakpoints={{
+              // Mobile
+              0: {
+                slidesPerView: 1,
+                spaceBetween: 16,
+              },
+
+              // Small tablet
               640: {
                 slidesPerView: 2,
+                spaceBetween: 20,
               },
 
+              // Tablet / small desktop
               1024: {
                 slidesPerView: 3,
+                spaceBetween: 22,
               },
 
+              // Large desktop
               1280: {
                 slidesPerView: 4,
+                spaceBetween: 24,
               },
             }}
-            className="toys-swiper !pb-12"
+            className="toys-swiper !overflow-hidden !pb-12"
           >
             {CARDS.map((card, idx) => (
               <SwiperSlide
@@ -613,6 +672,7 @@ export default function ToysEveryNeed() {
               h-10
               w-10
               -translate-y-1/2
+              cursor-pointer
               items-center
               justify-center
               rounded-full
@@ -621,15 +681,14 @@ export default function ToysEveryNeed() {
               bg-white/90
               text-[#1f4e4b]
               shadow-md
-              transition-colors
+              transition-all
+              duration-300
+              hover:scale-110
               hover:bg-[#2cbfb3]
               hover:text-white
-              cursor-pointer
             "
           >
-            <ChevronLeft
-              className="h-6 w-6"
-            />
+            <ChevronLeft className="h-6 w-6" />
           </button>
 
           {/* =================================================
@@ -649,6 +708,7 @@ export default function ToysEveryNeed() {
               h-10
               w-10
               -translate-y-1/2
+              cursor-pointer
               items-center
               justify-center
               rounded-full
@@ -657,15 +717,14 @@ export default function ToysEveryNeed() {
               bg-white/90
               text-[#1f4e4b]
               shadow-md
-              transition-colors
+              transition-all
+              duration-300
+              hover:scale-110
               hover:bg-[#2cbfb3]
               hover:text-white
-              cursor-pointer
             "
           >
-            <ChevronRight
-              className="h-6 w-6"
-            />
+            <ChevronRight className="h-6 w-6" />
           </button>
         </div>
       </section>
