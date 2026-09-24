@@ -234,15 +234,7 @@ const handleNewsletterSubmit = async () => {
                 </span>
               </li>
 
-              <li className="flex items-center gap-3 text-gray-700 hover:text-[#00C4B5] transition-colors">
-                <div className="w-7 h-7 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500">
-                  <Phone size={15} />
-                </div>
-
-                <span className="font-semibold">
-                  011-28759070
-                </span>
-              </li>
+             
 
             </ul>
           </div>

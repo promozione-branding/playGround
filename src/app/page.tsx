@@ -14,7 +14,7 @@ import ShopByCategories from "./components/Home/ShopByCategories";
 import ShopByAge from "./components/Home/ShopByAge";
 import ShopElementsSection from "./components/Home/ShopElementsSection";
 import WhoWeAre from "./components/Home/WhoWeAre";
-import CloudStatsBanner from "./components/Home/CloudStatsBanner";
+// import CloudStatsBanner from "./components/Home/CloudStatsBanner";
 import HeroSubBanner from "./components/Home/HeroSubBanner";
 import BusinessStats from "./components/Home/BusinessStats";
 import HowItWorksProcess from "./components/Home/HowItWorksProcess";
@@ -144,7 +144,7 @@ export default function Home() {
 
       <WhoWeAre />
 
-      <CloudStatsBanner />
+      {/* <CloudStatsBanner /> */}
 
       <HeroSubBanner />
 

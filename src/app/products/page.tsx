@@ -14,6 +14,7 @@ import {
 
 import PlayfulHeader from "../components/Navbar";
 import Footer2 from "../components/Footer2";
+import PopupForm from "../components/popup/PopupForm";
 
 /* =========================================================
    TYPES
@@ -142,9 +143,11 @@ const cardVariants: Variants = {
 const SkeletonCard = () => {
   return (
     <div className="overflow-hidden rounded-[2rem] bg-white shadow-sm">
+
       <div className="h-56 w-full animate-pulse bg-gray-200" />
 
       <div className="space-y-4 p-5">
+
         <div className="h-3 w-24 animate-pulse rounded bg-gray-200" />
 
         <div className="h-6 w-3/4 animate-pulse rounded bg-gray-200" />
@@ -161,6 +164,7 @@ const SkeletonCard = () => {
         <div className="h-5 w-28 animate-pulse rounded bg-gray-200" />
 
         <div className="h-11 w-full animate-pulse rounded-xl bg-gray-200" />
+
       </div>
     </div>
   );
@@ -173,8 +177,19 @@ const SkeletonCard = () => {
 export default function ProductsPage() {
   const router = useRouter();
 
+  /* =========================================================
+     PRODUCTS / CATEGORIES
+  ========================================================= */
+
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+
+  /* =========================================================
+     POPUP
+  ========================================================= */
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState("");
 
   /*
    * activeCategorySlug:
@@ -185,6 +200,7 @@ export default function ProductsPage() {
    *
    * We use slug instead of category name.
    */
+
   const [activeCategorySlug, setActiveCategorySlug] =
     useState<string>("all");
 
@@ -199,6 +215,36 @@ export default function ProductsPage() {
 
   const [categoryError, setCategoryError] =
     useState("");
+
+  /* =========================================================
+     ENQUIRY HANDLER
+  ========================================================= */
+
+  const handleEnquiry = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    product: Product
+  ) => {
+    // Prevent any default browser action
+    event.preventDefault();
+
+    // Prevent parent/card click events
+    event.stopPropagation();
+
+    // Set selected product
+    setSelectedProduct(product.productName);
+
+    // Open popup
+    setIsPopupOpen(true);
+  };
+
+  /* =========================================================
+     CLOSE POPUP
+  ========================================================= */
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedProduct("");
+  };
 
   /* =========================================================
      FETCH PRODUCTS
@@ -304,6 +350,7 @@ export default function ProductsPage() {
     /*
      * Wait until categories are loaded.
      */
+
     if (loadingCategories) {
       return;
     }
@@ -332,6 +379,7 @@ export default function ProductsPage() {
      *
      * => All
      */
+
     if (!categorySlugFromURL) {
       setActiveCategorySlug("all");
       return;
@@ -340,6 +388,7 @@ export default function ProductsPage() {
     /*
      * Find category using slug.
      */
+
     const matchedCategory = categories.find(
       (category) =>
         category.slug?.toLowerCase() ===
@@ -349,6 +398,7 @@ export default function ProductsPage() {
     /*
      * Valid category
      */
+
     if (matchedCategory) {
       setActiveCategorySlug(
         matchedCategory.slug
@@ -364,6 +414,7 @@ export default function ProductsPage() {
      *
      * => All
      */
+
     setActiveCategorySlug("all");
   }, [categories, loadingCategories]);
 
@@ -393,6 +444,7 @@ export default function ProductsPage() {
     /*
      * ALL PRODUCTS
      */
+
     if (activeCategorySlug === "all") {
       return products;
     }
@@ -402,6 +454,7 @@ export default function ProductsPage() {
      *
      * Match product category by slug.
      */
+
     return products.filter((product) => {
       const productCategorySlug =
         product.category?.slug || "";
@@ -423,6 +476,7 @@ export default function ProductsPage() {
     /*
      * Update selected category immediately.
      */
+
     setActiveCategorySlug(categorySlug);
 
     /*
@@ -434,6 +488,7 @@ export default function ProductsPage() {
      * Category:
      * /products?cat=toys
      */
+
     if (categorySlug === "all") {
       router.push("/products");
     } else {
@@ -633,7 +688,6 @@ export default function ProductsPage() {
 
             {!loadingCategories &&
               categoryTabs.map((category) => {
-
                 const isActive =
                   activeCategorySlug.toLowerCase() ===
                   category.slug.toLowerCase();
@@ -795,9 +849,7 @@ export default function ProductsPage() {
                             transition={{
                               duration: 0.3,
                             }}
-                            src={
-                              productImage
-                            }
+                            src={productImage}
                             alt={
                               product.productName ||
                               "Product"
@@ -834,7 +886,7 @@ export default function ProductsPage() {
 
                         {/* Heart */}
 
-                        <button
+                        {/* <button
                           type="button"
                           aria-label={`Add ${product.productName} to wishlist`}
                           className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-gray-500 shadow-sm backdrop-blur transition-all duration-300 hover:bg-[#18A6A6] hover:text-white"
@@ -844,7 +896,7 @@ export default function ProductsPage() {
                           }}
                         >
                           <Heart className="h-5 w-5" />
-                        </button>
+                        </button> */}
 
                       </div>
 
@@ -881,9 +933,7 @@ export default function ProductsPage() {
                           }).map(
                             (_, index) => (
                               <Star
-                                key={
-                                  index
-                                }
+                                key={index}
                                 className="h-4 w-4 fill-[#F4B942] text-[#F4B942]"
                               />
                             )
@@ -917,14 +967,22 @@ export default function ProductsPage() {
 
                         </div>
 
-                        {/* Enquire Button */}
+                        {/* =================================================
+                            ENQUIRE BUTTON
+                        ================================================= */}
 
-                        <a
-                          href="tel:+919811117654"
-                          className="mt-4 flex w-full items-center justify-center rounded-xl bg-[#18A6A6] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-[#138989] hover:shadow-lg"
+                        <button
+                          type="button"
+                          onClick={(event) =>
+                            handleEnquiry(
+                              event,
+                              product
+                            )
+                          }
+                          className="mt-4 flex w-full cursor-pointer items-center justify-center rounded-xl bg-[#18A6A6] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-[#138989] hover:shadow-lg"
                         >
                           Enquire Now
-                        </a>
+                        </button>
 
                       </div>
 
@@ -1011,6 +1069,16 @@ export default function ProductsPage() {
         </motion.div>
 
       </div>
+
+      {/* =====================================================
+          ENQUIRY POPUP
+      ===================================================== */}
+
+      <PopupForm
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+        productName={selectedProduct}
+      />
 
       {/* =====================================================
           FOOTER
