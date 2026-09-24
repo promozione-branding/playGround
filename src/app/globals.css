@@ -73,7 +73,7 @@ body {
 }
 .jodit-content p {
   font-family: Arial, sans-serif;
-    font-size: 18px !important;
+  font-size: 18px !important;
   line-height: 1.5;
   color: #333;
 }
@@ -89,6 +89,7 @@ body {
 }
 .jodit-content li {
   margin: 5px 0;
+  font-size: 18px !important;
 }
 
 
