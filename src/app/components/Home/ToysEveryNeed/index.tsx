@@ -230,7 +230,7 @@ function ToyCard({ card }: { card: ToyCardData }) {
             cursor-pointer
           "
         >
-          Shop now
+          Enquiry now
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
 

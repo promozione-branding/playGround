@@ -121,6 +121,7 @@ function MobileView() {
                     width={100}
                     src={project.link}
                     alt={project.title}
+                    unoptimized
                     loading={i === 0 ? 'eager' : 'lazy'}
                     className="w-full h-full object-cover"
                   />
@@ -196,7 +197,7 @@ function DesktopView() {
         {/* HEADER */}
         <div className="absolute inset-0 z-20 pointer-events-none">
           <div className="sticky top-0 h-[700px] flex flex-col">
-            <div className="relative w-full pt-10 pb-8 flex flex-col justify-center items-center text-center px-4 bg-white pointer-events-auto">
+            <div className="relative w-full pt-5 pb-3 flex flex-col justify-center items-center text-center px-4 bg-white pointer-events-auto">
               <div className="absolute inset-0 bg-gradient-to-r from-[#6BD0DC]/10 via-transparent to-[#00C4B5]/10 pointer-events-none" />
               <span className="relative bg-[#FF7A59] text-white text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full shadow-sm mb-2.5">
                 Fun &amp; Education For Kids
@@ -271,10 +272,10 @@ const DesktopCard: React.FC<DesktopCardProps> = ({
   const imageScale = useTransform(progress, imageRange, [1.10, 1]);
 
   return (
-    <div className="h-[700px] flex items-start justify-center sticky top-0 pt-56">
+    <div className="h-[670px] flex items-start justify-center sticky top-0 pt-48">
       <motion.div
         style={{ backgroundColor: color, scale, top: i * 24 }}
-        className="flex flex-row relative h-[480px] w-full max-w-[1440px] rounded-[2.5rem] p-10 origin-top shadow-xl border-4 border-white/30 text-white overflow-hidden gap-10 font-quicksand will-change-transform"
+        className="flex flex-row relative h-[440px] w-full max-w-[1440px] rounded-[2.5rem] p-7 origin-top shadow-xl border-4 border-white/30 text-white overflow-hidden gap-10 font-quicksand will-change-transform"
       >
         <div className="w-[45%] flex flex-col justify-between py-2 z-10">
           <div>

@@ -21,6 +21,7 @@ interface Project {
   name: string;
   title: string;
   year: string;
+  href: string;
   timeline: string;
   services: string[];
   image: string;
@@ -36,6 +37,7 @@ const projects: Project[] = [
     name: "KIDS TRAMPOLINE",
     title: "Safe and bouncy trampolines designed for endless active play",
     year: "3-8 Years",
+    href:"/products/trampoline-with-enclosure",
     timeline: "Active Play",
     services: ["Motor Skills", "Energy Burn", "Safe Play"],
     image: "/split/tampoline.webp",
@@ -52,6 +54,7 @@ const projects: Project[] = [
     name: "PLAY & CLIMB",
     title: "Fun climbing and play structures that encourage active exploration",
     year: "3-8 Years",
+    href:"/products/playground-climber-activity-series",
     timeline: "Active Play",
     services: ["Climbing", "Balance", "Coordination"],
     image: "/split/play-climb.webp",
@@ -68,6 +71,7 @@ const projects: Project[] = [
     name: "KIDS PLAY STATION",
     title: "Colorful play stations designed for creativity, learning and fun",
     year: "3-10 Years",
+    href:"/products/themed-multi-playstation",
     timeline: "Creative Play",
     services: ["Creative Play", "Learning", "Social Skills"],
     image: "/split/playstaion.webp",
@@ -181,7 +185,7 @@ function MobileView() {
                 </div>
 
                 {/* Button */}
-                <Link href={"/products"}
+                <Link href={proj.href}
                   className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-between border-2 border-[#2D3436] cursor-pointer ${proj.btnColor}`}
                 >
                   <span>EXPLORE COLLECTION</span>
@@ -323,17 +327,18 @@ function DesktopView() {
                         ))}
                       </div>
                     </div>
+                    <Link href={projects[activeIndex].href}
+                className={`w-full py-4 px-6 rounded-2xl font-black text-sm uppercase tracking-wider flex items-center justify-between border-3 border-[#2D3436] hover:-translate-y-1 active:translate-y-0.5 transition-all duration-200 group mt-4 cursor-pointer ${projects[activeIndex].btnColor}`}
+              >
+                <span>EXPLORE PRODUCT</span>
+                <ArrowRight className="w-5 h-5 stroke-[3] transform group-hover:translate-x-1.5 transition-transform duration-200" />
+              </Link>
                   </div>
                 </div>
               </div>
 
               {/* CTA Button */}
-              <Link href={"/products"}
-                className={`w-full py-4 px-6 rounded-2xl font-black text-sm uppercase tracking-wider flex items-center justify-between border-3 border-[#2D3436] hover:-translate-y-1 active:translate-y-0.5 transition-all duration-200 group mt-4 cursor-pointer ${projects[activeIndex].btnColor}`}
-              >
-                <span>EXPLORE COLLECTION</span>
-                <ArrowRight className="w-5 h-5 stroke-[3] transform group-hover:translate-x-1.5 transition-transform duration-200" />
-              </Link>
+              
             </div>
 
             {/* Right Column - Image Reveal Container */}

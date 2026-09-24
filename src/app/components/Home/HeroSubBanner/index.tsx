@@ -10,7 +10,7 @@ const BANNERS = [
     title: 'Kids Table & Play Sets',
     subtitle: 'Discover Amazing Offers!',
     buttonText: 'See Collection',
-    href: '/products',
+    href: '/products?cat=playschool-furniture',
     bgColor: 'bg-[#FFD400]',
     btnTextColor: 'text-[#FFB800]',
     image: '/assets/heroSubBanner/table.png',
@@ -22,7 +22,7 @@ const BANNERS = [
     title: 'Children Day Collection 2023',
     subtitle: "15% Off on Kids' Toys and Gifts!",
     buttonText: 'See Collection',
-    href: '/products',
+    href: '/products?cat=playing-equipments',
     bgColor: 'bg-[#F83B58]',
     btnTextColor: 'text-[#F83B58]',
     image: '/assets/heroSubBanner/kids_1.png',
@@ -133,7 +133,7 @@ export const HeroSubBanner: React.FC = () => {
               <p className="text-sm sm:text-base font-semibold !text-white/95 drop-shadow-sm mb-6">
                 Discover Amazing Offers!
               </p>
-              <Link href={"/products"}
+              <Link href={"/products?cat=playschool-furniture"}
                 className="inline-flex items-center gap-2 bg-white text-[#FFB800] hover:bg-slate-50 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-105 active:scale-95"
               >
                 <span>See Collection</span>
@@ -163,7 +163,7 @@ export const HeroSubBanner: React.FC = () => {
               <p className="text-sm sm:text-base font-semibold text-white/90 mb-6">
                 15% Off on Kids&apos; Toys and Gifts!
               </p>
-              <Link href={"/products"}
+              <Link href={"/products?cat=playing-equipments"}
                 className="inline-flex items-center gap-2 bg-white text-[#F83B58] hover:bg-slate-50 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-105 active:scale-95"
               >
                 <span>See Collection</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, PackageCheck, Building2, ShieldCheck, Rocket, Sparkles, Headphones } from 'lucide-react';
+import { Award, PackageCheck, Building2, ShieldCheck, Rocket, Sparkles, Headphones, Link } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -119,11 +119,11 @@ const BusinessStats = () => {
         <div className="bg-[#FFD400] rounded-3xl p-5 sm:p-12 lg:p-16 shadow-lg flex flex-col lg:flex-row gap-6 sm:gap-12 lg:gap-16 relative overflow-hidden border-2 border-white/60">
           
           {/* Arrow up circle (bottom right) */}
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white shadow-md cursor-pointer hover:scale-105 transition-transform z-20">
+          <a href="/contact" className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white shadow-md cursor-pointer hover:scale-105 transition-transform z-20">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 19V5M5 12l7-7 7 7"/>
             </svg>
-          </div>
+          </a>
  
           {/* Left: Text */}
           <div className="flex-1 lg:border-r lg:border-black/10 lg:border-dashed lg:pr-12">

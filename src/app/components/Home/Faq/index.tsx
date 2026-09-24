@@ -242,7 +242,7 @@ export const FaqInteractivePreview = () => {
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -20, scale: 0.98 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute inset-0 bg-white rounded-3xl p-8 lg:p-10 flex flex-col justify-between shadow-xl border border-white/60 overflow-hidden"
+                  className="absolute inset-0 bg-white rounded-3xl p-8 md:p-8 flex flex-col justify-between shadow-xl border border-white/60 overflow-hidden"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 text-slate-500">
@@ -256,7 +256,7 @@ export const FaqInteractivePreview = () => {
                       {activeItem.question}
                     </h3>
 
-                    <p className="text-slate-600 text-base md:text-lg leading-relaxed font-semibold">
+                    <p className="text-slate-600 text-base leading-tight  font-semibold">
                       {activeItem.answer}
                     </p>
                   </div>
