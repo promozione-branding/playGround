@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 
 import { LiquidButton } from "../ui/buttonUi";
+import Link from "next/link";
 
 /* ─────────────────────────────────────────────
    ANNOUNCEMENT BAR DATA
@@ -735,7 +736,7 @@ export default function KidzaNavbar() {
                   </span>
                 </a>
 
-                <span className="hidden lg:flex items-center gap-1">
+                <Link href="https://share.google/ZKTuBiSjPJKVsqoIi" className="hidden lg:flex items-center gap-1">
                   <MapPin
                     className="w-3.5 h-3.5"
                     strokeWidth={2.5}
@@ -744,7 +745,7 @@ export default function KidzaNavbar() {
                   <span className="text-xs">
                     Karol Bagh New Delhi - 110005, India
                   </span>
-                </span>
+                </Link>
 
               </div>
             </div>

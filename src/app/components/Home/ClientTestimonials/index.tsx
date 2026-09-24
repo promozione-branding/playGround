@@ -21,27 +21,43 @@ interface Testimonial {
 const testimonialsData: Testimonial[] = [
   {
     id: 1,
-    name: 'Roma',
-    role: 'DEVELOPER',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    name: "Preschool Owner",
+    role: "GURUGRAM",
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
     rating: 5,
-    quote: 'Awesome quality toys and kids furniture! The wooden play sets and creative building blocks are durable, super safe, and keep the children engaged for hours.',
+    quote:
+      "Toy Park made our play-school setup much easier. The furniture looks great, feels sturdy, and the team was helpful throughout the ordering process.",
   },
   {
     id: 2,
-    name: 'Sarah Mitchell',
-    role: 'PRESCHOOL TEACHER',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+    name: "School Procurement Team",
+    role: "DELHI",
+    avatar:
+      "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?auto=format&fit=crop&w=400&q=80",
     rating: 5,
-    quote: 'Awesome quality toys! My kids absolutely love playing with the wooden blocks and creative sets every single day. Highly recommend to all parents!',
+    quote:
+      "The quality was exactly what we were looking for. The products arrived well-packed, and the entire bulk-order process was smooth from start to finish.",
   },
   {
     id: 3,
-    name: 'David Chen',
-    role: 'PRODUCT DESIGNER',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    name: "Institutional Buyer",
+    role: "HARYANA",
+    avatar:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
     rating: 5,
-    quote: 'The design aesthetic and safety standards are unmatched. Beautiful colors, sturdy build, and endless imaginative play for our little dreamers.',
+    quote:
+      "From playground equipment to kids’ furniture, having so many products under one roof made sourcing much simpler for us.",
+  },
+  {
+    id: 4,
+    name: "Business Buyer",
+    role: "NOIDA",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    rating: 5,
+    quote:
+      "We needed products in bulk and wanted a manufacturer we could rely on. Toy Park was responsive, professional, and delivered as promised.",
   },
 ];
 

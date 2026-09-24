@@ -14,6 +14,7 @@ import {
   Shapes,
   Star,
 } from "lucide-react";
+import Link from "next/link";
 
 // ============================================================================
 // 1. DATA (Static Information)
@@ -209,9 +210,9 @@ function ZonesSection() {
           <p className="text-[#0369a1] text-sm md:text-lg mb-4 md:mb-6 font-medium">
             Over 10,000 square meters of pure joy. Navigate through our themed areas tailored for different age groups.
           </p>
-          <button className="flex items-center justify-center gap-3 md:gap-4 bg-white text-[#082f49] border-2 border-[#0ea5e9] w-full sm:w-auto px-5 py-2.5 md:px-6 md:py-3 rounded-full font-bold md:hover:bg-[#0ea5e9] md:hover:text-white transition-colors duration-200 text-sm md:text-base">
-            Download Map <ArrowUpRight className="w-4 h-4" />
-          </button>
+          <Link href="/contact" className="flex items-center justify-center gap-3 md:gap-4 bg-white text-[#082f49] border-2 border-[#0ea5e9] w-full sm:w-auto px-5 py-2.5 md:px-6 md:py-3 rounded-full font-bold md:hover:bg-[#0ea5e9] md:hover:text-white transition-colors duration-200 text-sm md:text-base">
+            Conatc Us <ArrowUpRight className="w-4 h-4" />
+          </Link>
         </div>
 
         <div className="w-full md:w-2/3 flex flex-col bg-white rounded-2xl md:rounded-[2.5rem] p-4 sm:p-6 md:p-10 border border-cyan-100">
