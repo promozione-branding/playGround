@@ -156,9 +156,81 @@ interface Category {
 function SearchModal({ onClose }: { onClose: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [search, setSearch] = useState("");
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  // Search products from /api/product while the user types.
+  useEffect(() => {
+    const query = search.trim();
+
+    if (!query) {
+      setProducts([]);
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    const searchProducts = async () => {
+      try {
+        setLoading(true);
+
+        const response = await axios.get("/api/product");
+
+        const productData = Array.isArray(response.data)
+          ? response.data
+          : response.data.products || [];
+
+        const searchText = query.toLowerCase();
+
+        const filtered = productData.filter((product: any) => {
+          const name = String(product.name || "").toLowerCase();
+          const title = String(product.title || "").toLowerCase();
+          const slug = String(product.slug || "").toLowerCase();
+          const description = String(product.description || "").toLowerCase();
+
+          const categoryName =
+            typeof product.category === "object"
+              ? String(product.category?.name || "").toLowerCase()
+              : String(product.category || "").toLowerCase();
+
+          return (
+            name.includes(searchText) ||
+            title.includes(searchText) ||
+            slug.includes(searchText) ||
+            description.includes(searchText) ||
+            categoryName.includes(searchText)
+          );
+        });
+
+        if (!cancelled) {
+          setProducts(filtered);
+        }
+      } catch (error) {
+        console.error("Product search failed:", error);
+
+        if (!cancelled) {
+          setProducts([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    const timer = setTimeout(searchProducts, 300);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [search]);
 
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
@@ -177,15 +249,45 @@ function SearchModal({ onClose }: { onClose: () => void }) {
     };
   }, [handleKey]);
 
+  const getProductName = (product: any) => {
+    return product.productName ;
+  };
+
+  const getProductImage = (product: any) => {
+    if (product.image) return product.image;
+    if (product.thumbnail) return product.thumbnail;
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      const firstImage = product.images[0];
+      return typeof firstImage === "string"
+        ? firstImage
+        : firstImage?.url || firstImage?.src || null;
+    }
+    return null;
+  };
+
+  const getProductUrl = (product: any) => {
+    if (product.slug) return `/products/${product.slug}`;
+    if (product._id) return `/products/${product._id}`;
+    if (product.id) return `/products/${product.id}`;
+    return "/products";
+  };
+
+  const getCategoryName = (product: any) => {
+    if (typeof product.category === "object") {
+      return product.category?.name || "";
+    }
+    return product.category || "";
+  };
+
   return (
-    <div
-      className="fixed inset-0 z-[200] flex items-start justify-center pt-24 px-4"
+   <div
+      className="fixed inset-0 z-[200] flex items-start justify-center pt-24 px-4 overflow-hidden"
       onClick={onClose}
     >
-      {/* Backdrop */}
+      {/* BACKDROP */}
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Modal */}
+      {/* MODAL */}
       <div
         className="relative w-full max-w-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -195,8 +297,13 @@ function SearchModal({ onClose }: { onClose: () => void }) {
         }}
       >
         <div className="bg-white rounded-3xl shadow-xl shadow-black/20 border border-gray-100 overflow-hidden">
-          {/* Search Input */}
+
+          {/* ═══════════════════════════════════════
+              SEARCH INPUT
+          ═══════════════════════════════════════ */}
+
           <div className="flex items-center gap-4 px-6 py-5 border-b border-gray-100">
+
             <Search
               className="w-5 h-5 text-[#62C4D2] shrink-0"
               strokeWidth={2.5}
@@ -205,43 +312,229 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             <input
               ref={inputRef}
               type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search toys, furniture, brands…"
-              className="flex-1 text-lg font-semibold text-gray-800 bg-transparent outline-none placeholder:text-gray-400"
+              className="flex-1 min-w-0 text-lg font-semibold text-gray-800 bg-transparent outline-none placeholder:text-gray-400"
             />
 
+            {/* LOADING */}
+            {loading && (
+              <div className="w-5 h-5 border-2 border-[#62C4D2] border-t-transparent rounded-full animate-spin shrink-0" />
+            )}
+
+            {/* CLEAR / ESC */}
             <button
-              onClick={onClose}
-              className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+              onClick={() => {
+                if (search) {
+                  setSearch("");
+                  inputRef.current?.focus();
+                } else {
+                  onClose();
+                }
+              }}
+              className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors shrink-0"
+              aria-label={search ? "Clear search" : "Close search"}
             >
-              <X className="w-4 h-4" />
+              {search ? (
+                <X className="w-4 h-4" />
+              ) : (
+                <span className="text-[10px] font-bold">
+                  ESC
+                </span>
+              )}
             </button>
           </div>
 
-          {/* Quick Links */}
-          <div className="px-6 py-4">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-              Popular Searches
-            </p>
+          {/* ═══════════════════════════════════════
+              SEARCH RESULTS
+          ═══════════════════════════════════════ */}
 
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Wooden Toys",
-                "Educational Kits",
-                "Baby Furniture",
-                "Building Blocks",
-                "Art & Craft",
-              ].map((tag) => (
-                <button
-                  key={tag}
-                  className="px-4 py-2 rounded-full bg-[#62C4D2]/10 text-[#62C4D2] text-sm font-bold hover:bg-[#62C4D2]/20 transition-colors"
-                >
-                  {tag}
-                </button>
-              ))}
+          {search.trim() ? (
+
+            /*
+             * IMPORTANT:
+             * ONLY THIS CONTAINER CAN SCROLL
+             */
+            <div
+              className="max-h-[430px] overflow-y-auto overscroll-contain"
+              onWheel={(e) => {
+                e.stopPropagation();
+              }}
+            >
+
+              {/* LOADING */}
+              {loading ? (
+
+                <div className="px-6 py-12 text-center">
+
+                  <div className="w-7 h-7 border-2 border-[#62C4D2] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+
+                  <p className="text-sm font-bold text-gray-400">
+                    Searching products...
+                  </p>
+
+                </div>
+
+              ) : products.length > 0 ? (
+
+                /* ═══════════════════════════════════════
+                   PRODUCTS
+                ═══════════════════════════════════════ */
+
+                <div className="p-3">
+
+                  <p className="px-3 py-2 text-xs font-black text-gray-400 uppercase tracking-widest">
+                    {products.length}{" "}
+                    {products.length === 1
+                      ? "Product"
+                      : "Products"}{" "}
+                    Found
+                  </p>
+
+                  {products.map((product, index) => {
+
+                    const image =
+                      getProductImage(product);
+
+                    const categoryName =
+                      getCategoryName(product);
+
+                    const productName =
+                      getProductName(product);
+
+                    return (
+                      <a
+                        key={
+                          product._id ||
+                          product.id ||
+                          product.slug ||
+                          index
+                        }
+                        href={getProductUrl(product)}
+                        onClick={onClose}
+                        className="flex items-center gap-4 p-3 rounded-2xl hover:bg-[#62C4D2]/10 transition-all group"
+                      >
+
+                        {/* PRODUCT IMAGE */}
+
+                        <div className="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 overflow-hidden shrink-0 flex items-center justify-center">
+
+                          {image ? (
+
+                            <img
+                              src={image}
+                              alt={productName}
+                              className="w-full h-full object-contain"
+                            />
+
+                          ) : (
+
+                            <Package className="w-6 h-6 text-gray-300" />
+
+                          )}
+
+                        </div>
+
+                        {/* PRODUCT INFO */}
+
+                        <div className="min-w-0 flex-1">
+
+                          <p className="font-extrabold text-gray-800 group-hover:text-[#0284C7] transition-colors line-clamp-2">
+                            {productName}
+                          </p>
+
+                          {categoryName && (
+                            <p className="text-xs text-gray-400 font-semibold mt-1 truncate">
+                              {categoryName}
+                            </p>
+                          )}
+
+                        </div>
+
+                        {/* ARROW */}
+
+                        <ArrowRight
+                          className="w-4 h-4 text-[#62C4D2] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all shrink-0"
+                        />
+
+                      </a>
+                    );
+                  })}
+
+                </div>
+
+              ) : (
+
+                /* ═══════════════════════════════════════
+                   NO RESULTS
+                ═══════════════════════════════════════ */
+
+                <div className="px-6 py-12 text-center">
+
+                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+
+                    <Search className="w-6 h-6 text-gray-300" />
+
+                  </div>
+
+                  <p className="font-extrabold text-gray-700">
+                    No products found
+                  </p>
+
+                  <p className="text-sm text-gray-400 mt-1">
+                    Try another product name or keyword
+                  </p>
+
+                </div>
+              )}
+
             </div>
-          </div>
+
+          ) : (
+
+            /* ═══════════════════════════════════════
+               POPULAR SEARCHES
+            ═══════════════════════════════════════ */
+
+            <div className="px-6 py-5">
+
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+                Popular Searches
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+
+                {[
+                  "Wooden Toys",
+                  "Educational Kits",
+                  "Baby Furniture",
+                  "Building Blocks",
+                  "Art & Craft",
+                ].map((tag) => (
+
+                  <button
+                    key={tag}
+                    onClick={() => {
+                      setSearch(tag);
+                      inputRef.current?.focus();
+                    }}
+                    className="px-4 py-2 rounded-full bg-[#62C4D2]/10 text-[#62C4D2] text-sm font-bold hover:bg-[#62C4D2]/20 transition-colors"
+                  >
+                    {tag}
+                  </button>
+
+                ))}
+
+              </div>
+
+            </div>
+          )}
+
         </div>
       </div>
+
+      {/* SEARCH ANIMATION */}
 
       <style>{`
         @keyframes searchSlideIn {
@@ -505,7 +798,9 @@ export default function KidzaNavbar() {
 
               <div
                 className="relative hidden md:block"
-                ref={dropdownRef}
+  ref={dropdownRef}
+  onMouseEnter={() => setIsCategoriesOpen(true)}
+  onMouseLeave={() => setIsCategoriesOpen(false)}
               >
 
                 <button
@@ -541,90 +836,94 @@ export default function KidzaNavbar() {
 
                 {/* CATEGORY DROPDOWN */}
 
-                {isCategoriesOpen && (
-                  <div
-                    className="absolute left-0 mt-3 w-60 z-40"
-                    style={{
-                      animation:
-                        "dropIn 0.2s cubic-bezier(0.34,1.56,0.64,1) both",
-                    }}
-                  >
+              {isCategoriesOpen && (
+  <div
+    className="absolute left-0 top-full mt-0 w-60 z-50"
+    style={{
+      animation:
+        "dropIn 0.2s cubic-bezier(0.34,1.56,0.64,1) both",
+    }}
+  >
+    {/* Dropdown Box */}
+    <div className="bg-white rounded-2xl shadow-xl shadow-black/12 border border-gray-100/80 overflow-hidden">
 
-                    <div className="bg-white rounded-2xl shadow-xl shadow-black/12 border border-gray-100/80 py-2 overflow-hidden">
+      {/* Top Accent - FIXED */}
+      <div className="h-0.5 mx-3 mt-2 mb-2 rounded-full bg-gradient-to-r from-[#62C4D2] via-[#f97316] to-[#FFD400]" />
 
-                      {/* Top Accent */}
-                      <div className="h-0.5 mx-3 mb-2 rounded-full bg-gradient-to-r from-[#62C4D2] via-[#f97316] to-[#FFD400]" />
+      {/* ONLY THIS PART SCROLLS */}
+      <div
+        className="overflow-y-auto overscroll-contain"
+        style={{
+          maxHeight: "360px",
+          scrollbarWidth: "thin",
+        }}
+        onWheel={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        {categoriesLoading ? (
+          <div className="px-4 py-5 text-center">
+            <div className="w-5 h-5 border-2 border-[#62C4D2] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
 
-                      {/* Loading */}
-                      {categoriesLoading ? (
-                        <div className="px-4 py-5 text-center">
-                          <div className="w-5 h-5 border-2 border-[#62C4D2] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+            <p className="text-xs font-bold text-gray-400">
+              Loading categories...
+            </p>
+          </div>
+        ) : categories.length > 0 ? (
 
-                          <p className="text-xs font-bold text-gray-400">
-                            Loading categories...
-                          </p>
-                        </div>
-                      ) : categories.length > 0 ? (
+          categories.map((category, index) => {
+            const Icon =
+              index % 2 === 0
+                ? Shapes
+                : Armchair;
 
-                        /* Categories */
-                        categories.map((category, index) => {
+            const color =
+              index % 2 === 0
+                ? "bg-[#f97316]/10 text-[#f97316]"
+                : "bg-[#62C4D2]/15 text-[#62C4D2]";
 
-                          const Icon =
-                            index % 2 === 0
-                              ? Shapes
-                              : Armchair;
+            return (
+              <a
+                key={
+                  category._id ||
+                  category.id ||
+                  category.slug ||
+                  index
+                }
+                href={`/products?cat=${category.slug}`}
+                onClick={() =>
+                  setIsCategoriesOpen(false)
+                }
+                className="flex items-center gap-3 px-3 py-2 mx-1.5 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-[#0284C7] transition-all rounded-xl group/item"
+              >
+                <div
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${color} transition-transform group-hover/item:scale-110`}
+                >
+                  <Icon className="w-4 h-4" />
+                </div>
 
-                          const color =
-                            index % 2 === 0
-                              ? "bg-[#f97316]/10 text-[#f97316]"
-                              : "bg-[#62C4D2]/15 text-[#62C4D2]";
+                <span className="line-clamp-2">
+                  {index + 1}. {category.name}
+                </span>
 
-                          return (
-                            <a
-                              key={
-                                category._id ||
-                                category.id ||
-                                category.slug ||
-                                index
-                              }
-                              href={`/products?cat=${category.slug}`}
-                              onClick={() =>
-                                setIsCategoriesOpen(false)
-                              }
-                              className="flex items-center gap-3 px-4 py-3 mx-1.5 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-[#0284C7] transition-all rounded-xl group/item"
-                            >
+                <ArrowRight
+                  className="w-3.5 h-3.5 ml-auto opacity-0 group-hover/item:opacity-100 transition-opacity text-[#62C4D2]"
+                />
+              </a>
+            );
+          })
 
-                              <div
-                                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${color} transition-transform group-hover/item:scale-110`}
-                              >
-                                <Icon className="w-4 h-4" />
-                              </div>
-
-                              <span>
-                                {index + 1}.{" "}
-                                {category.name}
-                              </span>
-
-                              <ArrowRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover/item:opacity-100 transition-opacity text-[#62C4D2]" />
-
-                            </a>
-                          );
-                        })
-
-                      ) : (
-
-                        /* No Categories */
-                        <div className="px-4 py-5 text-center">
-                          <p className="text-sm font-bold text-gray-400">
-                            No categories found
-                          </p>
-                        </div>
-
-                      )}
-
-                    </div>
-                  </div>
-                )}
+        ) : (
+          <div className="px-4 py-5 text-center">
+            <p className="text-sm font-bold text-gray-400">
+              No categories found
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
 
               </div>
             </div>
