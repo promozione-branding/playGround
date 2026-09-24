@@ -13,15 +13,51 @@ import {
   Sparkles,
   Shapes,
   Star,
+  LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import PopupForm from "../../popup/PopupForm";
 
 // ============================================================================
+// TYPES
+// ============================================================================
+
+type PopupHandler = () => void;
+
+interface HighlightItem {
+  title: string;
+  desc: string;
+}
+
+interface ExhibitionZone {
+  name: string;
+  size: string;
+  desc: string;
+}
+
+interface DailyActivity {
+  title: string;
+  img: string;
+}
+
+interface WelcomeSectionProps {
+  onOpenPopup: PopupHandler;
+}
+
+interface DailyActivitiesSectionProps {
+  activeImage: string;
+  onSelectImage: (img: string) => void;
+}
+
+interface PlanYourVisitSectionProps {
+  onOpenPopup: PopupHandler;
+}
+
+// ============================================================================
 // 1. DATA
 // ============================================================================
 
-const HIGHLIGHTS_DATA = [
+const HIGHLIGHTS_DATA: HighlightItem[] = [
   {
     title: "Interactive Play Zones",
     desc: "Hands-on areas where kids can build, race, and create with the newest toys on the market.",
@@ -56,7 +92,7 @@ const HIGHLIGHTS_DATA = [
   },
 ];
 
-const EXHIBITION_ZONES_DATA = [
+const EXHIBITION_ZONES_DATA: ExhibitionZone[] = [
   {
     name: "The Big Brick Build",
     size: "2,000 sq.m",
@@ -89,7 +125,7 @@ const EXHIBITION_ZONES_DATA = [
   },
 ];
 
-const DAILY_ACTIVITIES_DATA = [
+const DAILY_ACTIVITIES_DATA: DailyActivity[] = [
   {
     title: "The Great Toy Unboxing",
     img: "/product/12.webp",
@@ -108,7 +144,7 @@ const DAILY_ACTIVITIES_DATA = [
   },
 ];
 
-const HIGHLIGHT_ICONS = [
+const HIGHLIGHT_ICONS: LucideIcon[] = [
   Gamepad2,
   Sparkles,
   Rocket,
@@ -120,10 +156,9 @@ const HIGHLIGHT_ICONS = [
 ];
 
 // ============================================================================
-// 2. SUB-COMPONENTS
+// 2. FLOATING BACKGROUND
 // ============================================================================
 
-// Desktop-only Floating Background
 function FloatingBackgroundIcons() {
   return (
     <div className="hidden md:block fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-30">
@@ -182,7 +217,9 @@ function HeroSection() {
 // 4. WELCOME SECTION
 // ============================================================================
 
-function WelcomeSection({ onOpenPopup }) {
+function WelcomeSection({
+  onOpenPopup,
+}: WelcomeSectionProps) {
   return (
     <section className="py-8 md:py-16 px-4 md:px-12 relative z-10 cv-auto">
       <div className="flex flex-col md:flex-row gap-8 md:gap-12 justify-between items-center">
@@ -263,7 +300,9 @@ function HighlightsSection() {
 
       <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible scrollbar-none">
         {HIGHLIGHTS_DATA.map((item, idx) => {
-          const CardIcon = HIGHLIGHT_ICONS[idx % HIGHLIGHT_ICONS.length];
+          const CardIcon = HIGHLIGHT_ICONS[
+            idx % HIGHLIGHT_ICONS.length
+          ];
 
           return (
             <div
@@ -372,11 +411,9 @@ function ZonesSection() {
 function DailyActivitiesSection({
   activeImage,
   onSelectImage,
-}) {
+}: DailyActivitiesSectionProps) {
   return (
     <section className="pt-8 md:pt-12 pb-8 md:pb-10 bg-[#082f49] text-white flex flex-col md:flex-row items-center border-t border-[#0ea5e9]/30 relative z-10 cv-auto">
-      
-      {/* Dynamic Image */}
       <div className="w-full md:w-1/2 h-[220px] md:h-[55vh] relative overflow-hidden order-2 md:order-1 px-4 md:px-0 md:pl-12 mt-4 md:mt-0">
         <div className="relative w-full h-full rounded-xl md:rounded-[2.5rem] overflow-hidden border-2 md:border-4 border-[#0ea5e9]">
           <Image
@@ -391,7 +428,6 @@ function DailyActivitiesSection({
         </div>
       </div>
 
-      {/* Interactive List */}
       <div className="w-full md:w-1/2 px-4 md:px-16 order-1 md:order-2">
         <h2 className="text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-[#38bdf8] mb-3 md:mb-6">
           Daily Schedule
@@ -419,10 +455,12 @@ function DailyActivitiesSection({
 }
 
 // ============================================================================
-// 8. PLAN YOUR VISIT SECTION
+// 8. PLAN YOUR VISIT
 // ============================================================================
 
-function PlanYourVisitSection({ onOpenPopup }) {
+function PlanYourVisitSection({
+  onOpenPopup,
+}: PlanYourVisitSectionProps) {
   return (
     <section className="py-8 md:py-16 px-4 md:px-12 relative z-10 cv-auto">
       <div className="bg-white rounded-2xl md:rounded-[3rem] p-6 md:p-14 border border-cyan-100 flex flex-col items-center text-center relative overflow-hidden">
@@ -464,51 +502,44 @@ function PlanYourVisitSection({ onOpenPopup }) {
 // ============================================================================
 
 export default function ToyExhibition() {
-  const [activeEventImage, setActiveEventImage] = useState(
+  const [activeEventImage, setActiveEventImage] = useState<string>(
     DAILY_ACTIVITIES_DATA[0].img
   );
 
-  // Popup state is controlled here
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
-  const openPopup = () => {
+  const openPopup = (): void => {
     setIsPopupOpen(true);
   };
 
-  const closePopup = () => {
+  const closePopup = (): void => {
     setIsPopupOpen(false);
   };
 
   return (
     <div className="bg-[#e0f7fa] text-[#082f49] min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#0ea5e9] selection:text-white relative">
       
-      {/* Floating Background Icons */}
       <FloatingBackgroundIcons />
 
-      {/* Hero */}
       <HeroSection />
 
-      {/* Welcome */}
       <WelcomeSection onOpenPopup={openPopup} />
 
-      {/* Highlights */}
       <HighlightsSection />
 
-      {/* Zones */}
       <ZonesSection />
 
-      {/* Daily Activities */}
       <DailyActivitiesSection
         activeImage={activeEventImage}
         onSelectImage={setActiveEventImage}
       />
 
-      {/* CTA */}
       <PlanYourVisitSection onOpenPopup={openPopup} />
 
       {/* ================================================================
           POPUP FORM
           ================================================================ */}
+
       <PopupForm
         isOpen={isPopupOpen}
         onClose={closePopup}
@@ -518,6 +549,7 @@ export default function ToyExhibition() {
       {/* ================================================================
           GLOBAL STYLES
           ================================================================ */}
+
       <style jsx global>{`
         html {
           scroll-behavior: smooth;
