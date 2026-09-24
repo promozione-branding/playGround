@@ -38,11 +38,7 @@ import { LiquidButton } from "../ui/buttonUi";
 ───────────────────────────────────────────── */
 
 const announcements = [
-  {
-    text: "🎉 Free shipping on orders above ₹999!",
-    cta: "Shop Now",
-    href: "/products",
-  },
+
   {
     text: "🌟 New arrivals just landed — explore now",
     cta: "Explore",
