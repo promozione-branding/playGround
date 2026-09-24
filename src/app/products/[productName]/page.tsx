@@ -5,11 +5,18 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { Star, Check, ArrowRight, Loader2 } from "lucide-react";
+import {
+  Star,
+  Check,
+  ArrowRight,
+  Loader2,
+} from "lucide-react";
 
 import PlayfulHeader from "../../components/Navbar";
 import Footer2 from "../../components/Footer2";
 import ContactForm from "../../components/ContactForm";
+import PopupForm from "@/app/components/popup/PopupForm";
+
 
 // ============================================================================
 // TYPES
@@ -91,9 +98,11 @@ const PLACEHOLDER_IMAGE = "/assets/placeholder.png";
 
 export default function ProductDetail() {
   const params = useParams();
-  console.log(params)
 
-  const slug =typeof params.productName === "string"
+  console.log(params);
+
+  const slug =
+    typeof params.productName === "string"
       ? params.productName
       : Array.isArray(params.productName)
         ? params.productName[0]
@@ -105,15 +114,21 @@ export default function ProductDetail() {
   // STATE
   // ==========================================================================
 
-  const [product, setProduct] = useState<Product | null>(
-    null
-  );
+  const [product, setProduct] =
+    useState<Product | null>(null);
 
-  const [activeImage, setActiveImage] = useState(0);
+  const [activeImage, setActiveImage] =
+    useState(0);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
-  const [error, setError] = useState("");
+  const [error, setError] =
+    useState("");
+
+  // Popup state
+  const [isPopupOpen, setIsPopupOpen] =
+    useState(false);
 
   // ==========================================================================
   // FETCH PRODUCT
@@ -186,6 +201,7 @@ export default function ProductDetail() {
         );
 
         setProduct(null);
+
         setError(
           "Unable to load this product. Please try again."
         );
@@ -202,7 +218,8 @@ export default function ProductDetail() {
   // ==========================================================================
 
   const productImages =
-    product?.images && product.images.length > 0
+    product?.images &&
+    product.images.length > 0
       ? product.images
       : [];
 
@@ -280,6 +297,7 @@ export default function ProductDetail() {
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#00C4B5] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#00ad9f]"
             >
               View All Products
+
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -296,6 +314,7 @@ export default function ProductDetail() {
 
   return (
     <div className="flex min-h-screen flex-col justify-between bg-white font-quicksand text-[#2D3436]">
+
       <PlayfulHeader />
 
       <div className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
@@ -305,6 +324,7 @@ export default function ProductDetail() {
         ================================================================ */}
 
         <div className="mb-6 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-400 sm:mb-8 sm:text-sm">
+
           <Link
             href="/"
             className="transition-colors hover:text-[#00C4B5]"
@@ -341,6 +361,7 @@ export default function ProductDetail() {
           <div className="flex flex-col gap-4 lg:sticky lg:top-28 lg:col-span-4">
 
             {/* Main Image */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -352,6 +373,7 @@ export default function ProductDetail() {
               }}
               className="relative flex h-[280px] w-full items-center justify-center overflow-hidden rounded-[2rem] bg-[#EAF8F9] p-4 sm:h-[380px] sm:p-6 md:h-[460px]"
             >
+
               <motion.img
                 key={currentImage}
                 initial={{
@@ -378,6 +400,7 @@ export default function ProductDetail() {
                   }
                 }}
               />
+
             </motion.div>
 
             {/* ============================================================
@@ -386,6 +409,7 @@ export default function ProductDetail() {
 
             {productImages.length > 0 && (
               <div className="scrollbar-hide flex gap-3 overflow-x-auto py-2">
+
                 {productImages.map(
                   (image, index) => (
                     <button
@@ -404,6 +428,7 @@ export default function ProductDetail() {
                           : "bg-gray-50 hover:bg-gray-100"
                       }`}
                     >
+
                       <img
                         src={image.url}
                         alt={`${product.productName} thumbnail ${
@@ -420,11 +445,14 @@ export default function ProductDetail() {
                           }
                         }}
                       />
+
                     </button>
                   )
                 )}
+
               </div>
             )}
+
           </div>
 
           {/* ==============================================================
@@ -440,6 +468,7 @@ export default function ProductDetail() {
             <div className="mb-6">
 
               {/* Category */}
+
               {product.category?.name && (
                 <div className="mb-3">
                   <span className="inline-flex rounded-full bg-[#EAF8F9] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#00A99D]">
@@ -449,6 +478,7 @@ export default function ProductDetail() {
               )}
 
               {/* Product Name */}
+
               <h1 className="mb-3 text-2xl font-black leading-tight tracking-tight text-[#2D3436] sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
                 {product.productName}
               </h1>
@@ -458,7 +488,9 @@ export default function ProductDetail() {
               ========================================================= */}
 
               <div className="mb-4 flex items-center gap-3 sm:mb-5">
+
                 <div className="flex items-center text-[#FFB800]">
+
                   {[...Array(5)].map(
                     (_, index) => (
                       <Star
@@ -467,11 +499,13 @@ export default function ProductDetail() {
                       />
                     )
                   )}
+
                 </div>
 
                 <span className="text-xs font-bold text-gray-500 sm:text-sm">
                   Premium Product
                 </span>
+
               </div>
 
               {/* =========================================================
@@ -479,9 +513,11 @@ export default function ProductDetail() {
               ========================================================= */}
 
               <div className="mb-5 flex items-center sm:mb-6">
+
                 <span className="text-2xl font-black text-[#00C4B5] sm:text-3xl">
                   Enquire for Price
                 </span>
+
               </div>
 
               {/* =========================================================
@@ -497,6 +533,7 @@ export default function ProductDetail() {
                   }}
                 />
               )}
+
             </div>
 
             {/* ============================================================
@@ -508,30 +545,37 @@ export default function ProductDetail() {
               <ul className="space-y-3">
 
                 <li className="flex items-center gap-3 text-sm font-bold text-[#2D3436] md:text-base">
+
                   <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#A7F3D0] text-[#00C4B5] sm:h-6 sm:w-6">
                     <Check className="h-3 w-3 stroke-[3] sm:h-4 sm:w-4" />
                   </div>
 
                   Premium Quality Product
+
                 </li>
 
                 <li className="flex items-center gap-3 text-sm font-bold text-[#2D3436] md:text-base">
+
                   <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#A7F3D0] text-[#00C4B5] sm:h-6 sm:w-6">
                     <Check className="h-3 w-3 stroke-[3] sm:h-4 sm:w-4" />
                   </div>
 
-                  Designed for Safe & Active Play
+                  Designed for Safe &amp; Active Play
+
                 </li>
 
                 <li className="flex items-center gap-3 text-sm font-bold text-[#2D3436] md:text-base">
+
                   <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#A7F3D0] text-[#00C4B5] sm:h-6 sm:w-6">
                     <Check className="h-3 w-3 stroke-[3] sm:h-4 sm:w-4" />
                   </div>
 
                   Quality-Focused Manufacturing
+
                 </li>
 
               </ul>
+
             </div>
 
             {/* ============================================================
@@ -542,17 +586,49 @@ export default function ProductDetail() {
 
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
 
-                {/* Call */}
-                <a
-                  href="tel:+919811117654"
-                  className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#FF6B6B] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-[#ff5252] sm:py-4 sm:text-base"
+                {/* =====================================================
+                    ENQUIRY POPUP BUTTON
+                ===================================================== */}
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setIsPopupOpen(true)
+                  }
+                  className="
+                    flex flex-1
+                    cursor-pointer
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    bg-[#FF6B6B]
+                    px-6
+                    py-3.5
+                    text-sm
+                    font-bold
+                    uppercase
+                    tracking-wider
+                    text-white
+                    shadow-md
+                    transition-all
+                    hover:-translate-y-0.5
+                    hover:bg-[#ff5252]
+                    sm:py-4
+                    sm:text-base
+                  "
                 >
                   Enquiry Now
 
-                  <ArrowRight className="h-4 w-4 stroke-[3] sm:h-5 sm:w-5" />
-                </a>
+                  <ArrowRight
+                    className="h-4 w-4 stroke-[3] sm:h-5 sm:w-5"
+                  />
+                </button>
 
-                {/* WhatsApp */}
+                {/* =====================================================
+                    WHATSAPP
+                ===================================================== */}
+
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -565,6 +641,7 @@ export default function ProductDetail() {
                 </a>
 
               </div>
+
             </div>
 
             {/* ============================================================
@@ -576,6 +653,7 @@ export default function ProductDetail() {
                 <div className="overflow-hidden rounded-2xl bg-[#F4F9FF]">
 
                   {/* Header */}
+
                   <div className="flex items-center justify-between bg-[#E5F0FF] px-4 py-4 sm:px-6">
 
                     <h3 className="text-xs font-bold uppercase tracking-wider text-[#1E3A8A] sm:text-sm">
@@ -585,9 +663,11 @@ export default function ProductDetail() {
                     <span className="rounded-full bg-[#3B82F6] px-2.5 py-1 text-[10px] font-bold text-white sm:text-xs">
                       Official Specs
                     </span>
+
                   </div>
 
                   {/* Specs */}
+
                   <div className="divide-y divide-[#E2E8F0] text-xs sm:text-sm md:text-base">
 
                     {product.specifications.map(
@@ -600,6 +680,7 @@ export default function ProductDetail() {
                               : ""
                           }`}
                         >
+
                           <span className="font-bold text-[#334155]">
                             {spec.key}
                           </span>
@@ -607,13 +688,16 @@ export default function ProductDetail() {
                           <span className="break-words text-[#0F172A]">
                             {spec.value}
                           </span>
+
                         </div>
                       )
                     )}
 
                   </div>
+
                 </div>
               )}
+
           </div>
 
           {/* ==============================================================
@@ -625,6 +709,7 @@ export default function ProductDetail() {
             <div className="relative flex flex-col gap-6 overflow-visible rounded-[2rem] bg-[#F8FAFC] p-5 shadow-md sm:p-6">
 
               {/* Mascot */}
+
               <img
                 src="/assets/clouds/giraffe-svgrepo-com.svg"
                 alt="Giraffe Mascot"
@@ -632,6 +717,7 @@ export default function ProductDetail() {
               />
 
               {/* Logo */}
+
               <div className="border-b border-gray-200/80 pb-4 sm:pb-5">
 
                 <img
@@ -647,9 +733,11 @@ export default function ProductDetail() {
                 <p className="mt-1.5 text-xs font-bold text-gray-500 sm:text-sm">
                   Authentic &amp; Premium Quality Products
                 </p>
+
               </div>
 
               {/* Why Choose */}
+
               <div>
 
                 <h4 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#0F172A] sm:text-base">
@@ -689,9 +777,11 @@ export default function ProductDetail() {
                   </li>
 
                 </ul>
+
               </div>
 
               {/* About */}
+
               <div className="border-t border-gray-200/80 pt-4 sm:pt-5">
 
                 <h4 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#0F172A] sm:text-base">
@@ -731,9 +821,11 @@ export default function ProductDetail() {
                   </li>
 
                 </ul>
+
               </div>
 
               {/* WhatsApp */}
+
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -744,7 +836,9 @@ export default function ProductDetail() {
               </a>
 
             </div>
+
           </div>
+
         </div>
 
         {/* ================================================================
@@ -796,6 +890,7 @@ export default function ProductDetail() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
               {/* Card 1 */}
+
               <div className="flex flex-col justify-between rounded-[2rem] bg-[#FDF6ED] p-6 lg:p-7">
 
                 <div>
@@ -823,6 +918,7 @@ export default function ProductDetail() {
               </div>
 
               {/* Card 2 */}
+
               <div className="flex flex-col justify-between rounded-[2rem] bg-[#EAF8F9] p-6 lg:p-7">
 
                 <div>
@@ -850,6 +946,7 @@ export default function ProductDetail() {
               </div>
 
               {/* Card 3 */}
+
               <div className="flex flex-col justify-between rounded-[2rem] bg-[#F5EFFB] p-6 lg:p-7">
 
                 <div>
@@ -888,10 +985,24 @@ export default function ProductDetail() {
             />
 
           </div>
+
         </div>
+
       </div>
 
+      {/* ================================================================
+          ENQUIRY POPUP
+          SINGLE POPUP OUTSIDE MAIN CONTENT
+      ================================================================ */}
+
+      <PopupForm
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        productName={product.productName}
+      />
+
       <Footer2 />
+
     </div>
   );
 }

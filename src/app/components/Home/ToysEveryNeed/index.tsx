@@ -2,22 +2,23 @@
 
 import { useState } from "react";
 import {
-  Heart,
   ArrowRight,
-  Palette,
-  Scale,
-  Blocks,
-  Puzzle,
-  Rainbow,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
 } from "lucide-react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import PopupForm from "../../popup/PopupForm";
 import Link from "next/link";
 
 interface ToyCardData {
@@ -25,7 +26,7 @@ interface ToyCardData {
   age: string;
   sub: string;
   title: string;
-  href:string;
+  href: string;
   desc: string;
   img: string;
   fallback: string;
@@ -38,7 +39,7 @@ const CARDS: ToyCardData[] = [
   {
     cat: "Table & Board Games",
     age: "3–8 yrs",
-    href:"/products/air-hockey",
+    href: "/products/air-hockey",
     sub: "Easels, Drawers & Playhouses",
     title: "Air Hockey",
     desc: "Bring fast-paced indoor entertainment to recreational spaces with Toy Park’s Air Hockey Table.",
@@ -51,8 +52,8 @@ const CARDS: ToyCardData[] = [
   {
     cat: "Playing Equipments",
     age: "2–6 yrs",
+    href: "/products/climber-wire-ropes-attachments",
     sub: "Swings, Boards & Active Play",
-    href:"/products/climber-wire-ropes-attachments",
     title: "Climber Wire Ropes & Attachments",
     desc: "Upgrade playgrounds with Toy Park’s Climber Wire Ropes & Attachments, designed to add climbing.",
     img: "/product/14.webp",
@@ -64,9 +65,9 @@ const CARDS: ToyCardData[] = [
   {
     cat: "Soft Play Equipment",
     age: "1–5 yrs",
+    href: "/products/exercising-equipment",
     sub: "Slides, Blocks & Towers",
     title: "Exercising Equipment",
-    href:"/products/exercising-equipment",
     desc: "Keep children active and engaged with Toy Park’s Exercising Equipment range.",
     img: "/product/15.webp",
     fallback: "#a7f3d0",
@@ -77,9 +78,9 @@ const CARDS: ToyCardData[] = [
   {
     cat: "Playschool Furniture",
     age: "4–10 yrs",
+    href: "/products/play-school-chair",
     sub: "Puzzles & Memory Kits",
     title: "Play School Chair",
-    href:"/products/play-school-chair",
     desc: "Create comfortable, welcoming learning spaces with Toy Park’s Play School Chair.",
     img: "/product/16.webp",
     fallback: "#c4b5fd",
@@ -90,9 +91,9 @@ const CARDS: ToyCardData[] = [
   {
     cat: "Playschool Furniture",
     age: "0–3 yrs",
+    href: "/products/play-school-safety-essentials",
     sub: "Tactile Kits & Soft Play",
     title: "Play School Safety Essentials",
-    href:"/products/play-school-safety-essentials",
     desc: "Create safer, more comfortable learning environments with Toy Park’s Play School Safety Essentials",
     img: "/product/17.webp",
     fallback: "#fca5a5",
@@ -102,11 +103,22 @@ const CARDS: ToyCardData[] = [
   },
 ];
 
-function ToyCard({ card }: { card: ToyCardData }) {
+/* =========================================================
+   TOY CARD
+========================================================= */
+
+function ToyCard({
+  card,
+  onEnquiry,
+}: {
+  card: ToyCardData;
+  onEnquiry: (card: ToyCardData) => void;
+}) {
   const [error, setError] = useState(false);
 
   return (
-    <article
+    <Link
+    href={card.href}
       className="
         group relative w-full overflow-hidden
         rounded-[22px]
@@ -118,7 +130,7 @@ function ToyCard({ card }: { card: ToyCardData }) {
       "
     >
       <div>
-        {/* Image */}
+        {/* ================= IMAGE ================= */}
         <div
           className="
             relative flex h-[210px]
@@ -127,11 +139,15 @@ function ToyCard({ card }: { card: ToyCardData }) {
             bg-[#FDF3E7]
           "
           style={{
-            backgroundColor: error ? card.fallback : "#FDF3E7",
+            backgroundColor: error
+              ? card.fallback
+              : "#FDF3E7",
           }}
         >
           {error ? (
-            <span className="text-5xl">{card.emoji}</span>
+            <span className="text-5xl">
+              {card.emoji}
+            </span>
           ) : (
             <img
               src={card.img}
@@ -179,8 +195,9 @@ function ToyCard({ card }: { card: ToyCardData }) {
           </span>
         </div>
 
-        {/* Content */}
+        {/* ================= CONTENT ================= */}
         <div className="p-4">
+          {/* Sub Category */}
           <span
             className="
               mb-1 block
@@ -192,38 +209,78 @@ function ToyCard({ card }: { card: ToyCardData }) {
             {card.sub}
           </span>
 
-          <h3 className="mb-1.5 text-[15px] font-extrabold leading-snug text-[#0d2b2a]">
+          {/* Title */}
+          <h3
+            className="
+              mb-1.5
+              text-[15px]
+              font-extrabold
+              leading-snug
+              text-[#0d2b2a]
+            "
+          >
             {card.title}
           </h3>
 
+          {/* Rating */}
           <div className="mb-3 flex items-center gap-1.5">
-            <span className="text-xs tracking-wider text-[#f59e0b]">
+            <span
+              className="
+                text-xs
+                tracking-wider
+                text-[#f59e0b]
+              "
+            >
               {card.stars}
             </span>
 
-            <span className="text-[11px] font-semibold text-[#4a8c88]">
+            <span
+              className="
+                text-[11px]
+                font-semibold
+                text-[#4a8c88]
+              "
+            >
               {card.reviews}
             </span>
           </div>
 
-          <p className="mb-4 line-clamp-3 text-xs font-medium leading-relaxed text-[#4a8c88]">
+          {/* Description */}
+          <p
+            className="
+              mb-4
+              line-clamp-3
+              text-xs
+              font-medium
+              leading-relaxed
+              text-[#4a8c88]
+            "
+          >
             {card.desc}
           </p>
         </div>
       </div>
 
+      {/* ================= BUTTON ================= */}
       <div className="px-4 pb-4 flex gap-2">
-        <Link
-        href={card.href}
+        <button
           type="button"
+          onClick={(e) => {e.preventDefault();
+        e.stopPropagation();
+ onEnquiry(card); }}
           className="
             flex-1
-            inline-flex items-center justify-center gap-1.5
+            inline-flex
+            items-center
+            justify-center
+            gap-1.5
             rounded-[13px]
             bg-[#2cbfb3]
             py-2.5
-            text-xs font-bold
-            uppercase tracking-wider
+            text-xs
+            font-bold
+            uppercase
+            tracking-wider
             text-white
             transition-colors
             hover:bg-[#1a9e93]
@@ -231,211 +288,398 @@ function ToyCard({ card }: { card: ToyCardData }) {
           "
         >
           Enquiry now
-          <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
 
-        <button
-          type="button"
-          aria-label={`Add ${card.title} to wishlist`}
-          className="
-            flex h-[38px] w-[38px]
-            shrink-0 items-center justify-center
-            rounded-[13px]
-            border border-[#b2ede6]
-            text-[#2cbfb3]
-            transition-colors
-            hover:bg-[#e0f7f4]
-            hover:text-[#e11d48]
-            cursor-pointer
-          "
-        >
-          <Heart className="h-4 w-4" />
+          <ArrowRight
+            className="h-3.5 w-3.5"
+          />
         </button>
       </div>
-    </article>
+    </Link>
   );
 }
 
+/* =========================================================
+   MAIN COMPONENT
+========================================================= */
+
 export default function ToysEveryNeed() {
+  const [isPopupOpen, setIsPopupOpen] =
+    useState(false);
+
+  const [selectedProduct, setSelectedProduct] =
+    useState("");
+
+  /* =======================================================
+     OPEN ENQUIRY POPUP
+  ======================================================= */
+
+  const handleEnquiry = (card: ToyCardData) => {
+    setSelectedProduct(card.title);
+    setIsPopupOpen(true);
+  };
+
+  /* =======================================================
+     CLOSE POPUP
+  ======================================================= */
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedProduct("");
+  };
+
   return (
-    <section
-      className="
-        relative w-full overflow-hidden
-        bg-gradient-to-br
-        from-[#e8faf8]
-        via-[#cff4f8]
-        to-[#dffaf7]
-        pt-6 pb-12
-        font-quicksand
-        md:py-16
-      "
-    >
-      {/* Mascot Floating Animation Style */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes mascotFloat {
-          0%, 100% {
-            transform: translateY(0) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-16px) rotate(5deg);
-          }
-        }
-        .mascot {
-          animation: mascotFloat 5s ease-in-out infinite;
-        }
-        .mascot-delay {
-          animation-delay: 1.5s;
-        }
-        .toys-swiper .swiper-pagination-bullet {
-          background: #2cbfb3;
-        }
-      ` }} />
-
-      {/* Small ambient decorations */}
-      <div
-        aria-hidden
+    <>
+      <section
         className="
-          pointer-events-none
-          absolute -left-20 -top-20
-          h-56 w-56
-          rounded-full
-          bg-[#22d3e8]/10
-          blur-2xl
-        "
-      />
-
-      <div
-        aria-hidden
-        className="
-          pointer-events-none
-          absolute -bottom-20 -right-16
-          h-48 w-48
-          rounded-full
-          bg-[#2cbfb3]/10
-          blur-2xl
-        "
-      />
-
-      {/* Floating mascot 1 */}
-      <div
-        aria-hidden
-        className="
-          mascot
-          pointer-events-none
-          absolute left-[8%] top-[10%]
-          z-10
-          hidden h-20 w-20
-          rounded-full
-          bg-[#b2ede6]/40
-          p-2
-          sm:flex
-          md:h-24 md:w-24
-          md:left-[18%]
-          lg:left-[24%]
+          relative w-full overflow-hidden
+          bg-gradient-to-br
+          from-[#e8faf8]
+          via-[#cff4f8]
+          to-[#dffaf7]
+          pt-6 pb-12
+          font-quicksand
+          md:py-16
         "
       >
-        <img
-          src="/assets/icons/icon_mastcoff.avif"
-          alt=""
-          width="96"
-          height="96"
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-contain"
+        {/* =================================================
+            ANIMATIONS
+        ================================================= */}
+
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @keyframes mascotFloat {
+                0%, 100% {
+                  transform: translateY(0) rotate(0deg);
+                }
+
+                50% {
+                  transform: translateY(-16px) rotate(5deg);
+                }
+              }
+
+              .mascot {
+                animation: mascotFloat 5s ease-in-out infinite;
+              }
+
+              .mascot-delay {
+                animation-delay: 1.5s;
+              }
+
+              .toys-swiper .swiper-pagination-bullet {
+                background: #2cbfb3;
+              }
+            `,
+          }}
         />
-      </div>
 
-      {/* Floating mascot 2 */}
-      <div
-        aria-hidden
-        className="
-          mascot mascot-delay
-          pointer-events-none
-          absolute right-[8%] top-[8%]
-          z-10
-          hidden h-20 w-20
-          rounded-full
-          bg-[#a7f3d0]/40
-          p-2
-          sm:flex
-          md:h-24 md:w-24
-          md:right-[18%]
-          lg:right-[24%]
-        "
-      >
-        <img
-          src="/assets/icons/icon_mastcoff2.avif"
-          alt=""
-          width="96"
-          height="96"
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-contain"
-        />
-      </div>
+        {/* =================================================
+            AMBIENT DECORATIONS
+        ================================================= */}
 
-      {/* Header */}
-      <header className="relative z-20 mb-10 px-4 text-center">
-
-        <h2
+        <div
+          aria-hidden
           className="
-            mb-2.5
-            text-3xl font-black
-            tracking-tight
-            text-[#0d2b2a]
-            sm:text-4xl
-            md:text-5xl
+            pointer-events-none
+            absolute
+            -left-20
+            -top-20
+            h-56
+            w-56
+            rounded-full
+            bg-[#22d3e8]/10
+            blur-2xl
+          "
+        />
+
+        <div
+          aria-hidden
+          className="
+            pointer-events-none
+            absolute
+            -bottom-20
+            -right-16
+            h-48
+            w-48
+            rounded-full
+            bg-[#2cbfb3]/10
+            blur-2xl
+          "
+        />
+
+        {/* =================================================
+            FLOATING MASCOT 1
+        ================================================= */}
+
+        <div
+          aria-hidden
+          className="
+            mascot
+            pointer-events-none
+            absolute
+            left-[8%]
+            top-[10%]
+            z-10
+            hidden
+            h-20
+            w-20
+            rounded-full
+            bg-[#b2ede6]/40
+            p-2
+            sm:flex
+            md:left-[18%]
+            md:h-24
+            md:w-24
+            lg:left-[24%]
           "
         >
-          Toys for{" "}
-          <span className="text-[#1a9e93]">
-            Every
-          </span>{" "}
-          Need
-        </h2>
+          <img
+            src="/assets/icons/icon_mastcoff.avif"
+            alt=""
+            width="96"
+            height="96"
+            loading="lazy"
+            decoding="async"
+            className="
+              h-full
+              w-full
+              object-contain
+            "
+          />
+        </div>
 
-        <p className="mx-auto max-w-[420px] text-sm leading-relaxed text-[#4a8c88]">
-          Play collections crafted to nurture creativity, movement, and
-          essential developmental milestones.
-        </p>
-      </header>
+        {/* =================================================
+            FLOATING MASCOT 2
+        ================================================= */}
 
-      {/* Swiper Slider */}
-      <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <Swiper
-          modules={[Autoplay, Navigation, Pagination]}
-          spaceBetween={24}
-          slidesPerView={1}
-          loop={true}
-          autoplay={false}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          navigation={{
-            prevEl: '.custom-prev-btn',
-            nextEl: '.custom-next-btn',
-          }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
-          }}
-          className="toys-swiper !pb-12"
+        <div
+          aria-hidden
+          className="
+            mascot
+            mascot-delay
+            pointer-events-none
+            absolute
+            right-[8%]
+            top-[8%]
+            z-10
+            hidden
+            h-20
+            w-20
+            rounded-full
+            bg-[#a7f3d0]/40
+            p-2
+            sm:flex
+            md:right-[18%]
+            md:h-24
+            md:w-24
+            lg:right-[24%]
+          "
         >
-          {CARDS.map((card, idx) => (
-            <SwiperSlide key={idx} className="!h-auto flex">
-              <ToyCard card={card} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <img
+            src="/assets/icons/icon_mastcoff2.avif"
+            alt=""
+            width="96"
+            height="96"
+            loading="lazy"
+            decoding="async"
+            className="
+              h-full
+              w-full
+              object-contain
+            "
+          />
+        </div>
 
-        {/* Custom Navigation Arrows */}
-        <button className="custom-prev-btn absolute left-1 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/90 border border-[#b2ede6] text-[#1f4e4b] flex items-center justify-center shadow-md hover:bg-[#2cbfb3] hover:text-white transition-colors cursor-pointer">
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button className="custom-next-btn absolute right-1 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/90 border border-[#b2ede6] text-[#1f4e4b] flex items-center justify-center shadow-md hover:bg-[#2cbfb3] hover:text-white transition-colors cursor-pointer">
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
+        {/* =================================================
+            HEADER
+        ================================================= */}
 
-    </section>
+        <header
+          className="
+            relative
+            z-20
+            mb-10
+            px-4
+            text-center
+          "
+        >
+          <h2
+            className="
+              mb-2.5
+              text-3xl
+              font-black
+              tracking-tight
+              text-[#0d2b2a]
+              sm:text-4xl
+              md:text-5xl
+            "
+          >
+            Toys for{" "}
+            <span className="text-[#1a9e93]">
+              Every
+            </span>{" "}
+            Need
+          </h2>
+
+          <p
+            className="
+              mx-auto
+              max-w-[420px]
+              text-sm
+              leading-relaxed
+              text-[#4a8c88]
+            "
+          >
+            Play collections crafted to nurture
+            creativity, movement, and essential
+            developmental milestones.
+          </p>
+        </header>
+
+        {/* =================================================
+            SWIPER
+        ================================================= */}
+
+        <div
+          className="
+            relative
+            z-20
+            mx-auto
+            max-w-[1400px]
+            px-6
+            lg:px-12
+          "
+        >
+          <Swiper
+            modules={[
+              Autoplay,
+              Navigation,
+              Pagination,
+            ]}
+            spaceBetween={24}
+            slidesPerView={1}
+            loop={true}
+            autoplay={false}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            navigation={{
+              prevEl: ".custom-prev-btn",
+              nextEl: ".custom-next-btn",
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+
+              1024: {
+                slidesPerView: 3,
+              },
+
+              1280: {
+                slidesPerView: 4,
+              },
+            }}
+            className="toys-swiper !pb-12"
+          >
+            {CARDS.map((card, idx) => (
+              <SwiperSlide
+                key={`${card.title}-${idx}`}
+                className="!h-auto flex"
+              >
+                <ToyCard
+                  card={card}
+                  onEnquiry={handleEnquiry}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* =================================================
+              CUSTOM PREVIOUS BUTTON
+          ================================================= */}
+
+          <button
+            type="button"
+            aria-label="Previous products"
+            className="
+              custom-prev-btn
+              absolute
+              left-1
+              top-1/2
+              z-30
+              flex
+              h-10
+              w-10
+              -translate-y-1/2
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-[#b2ede6]
+              bg-white/90
+              text-[#1f4e4b]
+              shadow-md
+              transition-colors
+              hover:bg-[#2cbfb3]
+              hover:text-white
+              cursor-pointer
+            "
+          >
+            <ChevronLeft
+              className="h-6 w-6"
+            />
+          </button>
+
+          {/* =================================================
+              CUSTOM NEXT BUTTON
+          ================================================= */}
+
+          <button
+            type="button"
+            aria-label="Next products"
+            className="
+              custom-next-btn
+              absolute
+              right-1
+              top-1/2
+              z-30
+              flex
+              h-10
+              w-10
+              -translate-y-1/2
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-[#b2ede6]
+              bg-white/90
+              text-[#1f4e4b]
+              shadow-md
+              transition-colors
+              hover:bg-[#2cbfb3]
+              hover:text-white
+              cursor-pointer
+            "
+          >
+            <ChevronRight
+              className="h-6 w-6"
+            />
+          </button>
+        </div>
+      </section>
+
+      {/* =====================================================
+          SINGLE POPUP
+          OUTSIDE ALL CARDS + OUTSIDE SWIPER
+      ===================================================== */}
+
+      <PopupForm
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+        productName={selectedProduct}
+      />
+    </>
   );
 }
