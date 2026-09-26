@@ -483,9 +483,24 @@ const handleNewsletterSubmit = async () => {
         />
 
         {/* Copyright Bar */}
-        <div className="absolute bottom-2 sm:bottom-3 w-full text-center z-30 pointer-events-auto text-white/90 text-[10px] sm:text-sm font-medium px-4">
-          © 2026 Toypark. All Rights Reserved by Toypark
-        </div>
+<div className="absolute bottom-2 sm:bottom-3 left-0 w-full z-30 pointer-events-auto px-4 text-center">
+  <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-white/90 text-[10px] sm:text-sm font-medium leading-tight">
+    <span>© 2026 Toypark. All Rights Reserved by Toypark</span>
+
+    <span className="hidden sm:inline">|</span>
+
+    <span>Website Designed By</span>
+
+    <a
+      href="https://inquirybazaar.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-bold hover:text-red-500 transition-colors"
+    >
+      Inquiry Bazaar Pvt. Ltd.
+    </a>
+  </div>
+</div>
 
       </div>
     </footer>
