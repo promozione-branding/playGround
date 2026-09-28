@@ -97,34 +97,34 @@ const handleNewsletterSubmit = async () => {
   setNewsletterMessage("");
 
   try {
-    const payload = {
-      platform: "Playground Popup form",
-      platformEmail: "info@toyparkindia.com",
-      name: "N/A",
-      email: trimmedEmail,
-      phone: "0000000000",
-      product: "N/A",
-      place: "N/A",
-      priceRange: "N/A",
-      message: "News Letter Subscribe",
-    };
-    console.log(payload)
-
     const response = await axios.post(
       "https://brandbnalo.com/api/form/add",
-      payload
+      {
+        platform: "Playground Popup form",
+        platformEmail: "info@toyparkindia.com",
+        name: "N/A",
+        email: trimmedEmail,
+        phone: "0000000000",
+        product: "N/A",
+        place: "N/A",
+        priceRange:"N/A",
+        message: "N/A",
+      },
     );
 
     console.log("Newsletter response:", response);
 
     setNewsletterMessage("Subscribed successfully!");
     setNewsletterEmail("");
-  } catch (error) {
-    console.error("Newsletter subscription error:", error);
+  } catch (error: any) {
+    console.error(
+      "Newsletter subscription error:",
+      error
+    );
 
     setNewsletterMessage(
       error?.response?.data?.message ||
-        "Unable to subscribe. Please try again."
+      "Unable to subscribe. Please try again."
     );
   } finally {
     setNewsletterLoading(false);
