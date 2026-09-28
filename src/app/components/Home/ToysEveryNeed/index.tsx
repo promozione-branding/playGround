@@ -349,8 +349,9 @@ export default function ToysEveryNeed() {
           via-[#cff4f8]
           to-[#dffaf7]
           pt-6 pb-12
+          md:pt-5 md:pb-8
           font-quicksand
-          md:py-16
+          xl:py-16
         "
       >
         {/* =================================================

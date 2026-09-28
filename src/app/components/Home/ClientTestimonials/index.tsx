@@ -66,7 +66,7 @@ export const ClientTestimonials: React.FC = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass | null>(null);
 
   return (
-    <div className="relative w-full bg-[#FFFFFF] py-12 sm:py-24 px-4 sm:px-6 md:px-12 font-sans antialiased overflow-hidden select-none">
+    <div className="relative w-full bg-[#FFFFFF] py-7 sm:py-13 px-4 sm:px-6 md:px-12 font-sans antialiased overflow-hidden select-none">
       
       {/* ═══ MAIN LAYOUT ═══ */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">

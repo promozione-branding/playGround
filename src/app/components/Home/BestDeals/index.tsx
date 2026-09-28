@@ -208,52 +208,76 @@ export const DealsSection: React.FC = () => {
   return (
     <>
       <section className="w-full bg-white py-8 sm:py-12 px-3 sm:px-8 font-quicksand text-slate-800">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-
+        <div
+          className="
+            max-w-[1400px]
+            mx-auto
+            grid
+            grid-cols-1
+            md:grid-cols-12
+            gap-8
+          "
+        >
           {/* =================================================
               LEFT COLUMN: SPECIAL ITEMS
+              STICKY ON TABLET + DESKTOP
           ================================================= */}
 
-          <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-4 sm:gap-6 pr-0 lg:pr-4">
+          <div
+            className="
+              hidden
+              sm:flex
 
-            <div className="flex items-center justify-between">
+              md:col-span-4
+              xl:col-span-3
+
+              flex-col
+              gap-4
+              sm:gap-6
+
+              pr-0
+              md:pr-4
+
+              sticky
+              top-6
+              self-start
+
+              h-fit
+              max-h-[calc(100vh-3rem)]
+            "
+          >
+            {/* =================================================
+                SPECIAL ITEMS HEADER
+            ================================================= */}
+
+            <div className="flex items-center justify-between shrink-0">
               <h2 className="text-xl sm:text-2xl font-black text-[#1E293B] tracking-tight">
                 Special Items
               </h2>
             </div>
 
             {/* =================================================
-                MOBILE SPECIAL ITEMS
+                SPECIAL ITEMS SCROLL AREA
             ================================================= */}
 
-            <div className="block sm:hidden w-full relative pb-8">
-              <Swiper
-                modules={[Autoplay, Pagination]}
-                slidesPerView={1}
-                spaceBetween={16}
-                loop={true}
-                autoplay={false}
-                pagination={{
-                  clickable: true,
-                }}
-                className="w-full special-items-swiper"
-              >
-                {SPECIAL_ITEMS.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <SpecialItemCard
-                      item={item}
-                      onEnquiry={handleEnquiry}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            <div
+              className="
+                flex
+                flex-col
 
-            {/* =================================================
-                DESKTOP SPECIAL ITEMS
-            ================================================= */}
+                gap-6
+                lg:gap-8
+                xl:gap-[2.2rem]
 
-            <div className="hidden sm:flex flex-col gap-6 lg:gap-8 xl:gap-[2.2rem] justify-between flex-1">
+               
+
+                pr-2
+
+                scrollbar-thin
+                scrollbar-thumb-slate-300
+                scrollbar-track-transparent
+              "
+            >
               {SPECIAL_ITEMS.map((item) => (
                 <SpecialItemCard
                   key={item.id}
@@ -265,11 +289,54 @@ export const DealsSection: React.FC = () => {
           </div>
 
           {/* =================================================
+              MOBILE SPECIAL ITEMS
+              ONLY MOBILE
+          ================================================= */}
+
+          <div className="block sm:hidden w-full relative pb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-black text-[#1E293B] tracking-tight">
+                Special Items
+              </h2>
+            </div>
+
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              slidesPerView={1}
+              spaceBetween={16}
+              loop={true}
+              autoplay={false}
+              pagination={{
+                clickable: true,
+              }}
+              className="w-full special-items-swiper"
+            >
+              {SPECIAL_ITEMS.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <SpecialItemCard
+                    item={item}
+                    onEnquiry={handleEnquiry}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          {/* =================================================
               RIGHT COLUMN: HOT DEALS
           ================================================= */}
 
-          <div className="lg:col-span-8 xl:col-span-9 flex flex-col gap-4 sm:gap-6">
+          <div
+            className="
+              md:col-span-8
+              xl:col-span-9
 
+              flex
+              flex-col
+              gap-4
+              sm:gap-6
+            "
+          >
             {/* =================================================
                 HEADER
             ================================================= */}
@@ -288,15 +355,29 @@ export const DealsSection: React.FC = () => {
               <button
                 type="button"
                 className="
-                  flex items-center gap-1.5
-                  text-xs font-bold
+                  flex
+                  items-center
+                  gap-1.5
+
+                  text-xs
+                  font-bold
+
                   text-slate-500
-                  border border-slate-200
+
+                  border
+                  border-slate-200
+
                   rounded-full
-                  px-3 py-1.5
-                  sm:px-4 sm:py-2
+
+                  px-3
+                  py-1.5
+
+                  sm:px-4
+                  sm:py-2
+
                   hover:bg-slate-50
                   hover:text-slate-900
+
                   transition-all
                 "
               >
@@ -341,10 +422,22 @@ export const DealsSection: React.FC = () => {
             </div>
 
             {/* =================================================
-                DESKTOP HOT DEALS
+                TABLET + DESKTOP HOT DEALS
             ================================================= */}
 
-            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div
+              className="
+                hidden
+                sm:grid
+
+                sm:grid-cols-2
+                md:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+
+                gap-5
+              "
+            >
               {HOT_DEALS.map((deal) => (
                 <ProductCard
                   key={deal.id}
@@ -384,6 +477,24 @@ export const DealsSection: React.FC = () => {
               .hot-deals-swiper .swiper-pagination {
                 bottom: 0px !important;
               }
+
+              /* Special Items scrollbar */
+              .special-items-scroll::-webkit-scrollbar {
+                width: 4px;
+              }
+
+              .special-items-scroll::-webkit-scrollbar-track {
+                background: transparent;
+              }
+
+              .special-items-scroll::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 999px;
+              }
+
+              .special-items-scroll::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+              }
             `,
           }}
         />
@@ -410,23 +521,36 @@ export const DealsSection: React.FC = () => {
 const ProductCard: React.FC<{
   deal: Product;
   onEnquiry: (product: Product) => void;
-}> = ({ deal, onEnquiry }) => {
+}> = ({ deal }) => {
   return (
     <Link
       href={deal.href}
       className="
         bg-white
-        rounded-xl sm:rounded-2xl
-        border border-slate-100
-        p-2.5 sm:p-4
-        flex flex-col justify-between
+        rounded-xl
+        sm:rounded-2xl
+
+        border
+        border-slate-100
+
+        p-2.5
+        sm:p-4
+
+        flex
+        flex-col
+        justify-between
+
         relative
+
         hover:shadow-xl
         hover:border-slate-200
+
         transition-all
         duration-300
+
         group
         cursor-pointer
+
         h-full
       "
     >
@@ -438,14 +562,27 @@ const ProductCard: React.FC<{
         <span
           className="
             absolute
-            top-2.5 left-2.5
-            sm:top-4 sm:left-4
+
+            top-2.5
+            left-2.5
+
+            sm:top-4
+            sm:left-4
+
             bg-[#FF4D4F]
+
             text-white
-            text-[9px] sm:text-[10px]
+
+            text-[9px]
+            sm:text-[10px]
+
             font-black
-            px-1.5 py-0.5
+
+            px-1.5
+            py-0.5
+
             rounded-md
+
             z-10
           "
         >
@@ -465,19 +602,39 @@ const ProductCard: React.FC<{
         }}
         className="
           absolute
-          top-2.5 right-2.5
-          sm:top-4 sm:right-4
-          w-7 h-7
-          sm:w-8 sm:h-8
+
+          top-2.5
+          right-2.5
+
+          sm:top-4
+          sm:right-4
+
+          w-7
+          h-7
+
+          sm:w-8
+          sm:h-8
+
           rounded-full
+
           bg-white/80
-          border border-slate-100
-          flex items-center justify-center
+
+          border
+          border-slate-100
+
+          flex
+          items-center
+          justify-center
+
           text-slate-400
+
           hover:text-red-500
           hover:bg-white
+
           shadow-sm
+
           transition-all
+
           z-10
         "
       >
@@ -491,12 +648,24 @@ const ProductCard: React.FC<{
       <div
         className="
           w-full
-          h-28 sm:h-44
+
+          h-28
+          sm:h-44
+
           bg-slate-100
-          rounded-lg sm:rounded-xl
-          flex items-center justify-center
-          mb-2.5 sm:mb-4
+
+          rounded-lg
+          sm:rounded-xl
+
+          flex
+          items-center
+          justify-center
+
+          mb-2.5
+          sm:mb-4
+
           relative
+
           overflow-hidden
         "
       >
@@ -506,8 +675,11 @@ const ProductCard: React.FC<{
           className="
             w-full
             h-full
+
             object-cover
+
             group-hover:scale-105
+
             transition-transform
             duration-500
           "
@@ -519,29 +691,46 @@ const ProductCard: React.FC<{
       ================================================= */}
 
       <div className="flex flex-col gap-1 sm:gap-1.5">
+        {/* CATEGORY */}
 
         <span
           className="
-            text-[9px] sm:text-[11px]
+            text-[9px]
+            sm:text-[11px]
+
             font-medium
+
             text-slate-400
+
             uppercase
+
             tracking-wider
           "
         >
           {deal.category}
         </span>
 
+        {/* TITLE */}
+
         <h3
           className="
-            text-xs sm:text-sm
+            text-xs
+            sm:text-sm
+
             font-bold
+
             text-slate-800
+
             line-clamp-2
+
             leading-snug
+
             group-hover:text-cyan-600
+
             transition-colors
-            h-8 sm:h-10
+
+            h-8
+            sm:h-10
           "
         >
           {deal.title}
@@ -555,17 +744,26 @@ const ProductCard: React.FC<{
           className="
             flex
             items-center
-            gap-0.5 sm:gap-1
+
+            gap-0.5
+            sm:gap-1
+
             text-amber-400
-            text-[10px] sm:text-xs
+
+            text-[10px]
+            sm:text-xs
           "
         >
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
               className={`
-                w-3 h-3
-                sm:w-3.5 sm:h-3.5
+                w-3
+                h-3
+
+                sm:w-3.5
+                sm:h-3.5
+
                 ${
                   i < Math.floor(deal.rating)
                     ? "fill-current"
@@ -578,9 +776,14 @@ const ProductCard: React.FC<{
           <span
             className="
               text-slate-400
-              text-[9px] sm:text-[11px]
+
+              text-[9px]
+              sm:text-[11px]
+
               font-semibold
-              ml-0.5 sm:ml-1
+
+              ml-0.5
+              sm:ml-1
             "
           >
             ({deal.rating.toFixed(1)})
@@ -591,38 +794,52 @@ const ProductCard: React.FC<{
             CONTACT BUTTON
         ================================================= */}
 
-        <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
+        <div
+          className="
+            flex
+            items-center
+
+            gap-1.5
+            sm:gap-2
+
+            mt-0.5
+            sm:mt-1
+          "
+        >
           <Link
-            type="button"
             href="tel:+919811117654"
             onClick={(e) => {
-             
               e.stopPropagation();
-
-              // onEnquiry(deal);
             }}
             className="
               bg-[#00C4B5]
+
               flex
               justify-center
               items-center
+
               gap-1
+
               text-sm
               text-white
+
               px-2
               py-2
+
               font-bold
+
               rounded-3xl
+
               hover:bg-[#00a99d]
+
               transition-colors
+
               cursor-pointer
             "
           >
             Contact Now
 
-            <ArrowRight
-              className="w-3 h-3 sm:w-4 sm:h-4"
-            />
+            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
           </Link>
         </div>
       </div>
@@ -644,16 +861,28 @@ const SpecialItemCard: React.FC<{
       className="
         flex
         items-center
+
         gap-3.5
+
         p-3
+
         rounded-2xl
+
         bg-white
-        border border-[#ff3b30]/80
+
+        border
+        border-[#ff3b30]/80
+
         shadow-sm
+
         hover:shadow-md
+
         hover:border-[#00C4B5]/40
+
         transition-all
+
         cursor-pointer
+
         group
       "
     >
@@ -663,16 +892,27 @@ const SpecialItemCard: React.FC<{
 
       <div
         className="
-          w-24 h-24
-          sm:w-28 sm:h-28
+          w-24
+          h-24
+
+          sm:w-28
+          sm:h-28
+
           bg-slate-100
+
           rounded-xl
+
           flex
           items-center
           justify-center
-          border border-slate-100
+
+          border
+          border-slate-100
+
           flex-shrink-0
+
           overflow-hidden
+
           shadow-sm
         "
       >
@@ -682,9 +922,13 @@ const SpecialItemCard: React.FC<{
           className="
             w-full
             h-full
+
             object-cover
+
             group-hover:scale-105
+
             transition-transform
+
             duration-300
           "
         />
@@ -698,31 +942,50 @@ const SpecialItemCard: React.FC<{
         className="
           flex
           flex-col
+
           gap-1
+
           overflow-hidden
+
           flex-1
         "
       >
+        {/* CATEGORY */}
+
         <span
           className="
-            text-[10px] sm:text-xs
+            text-[10px]
+            sm:text-xs
+
             font-bold
+
             text-slate-400
+
             uppercase
+
             tracking-wider
           "
         >
           {item.category}
         </span>
 
+        {/* TITLE */}
+
         <h4
           className="
-            text-xs sm:text-sm
+            text-xs
+            sm:text-sm
+
             font-extrabold
+
             text-slate-800
+
             line-clamp-2
+
             leading-snug
+
             group-hover:text-[#00C4B5]
+
             transition-colors
           "
         >
@@ -744,26 +1007,33 @@ const SpecialItemCard: React.FC<{
             }}
             className="
               bg-[#ff3b30]
+
               flex
               justify-center
               items-center
+
               gap-1
+
               text-sm
               text-white
+
               px-2
               py-2
+
               font-bold
+
               rounded-3xl
+
               hover:bg-[#e53228]
+
               transition-colors
+
               cursor-pointer
             "
           >
             Grab Now
 
-            <ArrowRight
-              className="w-3 h-3 sm:w-4 sm:h-4"
-            />
+            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>

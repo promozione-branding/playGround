@@ -845,7 +845,7 @@ export default function ProductDetail() {
             BOTTOM DETAILS
         ================================================================ */}
 
-        <div className="mt-12 border-t border-gray-100 pt-8 lg:mt-16 lg:pt-10">
+        <div className="mt-6 xl:mt-8 border-t border-gray-100 pt-8 lg:mt-16 lg:pt-10">
 
           {/* ==============================================================
               LONG DESCRIPTION

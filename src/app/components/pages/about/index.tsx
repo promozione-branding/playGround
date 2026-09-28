@@ -95,7 +95,7 @@ export default function AboutUsScrollAnimation() {
       </section>
 
       {/* --- SECTION 2: INTRO BADGE --- */}
-      <div className="py-10 flex items-center justify-center bg-[#E0F7F6]">
+      <div className="py-6 md:py-8 flex items-center justify-center bg-[#E0F7F6]">
         <div className="flex items-center gap-4 bg-white/80 px-8 py-3.5 rounded-full border-2 border-[#00C4B5]/40">
           <h2 className="text-4xl md:text-5xl font-black text-[#00A89B] tracking-wider uppercase">
             Our Story
@@ -109,7 +109,7 @@ export default function AboutUsScrollAnimation() {
       </div>
 
       {/* --- SECTION 3: WHO WE ARE --- */}
-      <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-6 md:py-13 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
         {/* Left Side: Animated Image */}
         <ScrollReveal
           baseClass="opacity-0 -translate-x-12"
@@ -149,7 +149,7 @@ export default function AboutUsScrollAnimation() {
       </section>
 
       {/* --- SECTION 4: TEAM VIBE BANNER --- */}
-      <section className="py-16 px-6 md:px-16 bg-[#E0F7F6] flex justify-center">
+      <section className="py-6 md:py-13 px-6 md:px-16 bg-[#E0F7F6] flex justify-center">
         <div className="bg-white rounded-3xl p-8 md:p-12 border border-[#00C4B5]/20 max-w-7xl w-full flex flex-col md:flex-row items-center justify-between gap-8">
           
           <div className="flex-1 text-left">
@@ -179,7 +179,7 @@ export default function AboutUsScrollAnimation() {
       </section>
 
       {/* --- SECTION 5: ADVANCED INFRASTRUCTURE --- */}
-      <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-6 md:py-13 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
         <ScrollReveal
           baseClass="opacity-0 translate-x-12"
           activeClass="opacity-100 translate-x-0"
@@ -219,7 +219,7 @@ export default function AboutUsScrollAnimation() {
       </section>
 
       {/* --- SECTION 6: LEADERSHIP --- */}
-      <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-6 md:py-13 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
         <ScrollReveal
           baseClass="opacity-0 -translate-y-12"
           activeClass="opacity-100 translate-y-0"

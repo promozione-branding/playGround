@@ -362,7 +362,7 @@ const features = [
 const FeatureCard: React.FC<{ feature: any }> = ({ feature }) => {
   return (
     <div
-      className={`group relative flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-5 rounded-2xl p-3.5 sm:p-6 border-2 ${feature.borderColor} ${feature.bgColor} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer shadow-sm h-full`}
+      className={`group relative flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-5 rounded-2xl p-3.5 xl:p-6 border-2 ${feature.borderColor} ${feature.bgColor} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer shadow-sm h-full`}
     >
       {/* Icon Circle Box */}
       <div className={`flex h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-xl sm:rounded-2xl ${feature.iconBg} shadow-sm border border-white/60 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6`}>

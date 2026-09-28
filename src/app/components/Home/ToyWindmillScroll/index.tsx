@@ -39,7 +39,7 @@ export const ToyWindmillScroll: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center pt-0 pb-10 lg:pb-16 px-6 sm:px-10 overflow-hidden bg-gradient-to-br from-[#93e2ec] via-[#93e2ec] to-[#c1f2eb] font-quicksand antialiased text-zinc-800"
+      className="relative w-full min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center pt-0 pb-5 xl:pb-10 px-6 sm:px-10 overflow-hidden bg-gradient-to-br from-[#93e2ec] via-[#93e2ec] to-[#c1f2eb] font-quicksand antialiased text-zinc-800"
     >
 
       {/* ═══ BACKGROUND MEDIA ═══ */}
