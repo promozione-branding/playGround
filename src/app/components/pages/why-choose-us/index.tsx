@@ -196,7 +196,7 @@ export default function WhyChooseUsPageContent() {
       {/* ─── 1. HERO ─────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative h-screen w-full flex items-center justify-center overflow-hidden"
+        className="relative h-screen w-full  flex md:items-center justify-center overflow-hidden"
       >
         {/* Parallax background image */}
         <div
@@ -218,7 +218,7 @@ export default function WhyChooseUsPageContent() {
         {/* Hero text content */}
         <div
           ref={heroTextRef}
-          className="relative z-10 text-center px-6 will-change-transform max-w-4xl"
+          className="relative z-10 pt-30 text-center px-6 will-change-transform max-w-4xl"
         >
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-[#00C4B5] px-5 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-8">
             <Sparkles className="w-4 h-4 text-[#FFE66D]" /> WHY BUSINESSES CHOOSE US
@@ -346,9 +346,9 @@ export default function WhyChooseUsPageContent() {
 
               {/* Lid */}
               <div
-                className={`toy-box-lid absolute inset-0 bg-gradient-to-br ${pillar.color} rounded-3xl p-8 shadow-2xl flex flex-col justify-between border-4 border-white/20 overflow-hidden z-10`}
+                className={`toy-box-lid absolute inset-0 bg-gradient-to-br ${pillar.color} rounded-3xl p-5 md:p-8 shadow-2xl flex flex-col justify-between border-4 border-white/20 overflow-hidden z-10`}
               >
-                <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+                <div className="absolute -right-6 -top-6 md:w-32 md:h-32 bg-white/10 rounded-full blur-2xl" />
                 <span className="text-white/70 font-black tracking-widest uppercase text-xs">
                   Pillar #{idx + 1}
                 </span>

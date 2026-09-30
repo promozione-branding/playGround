@@ -184,7 +184,7 @@ export default function PopupForm({
                     <X className="h-5 w-5" />
                 </button>
 
-                <div className="p-6 sm:p-8 md:p-10">
+                <div className="p-3 sm:p-8 md:p-10">
 
                     {/* Header */}
                     {!isSubmitted && (
@@ -194,11 +194,11 @@ export default function PopupForm({
                                 Get In Touch
                             </div> */}
 
-                            <h2 className="!m-0 !text-3xl !font-black !tracking-tight !text-[#17292B] sm:!text-4xl">
+                            <h2 className="!m-0 !text-2xl !font-black !tracking-tight !text-[#17292B] sm:!text-4xl">
                                 Have Questions?
                             </h2>
 
-                            <p className="!mt-3 !text-sm !font-semibold !leading-6 !text-[#31585C]">
+                            <p className="!mt-3 !text-sm !font-semibold leading-3.5 md:!leading-6 !text-[#31585C]">
                                 Send us a message and our ToyPark support team will
                                 get back to you.
                             </p>
@@ -240,9 +240,9 @@ export default function PopupForm({
                             )}
 
                             {/* Name + Email */}
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2">
                                 <div>
-                                    <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
+                                    <label className="mb-1 md:mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
                                         Full Name *
                                     </label>
 
@@ -257,12 +257,12 @@ export default function PopupForm({
                                             })
                                         }
                                         placeholder="Your full name"
-                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-4 py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
+                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-1 py-2 md:px-4 md:py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
+                                    <label className="mb-1 md:mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
                                         Email Address 
                                     </label>
 
@@ -277,15 +277,15 @@ export default function PopupForm({
                                             })
                                         }
                                         placeholder="you@example.com"
-                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-4 py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
+                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-1 py-2 md:px-4 md:py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
                                     />
                                 </div>
                             </div>
 
                             {/* Phone + Product */}
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2">
                                 <div>
-                                    <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
+                                    <label className="mb-1 md:mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
                                         Phone / WhatsApp *
                                     </label>
 
@@ -302,12 +302,12 @@ export default function PopupForm({
                                             })
                                         }
                                         placeholder="999999999"
-                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-4 py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
+                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-1 py-2 md:px-4 md:py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
+                                    <label className="mb-1 md:mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
                                         Product
                                     </label>
 
@@ -321,20 +321,20 @@ export default function PopupForm({
                                             })
                                         }
                                         placeholder="Product name"
-                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-4 py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
+                                        className="w-full rounded-2xl border-2 border-[#17292B] bg-white px-1 py-2 md:px-4 md:py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
                                     />
                                 </div>
                             </div>
 
                             {/* Message */}
                             <div>
-                                <label className="mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
+                                <label className="mb-1 md:mb-2 block text-xs font-black uppercase tracking-wider text-[#17292B]">
                                     Message *
                                 </label>
 
                                 <textarea
                                     required
-                                    rows={4}
+                                    rows={3}
                                     value={formData.message}
                                     onChange={(e) =>
                                         setFormData({
@@ -343,7 +343,7 @@ export default function PopupForm({
                                         })
                                     }
                                     placeholder="How can we help you?"
-                                    className="w-full resize-none rounded-2xl border-2 border-[#17292B] bg-white px-4 py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
+                                    className="w-full resize-none rounded-2xl border-2 border-[#17292B] bg-white px-1 py-2 md:px-4 md:py-3.5 text-sm font-bold text-[#17292B] placeholder:text-gray-400 shadow-[2px_2px_0px_0px_#17292B] outline-none transition focus:ring-2 focus:ring-[#00C4B5]"
                                 />
                             </div>
 
@@ -351,7 +351,7 @@ export default function PopupForm({
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#17292B] bg-[#FF6B6B] py-4 text-base font-black uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_#17292B] transition-all hover:-translate-y-0.5 hover:bg-[#ff5252] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#17292B] bg-[#FF6B6B] py-2 md:py-4 text-base font-black uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_#17292B] transition-all hover:-translate-y-0.5 hover:bg-[#ff5252] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 <span>
                                     {isSubmitting

@@ -513,7 +513,7 @@ export default function ProductsPage() {
           HERO / HEADER
       ===================================================== */}
 
-      <section className="relative overflow-hidden px-4 pb-8 pt-28 sm:px-6 lg:px-8 lg:pb-12 lg:pt-36">
+      <section className="relative overflow-hidden px-4 pb-8 pt-10 sm:px-6 lg:px-8 md:pb-12 md:pt-16">
 
         {/* Floating Cloud 1 */}
 
@@ -917,7 +917,7 @@ export default function ProductsPage() {
                         <Link
                           href={`/products/${product.slug}`}
                         >
-                          <h2 className="line-clamp-2 min-h-[56px] text-lg font-black capitalize leading-7 text-[#2D3436] transition-colors duration-300 group-hover:text-[#18A6A6]">
+                          <h2 className="line-clamp-2  text-lg font-black capitalize leading-7 text-[#2D3436] transition-colors duration-300 group-hover:text-[#18A6A6]">
                             {
                               product.productName
                             }
@@ -926,7 +926,7 @@ export default function ProductsPage() {
 
                         {/* Rating */}
 
-                        <div className="mt-3 flex items-center gap-1">
+                        <div className="mt-1 flex items-center gap-1">
 
                           {Array.from({
                             length: 5,

@@ -1229,7 +1229,7 @@ export default function KidzaNavbar() {
                   >
 
                     <a
-                      href="mailto:kidza@gmail.com"
+                      href="mailto:info@toyparkindia.com"
                       className="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#62C4D2] transition-colors"
                     >
                       <Mail
@@ -1238,14 +1238,14 @@ export default function KidzaNavbar() {
                       />
 
                       <span>
-                        kidza@gmail.com
+                        info@toyparkindia.com
                       </span>
                     </a>
 
                     <div className="w-px h-4 bg-gray-200" />
 
                     <a
-                      href="tel:+004793948888"
+                      href="tel:+919811117654"
                       className="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#62C4D2] transition-colors"
                     >
                       <Phone
@@ -1254,7 +1254,7 @@ export default function KidzaNavbar() {
                       />
 
                       <span>
-                        +00 (47) 939 4888
+                        +919811117654
                       </span>
                     </a>
 
