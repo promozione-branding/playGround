@@ -240,9 +240,9 @@ export default function ProductDetail() {
     ? `Hi ToyPark! I'm interested in ${product.productName}`
     : "Hi ToyPark! I'm interested in your products";
 
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
+ const whatsappUrl = `https://wa.me/919811117654?text=${encodeURIComponent(
+  whatsappMessage
+)}`;
 
   // ==========================================================================
   // LOADING STATE

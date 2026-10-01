@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import PopupForm from "../../popup/PopupForm";
 
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -484,12 +485,13 @@ function PlanYourVisitSection({
               Buy Family Pass
             </button>
 
-            <button
+            <Link
+              href="tel:+919811117654"
               type="button"
               className="bg-transparent text-[#082f49] border-2 border-[#082f49] w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold md:hover:bg-[#082f49] md:hover:text-white transition-colors duration-200 text-sm md:text-base"
             >
-              View FAQ
-            </button>
+              Call Us
+            </Link>
           </div>
         </div>
       </div>

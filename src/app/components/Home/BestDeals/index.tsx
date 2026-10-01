@@ -266,8 +266,8 @@ export const DealsSection: React.FC = () => {
                 flex-col
 
                 gap-6
-                lg:gap-8
-                xl:gap-[2.2rem]
+                
+                md:gap-2
 
                
 
@@ -862,7 +862,7 @@ const SpecialItemCard: React.FC<{
         flex
         items-center
 
-        gap-3.5
+        gap-3
 
         p-3
 

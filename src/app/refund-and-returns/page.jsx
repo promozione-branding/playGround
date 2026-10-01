@@ -425,7 +425,7 @@ export default function Page() {
                                 refund, or any questions about your order.
                             </p>
 
-                            <Link href={"/contact"}
+                            <Link href="tel:+919811117654"
                                 className="!mt-8 rounded-full !bg-[#BDECF0] !px-8 !py-3.5 !text-sm !font-semibold !text-[#17292B] transition hover:!bg-white"
                             >
                                 Contact Support

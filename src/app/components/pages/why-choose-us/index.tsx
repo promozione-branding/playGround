@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +9,7 @@ import { Sparkles, Star, Zap, Rocket, Gamepad2, Heart, ArrowRight } from "lucide
 
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import Link from "next/link";
+import PopupForm from "../../popup/PopupForm";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -53,6 +54,8 @@ export default function WhyChooseUsPageContent() {
   const heroTextRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const toyRef = useRef<HTMLDivElement>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -420,15 +423,20 @@ export default function WhyChooseUsPageContent() {
             From your first bulk order to your next big idea, ToyPark is here with the products, experience, and support to help you make it happen.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/contact" className="inline-block bg-white text-[#0284c7] px-8 py-4 rounded-full font-black text-base sm:text-lg shadow-[0_5px_0_rgb(2,132,199)] hover:translate-y-0.5 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all duration-200 uppercase tracking-wide">
-              Start a Conversation
-            </Link>
+            <button onClick={() => setIsPopupOpen(true)} className="inline-block bg-white text-[#0284c7] px-8 py-4 rounded-full font-black text-base sm:text-lg shadow-[0_5px_0_rgb(2,132,199)] hover:translate-y-0.5 hover:shadow-[0_2px_0_rgb(2,132,199)] transition-all duration-200 uppercase tracking-wide">
+              Get a Quote
+            </button>
             <Link href="/products" className="inline-block bg-transparent text-white border-2 border-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-wide">
               Explore Wholesale
             </Link>
           </div>
         </div>
       </section>
+      <PopupForm
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                productName="Toy Product"
+              />
     </div>
   );
 }

@@ -523,10 +523,10 @@ export default function Page() {
                             </p>
 
                             <Link
-                                href="/contact"
+                                href="tel:+919811117654"
                                 className="mt-8 inline-block rounded-full !bg-[#BDECF0] !px-8 !py-3.5 !text-sm !font-semibold !text-[#17292B] no-underline transition hover:!bg-white"
                             >
-                                Contact Support
+                                Get Call Support
                             </Link>
                         </div>
                     </div>
