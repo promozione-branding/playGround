@@ -47,7 +47,7 @@ export const ToyWindmillScroll: React.FC = () => {
         {/* Background Video */}
         <video
           ref={videoRef}
-          src="https://pub-eb2eff44950b4abfbe1564159bd1cbc8.r2.dev/video/Toy_windmill_on_green_hill_202608111041.mp4"
+          src="/video/windmill2.mp4"
           autoPlay
           loop
           muted
