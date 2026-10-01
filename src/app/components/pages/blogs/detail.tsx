@@ -1,106 +1,322 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowLeft, Clock, User, Calendar, Tag } from "lucide-react";
-import { journalEntries } from "./index";
+import {
+    ArrowLeft,
+    Clock,
+    User,
+    Calendar,
+    Tag,
+} from "lucide-react";
+
+interface Blog {
+    _id: string;
+    title: string;
+    slug: string;
+    date: string;
+    metaTitle: string;
+    metaDescription: string;
+    content: string;
+    thumbnail?: {
+        url: string;
+        imageKey: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+interface BlogApiResponse {
+    success: boolean;
+    blog: Blog;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Helpers                                                                    */
+/* -------------------------------------------------------------------------- */
+
+const formatDate = (dateString: string) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+};
+
+const getReadTime = (content: string) => {
+    if (!content) {
+        return "1 min read";
+    }
+
+    const plainText = content
+        .replace(/<[^>]*>/g, " ")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const words = plainText
+        .split(/\s+/)
+        .filter(Boolean).length;
+
+    const minutes = Math.max(
+        1,
+        Math.ceil(words / 200)
+    );
+
+    return `${minutes} min read`;
+};
+
+/* -------------------------------------------------------------------------- */
+/* Component                                                                  */
+/* -------------------------------------------------------------------------- */
 
 export default function BlogDetailContent() {
-  const params = useParams();
-  const id = params?.id as string;
+    const params = useParams();
+    
 
-  const entry = journalEntries.find((item) => item.id === id) || journalEntries[0];
+    const id = params?.id as string;
+    console.log(id)
 
-  return (
-    <div className="bg-[#f0f8fa] text-[#0c2333] min-h-screen font-quicksand antialiased pt-10 pb-20 px-6 md:px-12 selection:bg-[#0284c7] selection:text-white">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Back Link */}
-        <Link 
-          href="/blogs" 
-          className="inline-flex items-center gap-2 text-sm font-bold text-[#0284c7] hover:text-[#0a192f] transition-colors mb-8 group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to All Journals</span>
-        </Link>
+    const [blog, setBlog] = useState<Blog | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-        {/* Category & Metadata */}
-        <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider text-[#0284c7] mb-4">
-          <span className="bg-[#e0f2fe] text-[#0284c7] px-3 py-1 rounded-full flex items-center gap-1.5">
-            <Tag className="w-3.5 h-3.5" />
-            {entry.category}
-          </span>
-          <span className="text-[#3b596d] flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5" />
-            {entry.date}
-          </span>
-          <span className="text-[#3b596d] flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" />
-            {entry.readTime}
-          </span>
-        </div>
+    /* ---------------------------------------------------------------------- */
+    /* Fetch Single Blog                                                       */
+    /* ---------------------------------------------------------------------- */
 
-        {/* Title */}
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#0a192f] mb-6 uppercase whitespace-pre-line">
-          {entry.title}
-        </h1>
+    useEffect(() => {
+        if (!id) return;
 
-        {/* Author info */}
-        <div className="flex items-center justify-between border-y border-cyan-900/10 py-4 mb-8 text-sm font-semibold text-[#3b596d]">
-          <div className="flex items-center gap-2">
-            <User className="w-4 h-4 text-[#0284c7]" />
-            <span>Written by <strong className="text-[#0a192f]">ToyPark Team</strong></span>
-          </div>
-        </div>
+        const fetchBlog = async () => {
+            try {
+                setLoading(true);
+                setError("");
 
-        {/* Main Image */}
-        <div className="relative w-full aspect-[16/10] md:aspect-[16/9] rounded-3xl overflow-hidden shadow-xl mb-12">
-          <Image 
-            src={entry.image} 
-            alt={entry.title} 
-            fill
-            priority
-            className="object-cover object-center" 
-          />
-        </div>
+                const response = await fetch(
+                    `/api/blog/${id}`,
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                    }
+                );
+                console.log(response)
 
-        {/* Summary Banner */}
-        <div className="bg-[#e3f2f7] border-l-4 border-[#0284c7] p-6 rounded-r-2xl mb-10 text-lg md:text-xl font-semibold leading-relaxed text-[#0a192f]">
-          "{entry.summary}"
-        </div>
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to fetch blog"
+                    );
+                }
 
-        {/* Content Paragraphs */}
-        <div className="space-y-6 text-base md:text-lg font-medium leading-relaxed text-[#3b596d] mb-16">
-          {entry.content.map((paragraph, idx) => (
-            <p key={idx}>{paragraph}</p>
-          ))}
-        </div>
+                const data: BlogApiResponse =
+                    await response.json();
 
-        {/* Related Next Articles */}
-        <div className="border-t border-cyan-900/10 pt-12">
-          <h3 className="text-2xl font-bold text-[#0a192f] mb-8">More Stories from ToyPark</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {journalEntries
-              .filter((item) => item.id !== entry.id)
-              .map((item) => (
-                <Link key={item.id} href={`/blogs/${item.id}`} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex gap-4 items-center">
-                  <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0">
-                    <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#0284c7] block mb-1">{item.category}</span>
-                    <h4 className="text-sm font-bold text-[#0a192f] group-hover:text-[#0284c7] transition-colors line-clamp-2 uppercase">
-                      {item.title}
-                    </h4>
-                  </div>
+                if (!data.success || !data.blog) {
+                    throw new Error(
+                        "Blog not found"
+                    );
+                }
+
+                console.log(data)
+
+                setBlog(data.blog);
+            } catch (error) {
+                console.error(
+                    "Error fetching blog:",
+                    error
+                );
+
+                setError(
+                    "Unable to load this blog."
+                );
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBlog();
+    }, [id]);
+
+    /* ---------------------------------------------------------------------- */
+    /* Loading                                                                */
+    /* ---------------------------------------------------------------------- */
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#f0f8fa] px-6 py-20 md:px-12">
+                <div className="mx-auto max-w-6xl animate-pulse">
+
+                    <div className="mb-8 h-5 w-40 rounded bg-[#d8e9ed]" />
+
+                    <div className="mb-5 h-7 w-24 rounded-full bg-[#d8e9ed]" />
+
+                    <div className="mb-4 h-16 w-3/4 rounded bg-[#d8e9ed]" />
+
+                    <div className="mb-10 h-5 w-1/2 rounded bg-[#d8e9ed]" />
+
+                    <div className="aspect-[16/9] w-full rounded-3xl bg-[#d8e9ed]" />
+
+                </div>
+            </div>
+        );
+    }
+
+    /* ---------------------------------------------------------------------- */
+    /* Error / Not Found                                                      */
+    /* ---------------------------------------------------------------------- */
+
+    if (error || !blog) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#f0f8fa] px-6">
+                <div className="text-center">
+
+                    <h1 className="text-6xl font-bold text-[#0a192f]">
+                        404
+                    </h1>
+
+                    <h2 className="mt-4 text-2xl font-bold text-[#0a192f]">
+                        Blog Not Found
+                    </h2>
+
+                    <p className="mt-3 text-[#3b596d]">
+                        {error ||
+                            "The blog you are looking for does not exist."}
+                    </p>
+
+                    <Link
+                        href="/blogs"
+                        className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#0284c7] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#0a192f]"
+                    >
+                        <ArrowLeft size={16} />
+                        Back to All Blogs
+                    </Link>
+
+                </div>
+            </div>
+        );
+    }
+
+    /* ---------------------------------------------------------------------- */
+    /* Main                                                                    */
+    /* ---------------------------------------------------------------------- */
+
+    return (
+        <div className="min-h-screen bg-[#f0f8fa] px-6 pb-20 pt-10 font-quicksand text-[#0c2333] antialiased selection:bg-[#0284c7] selection:text-white md:px-12">
+
+            <div className="mx-auto max-w-6xl">
+
+                {/* Back Link */}
+                <Link
+                    href="/blogs"
+                    className="group mb-8 inline-flex items-center gap-2 text-sm font-bold text-[#0284c7] transition-colors hover:text-[#0a192f]"
+                >
+                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+
+                    <span>
+                        Back to All Journals
+                    </span>
                 </Link>
-              ))}
-          </div>
-        </div>
 
-      </div>
-    </div>
-  );
+                {/* Category & Metadata */}
+                <div className="mb-4 flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider text-[#0284c7]">
+
+                    <span className="flex items-center gap-1.5 rounded-full bg-[#e0f2fe] px-3 py-1 text-[#0284c7]">
+                        <Tag className="h-3.5 w-3.5" />
+                        BLOG
+                    </span>
+
+                    <span className="flex items-center gap-1 text-[#3b596d]">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {formatDate(blog.date)}
+                    </span>
+
+                    <span className="flex items-center gap-1 text-[#3b596d]">
+                        <Clock className="h-3.5 w-3.5" />
+                        {getReadTime(blog.content)}
+                    </span>
+
+                </div>
+
+                {/* Title */}
+                <h1 className="mb-6 whitespace-pre-line text-3xl font-bold uppercase leading-tight text-[#0a192f] md:text-5xl lg:text-6xl">
+                    {blog.title}
+                </h1>
+
+                {/* Meta Description */}
+                {blog.metaDescription && (
+                    <p className="mb-8 max-w-4xl text-base leading-7 text-[#3b596d] md:text-lg">
+                        {blog.metaDescription}
+                    </p>
+                )}
+
+                {/* Author */}
+                <div className="mb-8 flex items-center justify-between border-y border-cyan-900/10 py-4 text-sm font-semibold text-[#3b596d]">
+
+                    <div className="flex items-center gap-2">
+                        <User className="h-4 w-4 text-[#0284c7]" />
+
+                        <span>
+                            Written by{" "}
+                            <strong className="text-[#0a192f]">
+                                ToyPark Team
+                            </strong>
+                        </span>
+                    </div>
+
+                </div>
+
+                {/* Main Image */}
+                {blog.thumbnail?.url && (
+                    <div className="relative mb-12 aspect-[16/10] w-full overflow-hidden rounded-3xl shadow-xl md:aspect-[16/9]">
+
+                        <Image
+                            src={blog.thumbnail.url}
+                            alt={blog.title}
+                            fill
+                            priority
+                            sizes="(max-width: 768px) 100vw, 1200px"
+                            className="object-cover object-center"
+                        />
+
+                    </div>
+                )}
+
+                {/* Summary */}
+                {blog.metaDescription && (
+                    <div className="mb-10 rounded-r-2xl border-l-4 border-[#0284c7] bg-[#e3f2f7] p-6 text-lg font-semibold leading-relaxed text-[#0a192f] md:text-xl">
+                        &quot;{blog.metaDescription}&quot;
+                    </div>
+                )}
+
+                {/* Blog Content */}
+                <article className="mb-16 text-base font-medium leading-relaxed text-[#3b596d] md:text-lg">
+
+                    <div
+                        className="
+                           jodit-content
+                        "
+                        dangerouslySetInnerHTML={{
+                            __html: blog.content,
+                        }}
+                    />
+
+                </article>
+
+            </div>
+        </div>
+    );
 }

@@ -1,166 +1,415 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, Sparkles, ArrowRight, Clock, Tag, Compass, Star, Smile, Heart } from "lucide-react";
+import {
+    ArrowRight,
+    CalendarDays,
+    Clock,
+    Compass,
+    Heart,
+    Smile,
+} from "lucide-react";
 
-export interface JournalEntry {
-  id: string;
-  title: string;
-  category: string;
-  date: string;
-  author: string;
-  readTime: string;
-  summary: string;
-  image: string;
-  content: string[];
+import "swiper/css";
+
+interface BlogThumbnail {
+    url: string;
+    imageKey: string;
 }
 
-export const journalEntries: JournalEntry[] = [
-  {
-    id: "001",
-    title: "CREATIVE PLAYROOMS:\nDESIGNING INSPIRING\nKIDS SPACES",
-    category: "Playroom Design",
-    date: "August 2026",
-    author: "ToyPark Design Team",
-    readTime: "4 min read",
-    summary: "Discover how to blend ergonomic furniture, vibrant colors, and organized storage to create inspiring playrooms that nurture child development and boundless imagination.",
-    image: "/assets/WHOWEARE/Empty_children_playroom_with_toys_202608081653.jpeg",
-    content: [
-      "Designing a children's playroom is about creating a sensory environment that balances active play with quiet focus. At ToyPark, we believe furniture shouldn't just fill space—it should inspire exploration.",
-      "Start with zoning: designate clear areas for reading, building, and physical play. Low-height modular wooden shelves encourage independence by allowing kids to clean up and pick their own toys easily.",
-      "Incorporate neutral wooden tones with pops of pastel colors to foster a calm yet stimulating visual environment. Every surface should feature smooth rounded edges to ensure absolute peace of mind during playtime."
-    ]
-  },
-  {
-    id: "002",
-    title: "SUSTAINABLE MATERIALS:\nTHE ART OF SAFE\nWOODEN FURNITURE",
-    category: "Sustainability",
-    date: "July 2026",
-    author: "Eco Craft Lab",
-    readTime: "5 min read",
-    summary: "An inside look at our eco-friendly craftsmanship—from sustainably harvested solid wood to non-toxic organic finishes that protect both your children and the planet.",
-    image: "/assets/WHOWEARE/Brightly_lit_empty_playroom_toys_202608081652.jpeg",
-    content: [
-      "Children spend countless hours interacting closely with their furniture. That's why every piece of ToyPark furniture is crafted using FSC-certified solid wood and organic plant-based oils.",
-      "Zero VOC finishes ensure pure indoor air quality for nursery and bedroom spaces. We prioritize durability so our heirloom-quality wooden play sets can be passed down through generations.",
-      "Sustainable design means creating timeless, multi-functional furniture that adapts as your child grows from toddlerhood to early school years."
-    ]
-  },
-  {
-    id: "003",
-    title: "MODULAR PLAY DESIGN:\nINDOOR CASTLES &\nEXPLORATION NOOKS",
-    category: "Active Play",
-    date: "June 2026",
-    author: "Child Development Expert",
-    readTime: "6 min read",
-    summary: "Transform indoor play into an adventurous experience with modular castles, climbing frames, and cozy reading nooks designed for active, healthy kids.",
-    image: "/assets/WHOWEARE/Playroom_with_castle_and_toys_202608081652.jpeg",
-    content: [
-      "Physical activity indoors is essential for developing motor skills and confidence. Our modular play structures turn living rooms and play spaces into safe adventure arenas.",
-      "Combining climbing rungs, soft canvas tents, and sturdy wooden forts allows kids to invent endless imaginative stories while developing core strength.",
-      "Modular components mean you can reconfigure the setup as your room layout changes or as your child's play preferences evolve."
-    ]
-  }
-];
+interface Blog {
+    _id: string;
+    title: string;
+    slug: string;
+    date: string;
+    metaTitle: string;
+    metaDescription: string;
+    content: string;
+    thumbnail?: BlogThumbnail;
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+interface BlogApiResponse {
+    success: boolean;
+    count: number;
+    blogs: Blog[];
+}
+
+/* -------------------------------------------------------------------------- */
+/* Helpers                                                                    */
+/* -------------------------------------------------------------------------- */
+
+const stripHtml = (html: string): string => {
+    if (!html) return "";
+
+    return html
+        .replace(/<[^>]*>/g, " ")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'")
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">")
+        .replace(/\s+/g, " ")
+        .trim();
+};
+
+const getSummary = (blog: Blog): string => {
+    const contentText = stripHtml(blog.content || "");
+
+    const summary =
+        contentText ||
+        blog.metaDescription ||
+        "Read the latest insights and updates from Toy Park.";
+
+    if (summary.length <= 150) {
+        return summary;
+    }
+
+    return `${summary.slice(0, 150).trim()}...`;
+};
+
+const getReadTime = (blog: Blog): string => {
+    const text = stripHtml(blog.content || "");
+
+    if (!text) {
+        return "1 min read";
+    }
+
+    const words = text.split(/\s+/).filter(Boolean).length;
+
+    const minutes = Math.max(1, Math.ceil(words / 200));
+
+    return `${minutes} min read`;
+};
+
+const formatDate = (dateString: string): string => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+};
+
+/* -------------------------------------------------------------------------- */
+/* Loading Skeleton                                                           */
+/* -------------------------------------------------------------------------- */
+
+const BlogSkeleton = () => {
+    return (
+        <div className="overflow-hidden rounded-[28px] bg-white shadow-sm">
+            <div className="h-[260px] animate-pulse bg-gray-200" />
+
+            <div className="p-6">
+                <div className="mb-4 h-4 w-24 animate-pulse rounded bg-gray-200" />
+
+                <div className="mb-3 h-7 w-full animate-pulse rounded bg-gray-200" />
+
+                <div className="mb-2 h-4 w-full animate-pulse rounded bg-gray-200" />
+
+                <div className="mb-6 h-4 w-3/4 animate-pulse rounded bg-gray-200" />
+
+                <div className="h-4 w-32 animate-pulse rounded bg-gray-200" />
+            </div>
+        </div>
+    );
+};
+
+/* -------------------------------------------------------------------------- */
+/* Main Component                                                             */
+/* -------------------------------------------------------------------------- */
 
 export default function BlogsPageContent() {
-  return (
-    <div className="bg-[#f0f8fa] text-[#0c2333] min-h-screen font-quicksand antialiased selection:bg-[#0284c7] selection:text-white pt-10 pb-24 px-6 md:px-16 relative overflow-hidden">
-      
-      {/* Dynamic Animated Background SVGs */}
-      <div className="absolute top-1/4 right-12 text-red-300/60 pointer-events-none z-0 animate-[spin_12s_linear_infinite]">
-        <Compass className="w-28 h-28 stroke-[1.5]" />
-      </div>
-      <div className="absolute bottom-20 left-10 text-[#0284c7]/30 pointer-events-none z-0 animate-bounce">
-        <Smile className="w-24 h-24 stroke-[1.5]" />
-      </div>
-      <div className="absolute bottom-32 right-1/4 text-pink-300/60 pointer-events-none z-0 animate-pulse">
-        <Heart className="w-20 h-20 fill-pink-300/40 stroke-[1.5]" />
-      </div>
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        
-        {/* HEADER SECTION */}
-        <div className="mb-16 max-w-4xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-red-500/10 text-red-600 px-4 py-1.5 rounded-full mb-4 border border-red-500/20 shadow-sm hover:scale-105 transition-transform cursor-pointer">
-            <Sparkles className="w-4 h-4 text-red-500 fill-red-500 animate-spin" />
-            <span className="text-xs font-black tracking-widest uppercase">TOY PARK JOURNALS & INSIGHTS</span>
-          </div>
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                setLoading(true);
+                setError("");
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-none tracking-tight mb-6 text-[#0a192f] flex flex-col md:flex-row md:items-center gap-3">
-            <span className="text-red-500 font-extrabold tracking-tight">TOY PARK</span>
-            <span className="flex items-center gap-3">
-              „BLOGS“
-              <BookOpen className="w-10 h-10 md:w-14 md:h-14 text-[#0284c7] inline-block stroke-[2.5] animate-bounce" />
-            </span>
-          </h1>
+                const response = await fetch("/api/blog", {
+                    method: "GET",
+                    cache: "no-store",
+                });
 
-          <p className="text-base md:text-xl font-semibold text-[#3b596d] leading-relaxed max-w-3xl">
-            Our ToyPark furniture designs emerge through playful experimentation, meticulous craftsmanship, and an unwavering commitment to child safety. Explore our articles, tips, and inspiration for kids' spaces.
-          </p>
-        </div>
+                if (!response.ok) {
+                    throw new Error(
+                        `Failed to fetch blogs: ${response.status}`
+                    );
+                }
 
-        {/* BLOGS GRID SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {journalEntries.map((entry) => (
-            <Link 
-              key={entry.id} 
-              href={`/blogs/${entry.id}`}
-              className="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group border border-cyan-900/5 hover:-translate-y-1.5"
-            >
-              {/* Image Container */}
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-cyan-900/5">
-                <Image 
-                  src={entry.image} 
-                  alt={entry.title} 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
-                />
-                <div className="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-[11px] font-bold text-[#0a192f] shadow-sm flex items-center gap-1">
-                  <Tag className="w-3 h-3 text-[#0284c7]" />
-                  {entry.category}
+                const data: BlogApiResponse = await response.json();
+
+                if (!data.success) {
+                    throw new Error("API returned an unsuccessful response");
+                }
+
+                setBlogs(Array.isArray(data.blogs) ? data.blogs : []);
+            } catch (error) {
+                console.error("Error fetching blogs:", error);
+
+                setError(
+                    "Unable to load blogs right now. Please try again later."
+                );
+
+                setBlogs([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBlogs();
+    }, []);
+
+console.log(blogs)
+    return (
+        <main
+            className="relative min-h-screen overflow-hidden bg-[#f0f8fa] text-[#0c2333]"
+            style={{
+                fontFamily: "var(--font-quicksand), sans-serif",
+            }}
+        >
+            {/* ---------------------------------------------------------------- */}
+            {/* Background Decorations                                          */}
+            {/* ---------------------------------------------------------------- */}
+
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute -left-20 top-20 opacity-[0.05]">
+                    <Compass
+                        size={220}
+                        strokeWidth={1}
+                    />
                 </div>
-              </div>
 
-              {/* Metadata */}
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-[#0284c7]">
-                  #{entry.id}
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#3b596d] flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-[#0284c7]" />
-                  {entry.readTime}
-                </span>
-              </div>
-              
-              {/* Title */}
-              <h3 className="text-lg md:text-xl font-bold leading-snug uppercase text-[#0a192f] group-hover:text-[#0284c7] transition-colors duration-300 mb-3 whitespace-pre-line">
-                {entry.title}
-              </h3>
+                <div className="absolute right-[-40px] top-[30%] opacity-[0.05]">
+                    <Smile
+                        size={180}
+                        strokeWidth={1}
+                    />
+                </div>
 
-              {/* Summary */}
-              <p className="text-sm text-[#3b596d] font-medium leading-relaxed line-clamp-3 mb-6 flex-grow">
-                {entry.summary}
-              </p>
+                <div className="absolute bottom-[10%] left-[8%] opacity-[0.05]">
+                    <Heart
+                        size={160}
+                        strokeWidth={1}
+                    />
+                </div>
+            </div>
 
-              {/* Read Article Link */}
-              <div className="pt-3 border-t border-cyan-900/10 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#3b596d]">
-                  {entry.date}
-                </span>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-[#0284c7] group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
-                  Read Article
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+            {/* ---------------------------------------------------------------- */}
+            {/* Hero                                                              */}
+            {/* ---------------------------------------------------------------- */}
 
-      </div>
-    </div>
-  );
+            <section className="relative px-5 pb-14 pt-24 sm:px-8 lg:px-12 lg:pb-20 lg:pt-32">
+                <div className="mx-auto max-w-7xl">
+                    <div className="max-w-4xl">
+                        {/* Badge */}
+                        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#0c2333]/10 bg-white/70 px-5 py-2 text-xs font-bold tracking-[0.18em] text-[#0c2333] backdrop-blur-sm">
+                            <span className="h-2 w-2 rounded-full bg-[#0c2333]" />
+
+                            TOY PARK JOURNALS & INSIGHTS
+                        </div>
+
+                        {/* Heading */}
+                        <h1 className="text-5xl font-bold leading-[0.95] tracking-[-0.04em] sm:text-6xl lg:text-8xl">
+                            TOY PARK{" "}
+                            <span className="font-normal italic">
+                                &quot;BLOGS&quot;
+                            </span>
+                        </h1>
+
+                        <p className="mt-7 max-w-2xl text-base leading-7 text-[#0c2333]/65 sm:text-lg">
+                            Explore the latest updates, ideas, insights and
+                            stories from Toy Park.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* ---------------------------------------------------------------- */}
+            {/* Blog Section                                                     */}
+            {/* ---------------------------------------------------------------- */}
+
+            <section className="relative px-5 pb-24 sm:px-8 lg:px-12">
+                <div className="mx-auto max-w-7xl">
+                    {/* Loading */}
+                    {loading && (
+                        <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+                            {Array.from({ length: 6 }).map((_, index) => (
+                                <BlogSkeleton key={index} />
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Error */}
+                    {!loading && error && (
+                        <div className="rounded-[28px] border border-red-200 bg-white p-10 text-center shadow-sm">
+                            <h2 className="text-2xl font-bold text-[#0c2333]">
+                                Something went wrong
+                            </h2>
+
+                            <p className="mt-3 text-[#0c2333]/60">
+                                {error}
+                            </p>
+
+                            <button
+                                type="button"
+                                onClick={() => window.location.reload()}
+                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0c2333] px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                            >
+                                Try Again
+                                <ArrowRight size={16} />
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Empty */}
+                    {!loading && !error && blogs.length === 0 && (
+                        <div className="rounded-[28px] border border-[#0c2333]/10 bg-white p-12 text-center shadow-sm">
+                            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#f0f8fa]">
+                                <Compass
+                                    size={28}
+                                    strokeWidth={1.5}
+                                />
+                            </div>
+
+                            <h2 className="mt-6 text-2xl font-bold">
+                                No blogs available
+                            </h2>
+
+                            <p className="mt-3 text-[#0c2333]/60">
+                                Check back soon for new articles and insights.
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Blog Grid */}
+                    {!loading && !error && blogs.length > 0 && (
+                        <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+                            {blogs.map((blog) => {
+                                const imageUrl = blog.thumbnail?.url;
+
+                                return (
+                                    <article
+                                        key={blog._id}
+                                        className="group overflow-hidden rounded-[28px] bg-white shadow-[0_12px_40px_rgba(12,35,51,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(12,35,51,0.12)]"
+                                    >
+                                        {/* Image */}
+                                        <Link
+                                            href={`/blogs/${blog.slug}`}
+                                            className="relative block h-[260px] overflow-hidden bg-[#e8f1f3]"
+                                        >
+                                            {imageUrl ? (
+                                                <Image
+                                                    src={imageUrl}
+                                                    alt={
+                                                        blog.title ||
+                                                        "Toy Park Blog"
+                                                    }
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full items-center justify-center bg-[#dfecef]">
+                                                    <Compass
+                                                        size={48}
+                                                        strokeWidth={1}
+                                                        className="text-[#0c2333]/30"
+                                                    />
+                                                </div>
+                                            )}
+
+                                            {/* Image Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0c2333]/30 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
+
+                                            {/* Blog Label */}
+                                            <div className="absolute left-5 top-5 rounded-full bg-white px-4 py-2 text-[10px] font-bold tracking-[0.16em] text-[#0c2333] shadow-sm">
+                                                BLOG
+                                            </div>
+
+                                            {/* ID */}
+                                            <div className="absolute bottom-5 right-5 rounded-full bg-[#0c2333]/80 px-3 py-1.5 text-[10px] font-bold tracking-wider text-white backdrop-blur-sm">
+                                                #
+                                                {blog._id
+                                                    .slice(-4)
+                                                    .toUpperCase()}
+                                            </div>
+                                        </Link>
+
+                                        {/* Content */}
+                                        <div className="p-6 sm:p-7">
+                                            {/* Meta */}
+                                            <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-[#0c2333]/50">
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <CalendarDays size={14} />
+
+                                                    {formatDate(blog.date)}
+                                                </span>
+
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <Clock size={14} />
+
+                                                    {getReadTime(blog)}
+                                                </span>
+                                            </div>
+
+                                            {/* Title */}
+                                            <Link
+                                                href={`/blogs/${blog.slug}`}
+                                            >
+                                                <h2 className="line-clamp-2 text-2xl font-bold leading-tight tracking-[-0.02em] transition-colors duration-300 group-hover:text-[#365d70]">
+                                                    {blog.title}
+                                                </h2>
+                                            </Link>
+
+                                            {/* Summary */}
+                                            <p className="mt-4 line-clamp-3 text-sm leading-6 text-[#0c2333]/60">
+                                                {getSummary(blog)}
+                                            </p>
+
+                                            {/* Bottom */}
+                                            <div className="mt-7 flex items-center justify-between border-t border-[#0c2333]/10 pt-5">
+                                                <span className="text-xs font-medium text-[#0c2333]/40">
+                                                    Toy Park
+                                                </span>
+
+                                                <Link
+                                                    href={`/blogs/${blog.slug}`}
+                                                    className="group/link inline-flex items-center gap-2 text-sm font-bold text-[#0c2333]"
+                                                >
+                                                    Read Article
+
+                                                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0c2333]/15 transition-all duration-300 group-hover/link:translate-x-1 group-hover/link:bg-[#0c2333] group-hover/link:text-white">
+                                                        <ArrowRight
+                                                            size={15}
+                                                        />
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+            </section>
+        </main>
+    );
 }
