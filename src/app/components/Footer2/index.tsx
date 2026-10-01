@@ -491,14 +491,17 @@ const handleNewsletterSubmit = async () => {
 
     <span>Website Designed By</span>
 
-    <a
+    <p
+     
+      className="font-bold  transition-colors"
+    >
+      Inquiry Bazaar Pvt. Ltd. <a
       href="https://inquirybazaar.com/"
       target="_blank"
       rel="noopener noreferrer"
       className="font-bold hover:text-red-500 transition-colors"
-    >
-      Inquiry Bazaar Pvt. Ltd.
-    </a>
+    >B2B Marketplace</a>
+    </p>
   </div>
 </div>
 

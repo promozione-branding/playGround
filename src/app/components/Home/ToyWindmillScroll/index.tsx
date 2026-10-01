@@ -72,10 +72,10 @@ export const ToyWindmillScroll: React.FC = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center font-quicksand">
 
         {/* Spacer Column on Left — Keeps moving windmill 100% visible */}
-        <div className="hidden lg:block lg:col-span-4 xl:col-span-5 h-full min-h-[300px]" />
+        <div className="hidden lg:block lg:col-span-5 xl:col-span-5 h-full min-h-[300px]" />
 
         {/* Text & Stats Container — Shifted to Right Column */}
-        <div className="lg:col-span-8 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8">
+        <div className="lg:col-span-6 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8">
 
           {/* Title and copy */}
           <motion.div
