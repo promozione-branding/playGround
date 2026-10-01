@@ -161,7 +161,7 @@ export const HeroSubBanner: React.FC = () => {
                 Children Day Collection 2026
               </h2>
               <p className="text-sm sm:text-base font-semibold text-white/90 mb-6">
-                15% Off on Kids&apos; Toys and Gifts!
+                Get Special Collection Toys and Gifts!
               </p>
               <Link href={"/products?cat=playing-equipments"}
                 className="inline-flex items-center gap-2 bg-white text-[#F83B58] hover:bg-slate-50 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-105 active:scale-95"

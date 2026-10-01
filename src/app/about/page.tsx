@@ -8,8 +8,8 @@ const WhoWeAre = dynamic(() => import('../components/Home/WhoWeAre'));
 const Footer2 = dynamic(() => import('../components/Footer2'));
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "About Us |Leading Play School Furniture Wholesaler | Toy Park",
+  description: "Discover Toy Park, a trusted Play School Furniture manufacturer in India since 2002, offering quality kids’ furniture, toys, playground equipment and more.",
 };
 
 export default function AboutPage() {

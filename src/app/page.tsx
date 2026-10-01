@@ -22,6 +22,7 @@ import DealsSection from "./components/Home/BestDeals";
 import HeroTextSection from "./components/Home/HeroText";
 import FaqInteractivePreview from "./components/Home/Faq";
 import KidsNewsSection from "./components/Home/newletter";
+import ToyWindmillScroll from "./components/Home/ToyWindmillScroll";
 import UpperFooter from "./components/Home/UpperFooter";
 import Footer2 from "./components/Footer2";
 import PopupForm from "./components/popup/PopupForm";
@@ -30,13 +31,13 @@ import PopupForm from "./components/popup/PopupForm";
 
 // Heavy below-the-fold or highly animated components remain dynamic
 // to improve initial page load speed
-const ToyWindmillScroll = dynamic(
-  () =>
-    import("./components/Home/ToyWindmillScroll").then(
-      (m) => m.ToyWindmillScroll
-    ),
-  { ssr: false }
-);
+// const ToyWindmillScroll = dynamic(
+//   () =>
+//     import("./components/Home/ToyWindmillScroll").then(
+//       (m) => m.ToyWindmillScroll
+//     ),
+//   { ssr: false }
+// );
 
 const SplitVantage = dynamic(
   () => import("./components/Home/splitVantage"),

@@ -25,7 +25,7 @@ export const ToyWindmillScroll: React.FC = () => {
       },
       {
         rootMargin: '0px',
-        threshold: 0.15 // Play when 15% of the section is visible
+        threshold: 0.0 // Play when 15% of the section is visible
       }
     );
 

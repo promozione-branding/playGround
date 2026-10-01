@@ -5,8 +5,8 @@ import Footer2 from '../components/Footer2';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "Why Choose Toy Park | Play School Furniture Manufacturer",
+  description: "Choose Toy Park for quality Play School Furniture, kids’ products, toys and playground equipment. Trusted manufacturer and wholesaler since 2002.",
 };
 
 

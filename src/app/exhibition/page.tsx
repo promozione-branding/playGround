@@ -6,8 +6,8 @@ const ExhibitionPageContent = dynamic(() => import('../components/pages/exhibiti
 const Footer2 = dynamic(() => import('../components/Footer2'));
 
 export const metadata: Metadata = {
-  title: "exhibition",
-  description: "exhibition",
+  title: "Toy Park Exhibitions | Play School Furniture Manufacturer",
+  description: "Explore Toy Park’s exhibition journey showcasing Play School Furniture, kids’ products, toys and playground solutions as a trusted manufacturer and wholesaler since 2002.",
 };
 
 export default function ExhibitionPage() {
