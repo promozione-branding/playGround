@@ -16,6 +16,7 @@ const CERTIFICATIONS = [
     color: "bg-[#FF5A5F]",
     icon: <Award className="w-10 h-10 md:w-12 md:h-12 text-white" />,
     image: "/about/4.webp",
+    alt:"Outdoor Play Area Equipment",
   },
   {
     id: "fsc",
@@ -25,6 +26,7 @@ const CERTIFICATIONS = [
     color: "bg-[#00C4B5]",
     icon: <Leaf className="w-10 h-10 md:w-12 md:h-12 text-white" />,
     image: "/product/16.webp",
+    alt:"Play School Furniture"
   },
   {
     id: "en71",
@@ -34,6 +36,7 @@ const CERTIFICATIONS = [
     color: "bg-[#0284C7]",
     icon: <ShieldCheck className="w-10 h-10 md:w-12 md:h-12 text-white" />,
     image: "/product/8.webp",
+    alt:"Indoor Play Area Equipment"
   },
   {
     id: "ce",
@@ -43,6 +46,7 @@ const CERTIFICATIONS = [
     color: "bg-[#FF7A59]",
     icon: <CheckCircle className="w-10 h-10 md:w-12 md:h-12 text-white" />,
     image: "/product/17.webp",
+    alt:"Play School Furniture Manufacturers"
   },
 ];
 
@@ -77,7 +81,7 @@ function CertCard({ cert, index }: { cert: (typeof CERTIFICATIONS)[0]; index: nu
       <div className="relative w-full h-[280px] sm:h-[340px] md:h-[380px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-zinc-100">
         <Image
           src={cert.image}
-          alt={cert.title}
+          alt={cert.alt}
           fill
           quality={70}
           loading="lazy"
@@ -121,7 +125,7 @@ export default function CertificationPageContent() {
         <div className="absolute inset-0 w-full h-full">
           <Image
             src="/about/10.webp"
-            alt="Bright Safe Play Area"
+            alt="Play School Equipment Wholesale"
             fill
             sizes="100vw"
             className="object-cover opacity-60 md:opacity-70"

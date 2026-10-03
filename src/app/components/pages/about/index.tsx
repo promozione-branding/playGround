@@ -85,7 +85,7 @@ export default function AboutUsScrollAnimation() {
           <div className="rounded-3xl overflow-hidden border-4 border-white">
             <Image
               src="/assets/aboutus/aboutus_banner.jpeg"
-              alt="About Us Banner"
+              alt="About Toypark"
               width={1200}
               height={400}
               priority
@@ -102,7 +102,7 @@ export default function AboutUsScrollAnimation() {
           </h2>
           <img
             src="/assets/clouds/giraffe-svgrepo-com.svg"
-            alt="Giraffe Icon"
+            alt="Giraffe"
             className="w-12 h-12 inline-block hover:rotate-6 transition-transform duration-300"
           />
         </div>
@@ -118,7 +118,7 @@ export default function AboutUsScrollAnimation() {
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
               src="/about/1.webp"
-              alt="Who We Are"
+              alt="Play School Furniture Manufacturers"
               width={800}
               height={500}
               className="w-full h-[400px] object-cover object-[center_35%] scale-[1.08]"
@@ -135,9 +135,9 @@ export default function AboutUsScrollAnimation() {
             <span className="text-[#00C4B5] font-extrabold uppercase tracking-widest text-sm">
               SINCE 2002
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-[#0D1C3A] leading-tight">
+            <h1 className="text-3xl md:text-5xl font-black text-[#0D1C3A] leading-tight">
               We’ve Been in the <span className="bg-gradient-to-r from-[#FF5A5F] via-[#FF8E53] to-[#f97316] bg-clip-text text-transparent">Play Game</span> for a While.
-            </h2>
+            </h1>
             <p className="text-slate-700 text-base md:text-lg leading-relaxed font-semibold">
               Toys, playgrounds, trampolines, and kids’ furniture—we’ve been making and supplying them since 1992. With decades of hands-on experience, we know what makes a product fun for kids, practical for businesses, and built to last.
             </p>
@@ -171,7 +171,7 @@ export default function AboutUsScrollAnimation() {
             />
             <img
               src="/assets/clean_logo_toypark.webp"
-              alt="Toy Park Logo"
+              alt="ToyPark"
               className="w-36 md:w-48 h-auto object-contain hover:scale-105 transition-transform duration-500"
             />
           </ScrollReveal>
@@ -188,7 +188,7 @@ export default function AboutUsScrollAnimation() {
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
               src="/cat/softplay.webp"
-              alt="Warehouse"
+              alt="School Furniture Wholesaler"
               width={800}
               height={500}
               className="w-full h-[400px] object-cover object-[center_35%] scale-[1.08]"
@@ -227,7 +227,7 @@ export default function AboutUsScrollAnimation() {
           <div className="rounded-3xl overflow-hidden bg-white">
             <Image
               src="/about/2.webp"
-              alt="Leadership"
+              alt="Indoor Play Area Equipment"
               width={800}
               height={500}
               className="w-full h-[400px] object-cover object-[center_35%] scale-[1.08]"

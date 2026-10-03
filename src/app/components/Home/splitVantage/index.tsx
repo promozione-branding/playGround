@@ -21,6 +21,7 @@ interface Project {
   name: string;
   title: string;
   year: string;
+  alt: string;
   href: string;
   timeline: string;
   services: string[];
@@ -37,6 +38,7 @@ const projects: Project[] = [
     name: "KIDS TRAMPOLINE",
     title: "Safe and bouncy trampolines designed for endless active play",
     year: "3-8 Years",
+    alt:"School Furniture Wholesaler",
     href:"/products/trampoline-with-enclosure",
     timeline: "Active Play",
     services: ["Motor Skills", "Energy Burn", "Safe Play"],
@@ -54,6 +56,7 @@ const projects: Project[] = [
     name: "PLAY & CLIMB",
     title: "Fun climbing and play structures that encourage active exploration",
     year: "3-8 Years",
+    alt:" Play School Furniture Manufacturers",
     href:"/products/playground-climber-activity-series",
     timeline: "Active Play",
     services: ["Climbing", "Balance", "Coordination"],
@@ -71,6 +74,7 @@ const projects: Project[] = [
     name: "KIDS PLAY STATION",
     title: "Colorful play stations designed for creativity, learning and fun",
     year: "3-10 Years",
+    alt:"Play School Equipment Wholesaler",
     href:"/products/themed-multi-playstation",
     timeline: "Creative Play",
     services: ["Creative Play", "Learning", "Social Skills"],
@@ -152,7 +156,7 @@ function MobileView() {
                 <div className="w-full aspect-[4/3] rounded-[1.2rem] border-2 border-[#2D3436] overflow-hidden bg-slate-50 relative">
                   <img
                     src={proj.image}
-                    alt={proj.title}
+                    alt={proj.alt}
                     loading="lazy"
                     className="w-full h-full object-cover"
                   />
@@ -420,7 +424,7 @@ function ProjectImage({
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         <img
           src={project.image}
-          alt={project.title}
+          alt={project.alt}
           loading="eager"
           decoding="async"
           className="h-full w-full object-cover"
@@ -456,7 +460,7 @@ function ProjectImage({
     >
       <img
         src={project.image}
-        alt={project.title}
+        alt={project.alt}
         loading="eager"
         decoding="async"
         className="h-full w-full object-cover"

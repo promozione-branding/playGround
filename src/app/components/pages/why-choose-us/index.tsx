@@ -208,7 +208,7 @@ export default function WhyChooseUsPageContent() {
         >
           <Image
             src="/split/playstaion.webp"
-            alt="ToyPark Design Lab"
+            alt="School Furniture Wholesaler"
             fill
             className="object-cover saturate-150 brightness-[0.35]"
             priority
@@ -396,7 +396,7 @@ export default function WhyChooseUsPageContent() {
             <div className="relative w-full h-[240px] sm:h-[340px] rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
               <Image
                 src="/about/9.webp"
-                alt="Quality Checked Safety Certified Kids Furniture"
+                alt="Play School Equipment Wholesale"
                 fill
                 className="object-cover"
               />

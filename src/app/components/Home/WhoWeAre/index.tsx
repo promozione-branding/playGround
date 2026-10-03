@@ -95,7 +95,7 @@ export const WhoWeAre: React.FC = () => {
           <div className="relative w-full max-w-[220px] sm:max-w-xl">
             <Image
               src="/assets/school.png"
-              alt="Our Journey of Inspiring Children"
+              alt="School Furniture Wholesaler"
               width={576}
               height={400}
               className="w-full h-auto object-contain drop-shadow-sm"

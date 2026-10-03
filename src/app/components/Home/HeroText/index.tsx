@@ -11,7 +11,7 @@ const HeroTextSection: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/assets/playground.webp"
-          alt="Toy Park Playground Background"
+          alt="Play School Equipment Wholesaler"
           fill
           priority
           sizes="100vw"

@@ -512,7 +512,7 @@ export default function SingleProduct({
 
                 <img
                   src="/assets/clean_logo_toypark.webp"
-                  alt="ToyPark Logo"
+                  alt="ToyPark"
                   className="mb-3 h-12 w-auto object-contain sm:h-14"
                 />
 

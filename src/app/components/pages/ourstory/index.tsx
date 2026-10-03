@@ -313,7 +313,7 @@ With <span className='font-bold'> bulk orders, wholesale supply, and custom solu
         {/* Full Width Background Image */}
         <img
           src="/about/4.webp"
-          alt="Featured Playroom Interior Design"
+          alt="Outdoor Play Area Equipment"
           className="absolute inset-0 w-full h-full object-cover block group-hover:scale-[1.02] transition-transform duration-1000 z-0"
         />
 
@@ -520,7 +520,7 @@ With <span className='font-bold'> bulk orders, wholesale supply, and custom solu
         <div className="w-full flex justify-center items-center drop-shadow-2xl hover:scale-[1.01] transition-transform duration-700 -mt-16 sm:-mt-24 md:-mt-36 lg:-mt-[150px] -mb-16 sm:-mb-24 md:-mb-32 lg:-mb-[140px] overflow-hidden">
           <img
             src="/assets/ourStory/Open_book_featuring_logo_and_202608081207 Background Removed.png"
-            alt="Toy Park Open Book Story"
+            alt="Play School Furniture Manufacturers"
             className="w-full max-w-5xl h-auto object-contain block scale-110 sm:scale-100"
           />
         </div>

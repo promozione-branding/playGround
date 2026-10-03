@@ -11,6 +11,7 @@ interface Photo {
   src: string;
   title: string;
   category: string;
+  alt: string;
   caption: string;
   location: string;
   shape: Shape;
@@ -24,6 +25,7 @@ const PHOTOS: Photo[] = [
     category: "Playhouses",
     caption: "Premium child-safe playhouse with mesh windows and durable wooden frame.",
     location: "ToyPark Playhouses",
+    alt:"Outdoor Play Area Equipment",
     shape: "portrait",
   },
   {
@@ -33,6 +35,7 @@ const PHOTOS: Photo[] = [
     category: "Furniture",
     caption: "Sustainably crafted birch study table and chair set engineered for healthy posture.",
     location: "ToyPark Kids Furniture",
+    alt:"School Furniture Wholesaler",
     shape: "landscape",
   },
   {
@@ -42,6 +45,7 @@ const PHOTOS: Photo[] = [
     category: "Active Play",
     caption: "360-degree padded safety net and heavy-duty steel frame for outdoor active play.",
     location: "ToyPark Active",
+    alt:"Outdoor Play Area Equipment",
     shape: "square",
   },
   {
@@ -51,6 +55,7 @@ const PHOTOS: Photo[] = [
     category: "Learning",
     caption: "Non-toxic organic dyed wooden building blocks nurturing spatial skills.",
     location: "ToyPark Montessori",
+    alt:" Play School Furniture Manufacturers",
     shape: "portrait",
   },
   {
@@ -60,11 +65,13 @@ const PHOTOS: Photo[] = [
     category: "Active Play",
     caption: "All-weather indoor/outdoor slide set built for gross motor development.",
     location: "ToyPark Active",
+    alt:"School Furniture Manufacturers",
     shape: "landscape",
   },
   {
     id: 6,
     src: "/product/18.webp",
+    alt:"Playgroup School Furniture",
     title: "Pastel Preschool Activity Rug",
     category: "Classroom",
     caption: "Anti-skid washable plush play mat designed for classroom group activities.",
@@ -76,6 +83,8 @@ const PHOTOS: Photo[] = [
     src: "/product/17.webp",
     title: "Creative Soft Play Blocks",
     category: "Soft Play",
+    alt:"indoor Play Area Equipment",
+
     caption: "High-density foam play cushions for toddler obstacle courses and building.",
     location: "ToyPark Toddlers",
     shape: "portrait",
@@ -85,6 +94,7 @@ const PHOTOS: Photo[] = [
     src: "/product/14.webp",
     title: "Wooden Rainbow Stacker Toy",
     category: "Learning",
+    alt:"Outdoor Play Area Equipment",
     caption: "Handcrafted natural wood arc set fostering open-ended creative play.",
     location: "ToyPark Craft",
     shape: "landscape",
@@ -94,6 +104,7 @@ const PHOTOS: Photo[] = [
     src: "/product/1.webp",
     title: "Sensory Wooden Activity Board",
     category: "Montessori",
+    alt:" Indoor Play Area Equipment",
     caption: "Tactile fine-motor skill board with gear wheels, latches, and wooden beads.",
     location: "ToyPark Learning",
     shape: "square",
@@ -105,6 +116,7 @@ const PHOTOS: Photo[] = [
     category: "Play Sets",
     caption: "Smooth sanded beechwood track set with magnetic train cars and wooden trees.",
     location: "ToyPark Play Sets",
+    alt:"Playgroup School Furniture",
     shape: "square",
   },
 ];
@@ -218,7 +230,7 @@ export default function GalleryLightboxZoom() {
                 <div className="absolute inset-0">
                   <Image
                     src={photo.src}
-                    alt={`${photo.title}. ${photo.caption}`}
+                    alt={photo.alt}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     draggable={false}

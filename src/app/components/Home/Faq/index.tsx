@@ -14,6 +14,7 @@ interface FAQItem {
   answer: string;
   category: "general" | "technical" | "billing" | "account";
   img: string;
+  alt:string;
 }
 
 const FAQ_DATA: FAQItem[] = [
@@ -24,6 +25,7 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "A little imagination. A lot of play. And products designed to make childhood more exciting. From clever toys to creative play spaces, we make it easier for kids to learn, explore, move, and simply have fun.",
     img: "/faq/7.webp",
+    alt:"Outdoor Play Area Equipment",
   },
   {
     id: "g2",
@@ -32,6 +34,8 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "Yes. We work with retailers, schools, daycares, distributors, and businesses looking for wholesale quantities.",
     img: "/faq/2.webp",
+    alt:"Indoor Play Area Equipment",
+
   },
   {
     id: "t1",
@@ -40,6 +44,8 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "Share the products, quantities, and requirements you have in mind. We’ll take it from there and help you with the right options and pricing.",
     img: "/faq/8.webp",
+    alt:"School Furniture Wholesaler",
+
   },
   {
     id: "t2",
@@ -48,6 +54,8 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "Our range covers different age groups, from early learners to active older children, with age recommendations provided for individual products.",
     img: "/faq/4.webp",
+    alt:"Play School Equipment Wholesaler",
+
   },
   {
     id: "b1",
@@ -56,6 +64,7 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "We fulfil wholesale orders across India, with delivery arrangements based on your order and location.",
     img: "/faq/5.webp",
+    alt:"Play School Furniture Manufacturers"
   },
   {
     id: "b2",
@@ -64,6 +73,7 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       "Tell us what you’re looking to stock, build, or sell. We’ll help you choose the right products, quantities, and options for your business.",
     img: "/faq/6.webp",
+    alt:"Playgroup School Furniture"
   },
 ];
 
@@ -76,7 +86,7 @@ export const FaqInteractivePreview = () => {
       <div className="absolute inset-0 pointer-events-none z-0">
         <img
           src="/assets/faq/sky-image.png_202608121708.jpeg"
-          alt="FAQ Sky Background"
+          alt="Playgroup School Furniture"
           className="w-full h-full object-cover opacity-60"
         />
       </div>
@@ -180,7 +190,7 @@ export const FaqInteractivePreview = () => {
                           <div className="overflow-hidden rounded-xl shadow-inner border border-slate-100 h-44 w-full relative">
                             <img
                               src={item.img}
-                              alt={item.question}
+                              alt={item.alt}
                               className="w-full h-full object-contain "
                             />
                           </div>
@@ -264,7 +274,7 @@ export const FaqInteractivePreview = () => {
                   <div className="overflow-hidden rounded-2xl shadow-md border border-slate-100 mt-auto w-full h-52 sm:h-60 relative">
                     <img
                       src={activeItem.img}
-                      alt={activeItem.question}
+                      alt={activeItem.alt}
                       className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                     />
                   </div>

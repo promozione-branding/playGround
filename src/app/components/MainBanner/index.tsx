@@ -16,24 +16,29 @@ const BANNER_SLIDES = [
     desktopImg: '/assets/banner/home_banner1.png',
     mobileImg: '/assets/banner/mobile_banner_1.png',
     overlayType: 'hero',
+    alt:"Play School Equipment Wholesaler",
   },
   {
     id: 2,
     desktopImg: '/assets/banner/home_banner2.png',
     mobileImg: '/assets/banner/mobile_banner2.png',
     overlayType: 'classroom',
+    alt:"Indoor Play Area Equipment",
   },
+
   {
     id: 3,
     desktopImg: '/assets/banner/home_banner3.png',
     mobileImg: '/assets/banner/mobile_banner3.png',
     overlayType: 'explore',
+    alt:"Playgroup School Furniture"
   },
   {
     id: 4,
     desktopImg: '/assets/banner/home_banner4.png',
     mobileImg: '/assets/banner/mobile_banner4.png',
     overlayType: 'activePlay',
+    alt:"School Furniture Wholesaler"
   },
 ];
 
@@ -417,7 +422,7 @@ const MainBanner = () => {
             <ResponsiveBannerImage
               desktopSrc={slide.desktopImg}
               mobileSrc={slide.mobileImg}
-              alt={`Main Banner ${slide.id}`}
+              alt={slide.alt}
               priority={index === 0}
             />
             {renderSlideOverlay(slide.overlayType)}

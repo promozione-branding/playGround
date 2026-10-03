@@ -185,7 +185,7 @@ function HeroSection() {
         <div className="absolute inset-0 w-full h-full md:h-[120%] md:-top-[10%] md:parallax-target">
           <Image
             src="/12.png"
-            alt="ToyPark Exhibition Hall"
+            alt="Play School Equipment Wholesaler"
             fill
             priority
             quality={100}
@@ -260,7 +260,7 @@ function WelcomeSection({
           <div className="absolute inset-0 w-full h-full md:h-[120%] md:-top-[10%] md:parallax-target">
             <Image
               src="/product/6.webp"
-              alt="ToyPark Exhibition Playroom"
+              alt="School Furniture Wholesaler"
               fill
               loading="lazy"
               quality={65}
@@ -419,7 +419,7 @@ function DailyActivitiesSection({
         <div className="relative w-full h-full rounded-xl md:rounded-[2.5rem] overflow-hidden border-2 md:border-4 border-[#0ea5e9]">
           <Image
             src={activeImage}
-            alt="Exhibition Event"
+            alt="Play School Equipment Wholesale"
             fill
             loading="lazy"
             quality={65}

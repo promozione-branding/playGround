@@ -192,7 +192,7 @@ const handleNewsletterSubmit = async () => {
             >
               <Image
                 src="/assets/clean_logo_toypark.webp"
-                alt="ToyPark Logo"
+                alt="ToyPark"
                 width={320}
                 height={120}
                 className="h-20 sm:h-28 md:h-34 w-auto max-w-[260px] sm:max-w-[320px] object-contain transform hover:scale-105 transition-transform"

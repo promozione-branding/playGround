@@ -11,6 +11,7 @@ export interface GalleryItem {
   id: number;
   url: string;
   title: string;
+  alt: string;
   description: string;
   tags?: string[];
   category?: string;
@@ -20,6 +21,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
     url: '/product/11.webp',
+    alt:"Play School Furniture Manufacturers",
     title: 'Wondear Dreamhouse Play Tent',
     description: 'A magical retreat crafted with durable ABS polymer and breathable mesh windows for endless roleplay.',
     tags: ['Playhouse', 'Indoor', 'Ages 3-6', 'Roleplay'],
@@ -28,6 +30,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 2,
     url: '/product/10.webp',
+    alt:"Play School Equipment Wholesale",
     title: 'Modern Ergonomic Kids Furniture Set',
     description: 'Sustainably sourced birch wood study & activity table set designed for comfort, safety, and creative sessions.',
     tags: ['Furniture', 'Wooden', 'Activity', 'Ergonomic'],
@@ -37,6 +40,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 3,
     url: '/product/5.webp',
     title: 'Safety Enclosed Active Trampoline',
+    alt:"School Furniture Wholesaler",
     description: 'Heavy-duty steel framed active jump arena featuring 360-degree safety netting and padded spring guards.',
     tags: ['Trampoline', 'Outdoor', 'Active Play', 'Safety Certified'],
     category: 'Active Play',
@@ -45,6 +49,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 4,
     url: '/product/8.webp',
     title: 'Interactive Wooden Learning Blocks',
+    alt:"Outdoor Play Area Equipment",
     description: 'Vibrant non-toxic organic dyed Montessori building blocks that nurture spatial thinking and fine motor skills.',
     tags: ['Learning', 'Montessori', 'Blocks', 'Non-Toxic'],
     category: 'Learning',
@@ -52,6 +57,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 5,
     url: '/about/6.webp',
+     alt:"School Furniture Wholesaler",
     title: 'Adventure Climber & Play Slide',
     description: 'All-weather modular indoor/outdoor slide unit engineered for smooth playdates and active coordination.',
     tags: ['Slide', 'Active', 'Climber', 'EN71 Certified'],
@@ -92,7 +98,7 @@ function AccordionCard({ item, isActive, onSelect, cardRef }: AccordionCardProps
       {/* Background Image */}
       <Image
         src={item.url}
-        alt={item.title}
+        alt={item.alt}
         fill
         quality={80}
         sizes="(max-width: 640px) 75vw, (max-width: 1024px) 460px, 560px"

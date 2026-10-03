@@ -781,7 +781,7 @@ export default function KidzaNavbar() {
 
                   <Image
                     src="/assets/ToyPark_logo.png"
-                    alt="ToyPark Logo"
+                    alt="ToyPark"
                     width={220}
                     height={56}
                     priority

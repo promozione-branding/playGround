@@ -18,6 +18,7 @@ import Image from 'next/image';
 const kidsActivities = [
   {
     title: '🪑 Premium Kids Furniture',
+    alt:"Playgroup School Furniture",
     subtitle: 'Ages 2-10 • Ergonomic & Safe',
     description:
       'From study tables and chairs to clever storage, our Play School Furniture is designed to make learning spaces more comfortable, functional, and inspiring—while standing up to everyday use.',
@@ -29,6 +30,7 @@ const kidsActivities = [
   {
     title: '🏰 Magical Outdoor Playhouse',
     subtitle: 'Ages 3-9 • Imaginative Play',
+    alt:"School Furniture Wholesaler",
     description:
       'From vibrant playhouses to exciting slides and adventure towers, create a play space where every climb, slide, and little adventure becomes a story of its own.',
     link: '/split/playstaion.webp',
@@ -39,6 +41,7 @@ const kidsActivities = [
   {
     title: '🌊 Water Bouncy Pools',
     subtitle: 'Ages 4-12 • Physical Health',
+    alt:"Indoor Play Area Equipment",
     description:
       'Bring splash-filled fun to playtime with Toy Park’s Water Bouncy & Play Pools range. Designed to add excitement to outdoor activities, these products create engaging spaces for children to bounce, splash, and enjoy playful moments.',
      link: '/scroll/pool.webp',
@@ -95,10 +98,10 @@ function MobileView() {
         <span className="bg-[#FF7A59] text-white text-[10px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full shadow-sm mb-1.5">
           Fun &amp; Education For Kids
         </span>
-        <h1 className="text-2xl font-black text-[#2D3436] tracking-tight leading-[115%]">
+        <h2 className="text-2xl font-black text-[#2D3436] tracking-tight leading-[115%]">
           Explore Wonder &amp; Play <br />
           <span className="text-[#00C4B5]">Swipe To Discover 👈👉</span>
-        </h1>
+        </h2>
       </div>
 
       {/* SWIPER CAROUSEL WITH AUTO SWIPE */}
@@ -123,7 +126,7 @@ function MobileView() {
                     height={100}
                     width={100}
                     src={project.link}
-                    alt={project.title}
+                    alt={project.alt}
                     unoptimized
                     loading={i === 0 ? 'eager' : 'lazy'}
                     className="w-full h-full object-cover"
@@ -224,6 +227,7 @@ function DesktopView() {
                 i={i}
                 url={project.link}
                 title={project.title}
+                alt={project.alt}
                 subtitle={project.subtitle}
                 color={project.color}
                 badge={project.badge}
@@ -251,6 +255,7 @@ interface DesktopCardProps {
   subtitle: string;
   description: string;
   url: string;
+  alt: string;
   href:string,
   color: string;
   badge: string;
@@ -265,6 +270,7 @@ const DesktopCard: React.FC<DesktopCardProps> = ({
   title,
   subtitle,
   description,
+  alt,
   url,
   color,
   href,
@@ -304,7 +310,7 @@ const DesktopCard: React.FC<DesktopCardProps> = ({
         </div>
         <div className="relative w-[55%] h-full rounded-2xl overflow-hidden shadow-md border-2 border-white/30 transform-gpu">
           <motion.div className="w-full h-full transform-gpu" style={{ scale: imageScale }}>
-            <img src={url} alt={title} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="w-full h-full object-cover" />
+            <img src={url} alt={alt} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="w-full h-full object-cover" />
           </motion.div>
         </div>
       </motion.div>

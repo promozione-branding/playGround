@@ -14,7 +14,7 @@ const BANNERS = [
     bgColor: 'bg-[#FFD400]',
     btnTextColor: 'text-[#FFB800]',
     image: '/assets/heroSubBanner/table.png',
-    alt: 'Kids Table Set',
+    alt: ' Play School Furniture Manufacturers',
     imgMaxHeight: 'max-h-[170px] sm:max-h-[220px]',
   },
   {
@@ -26,7 +26,7 @@ const BANNERS = [
     bgColor: 'bg-[#F83B58]',
     btnTextColor: 'text-[#F83B58]',
     image: '/assets/heroSubBanner/kids_1.png',
-    alt: 'Children Day Kids',
+    alt: 'School Furniture Wholesaler',
     imgMaxHeight: 'max-h-[180px] sm:max-h-[230px]',
   },
 ];
@@ -144,7 +144,7 @@ export const HeroSubBanner: React.FC = () => {
             <div className="relative mt-0 flex-1 h-full w-full max-w-[220px] sm:max-w-[260px] flex items-center justify-center">
               <Image
                 src="/assets/heroSubBanner/table.png"
-                alt="Kids Table Set"
+                alt="School Furniture Wholesaler"
                 width={260}
                 height={220}
                 className="w-full h-auto object-contain max-h-[220px] transform group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
@@ -174,7 +174,7 @@ export const HeroSubBanner: React.FC = () => {
             <div className="relative mt-0 flex-1 h-full w-full max-w-[220px] sm:max-w-[280px] flex items-center justify-center">
               <Image
                 src="/assets/heroSubBanner/kids_1.png"
-                alt="Children Day Kids"
+                alt="Play School Furniture Manufacturers"
                 width={280}
                 height={230}
                 className="w-full h-auto object-contain max-h-[230px] transform group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
