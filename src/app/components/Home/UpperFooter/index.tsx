@@ -245,7 +245,8 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
             <div className="relative w-full max-w-[520px] aspect-video p-3 bg-white rounded-[2.5rem] shadow-sm z-10">
               {isVideoVisible ? (
                 <video
-                  src="https://pub-eb2eff44950b4abfbe1564159bd1cbc8.r2.dev/video/toy_park_3.mp4%20(2).mp4"
+                  // src="https://pub-eb2eff44950b4abfbe1564159bd1cbc8.r2.dev/video/toy_park_3.mp4%20(2).mp4"
+                  src="/video/footer.mp4"
                   autoPlay
                   loop
                   muted

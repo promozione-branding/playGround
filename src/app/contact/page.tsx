@@ -6,8 +6,8 @@ const ContactPageContent = dynamic(() => import('../components/pages/contact'));
 const Footer2 = dynamic(() => import('../components/Footer2'));
 
 export const metadata: Metadata = {
-  title: "contact us page for ToyPark",
-  description: "contact us page for ToyPark",
+  title: "Contact Toy Park | Play School Furniture ",
+  description: "Contact Toy Park for Play School Furniture, kids’ furniture, toys, playground equipment, and wholesale solutions from a trusted manufacturer since 2002.",
 };
 
 

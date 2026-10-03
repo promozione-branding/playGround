@@ -4,8 +4,8 @@ import GalleryPageContent from '../components/pages/gallery';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "Toy Park Gallery | Play School Furniture & Kids’ Products",
+  description: "Explore the Toy Park Gallery featuring Play School Furniture, kids’ furniture, toys, playground equipment, play spaces, and more from our manufacturing journey.",
 };
 
 const GalleryLightboxZoom = dynamic(() => import('../components/GalleryLightboxZoom'));
