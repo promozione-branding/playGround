@@ -69,9 +69,9 @@ export default function Page() {
                                 how we protect your personal information.
                             </p>
 
-                            <p className="!mt-5 !text-sm !text-[#527477]">
+                            {/* <p className="!mt-5 !text-sm !text-[#527477]">
                                 Last updated: August 31, 2026
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </section>

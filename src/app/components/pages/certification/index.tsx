@@ -153,12 +153,12 @@ export default function CertificationPageContent() {
         <StampBadge />
 
         {/* Scroll Indicator */}
-        <div className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-zinc-600 text-xs font-bold tracking-widest uppercase">
+        {/* <div className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-zinc-600 text-xs font-bold tracking-widest uppercase">
           <div className="w-6 h-10 border-2 border-zinc-500 rounded-full flex items-start justify-center pt-2">
             <div className="w-1.5 h-1.5 bg-zinc-600 rounded-full opacity-75 animate-bounce" />
           </div>
           Scroll
-        </div>
+        </div> */}
       </section>
 
       {/* ─── 2. CERTIFICATIONS SECTION ───────────────────── */}
@@ -204,13 +204,13 @@ export default function CertificationPageContent() {
               href="/products"
               className="inline-flex items-center justify-center gap-2 bg-[#00C4B5] hover:bg-[#00a89b] text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg active:translate-y-1 hover:translate-y-1 transition-[transform,background-color] duration-200"
             >
-              Explore Catalog <ArrowRight className="w-5 h-5" />
+              Explore Products Range <ArrowRight className="w-5 h-5" />
             </a>
             <a
               href="/about"
               className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg transition-colors duration-200"
             >
-              Learn More About Us
+              Know About Us
             </a>
           </div>
         </div>

@@ -84,9 +84,9 @@ export default function ShopByAge() {
         {/* 6 Blobby Star Cards (3x2 Grid on Mobile, 6 Grid on Desktop) */}
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-6 lg:gap-8 xl:gap-10 justify-items-center items-center pt-2 max-w-7xl mx-auto">
           {AGE_CATEGORIES.map((cat) => (
-            <a
+            <div
               key={cat.id}
-              href={cat.link}
+              
               className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-36 lg:h-36 xl:w-40 xl:h-40 flex items-center justify-center cursor-pointer group select-none transition-transform duration-200 ease-out hover:scale-110 hover:rotate-3 active:scale-95"
             >
               {/* SVG Blobby Star Background */}
@@ -109,7 +109,7 @@ export default function ShopByAge() {
                   {cat.subLabel}
                 </span>
               </div>
-            </a>
+            </div>
           ))}
         </div>
 

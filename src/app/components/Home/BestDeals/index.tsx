@@ -352,7 +352,8 @@ export const DealsSection: React.FC = () => {
                 </h2>
               </div>
 
-              <button
+              <Link
+              href="/products"
                 type="button"
                 className="
                   flex
@@ -384,7 +385,7 @@ export const DealsSection: React.FC = () => {
                 <span>Explore all</span>
 
                 <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              </button>
+              </Link>
             </div>
 
             {/* =================================================
@@ -594,52 +595,7 @@ const ProductCard: React.FC<{
           WISHLIST BUTTON
       ================================================= */}
 
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-        className="
-          absolute
-
-          top-2.5
-          right-2.5
-
-          sm:top-4
-          sm:right-4
-
-          w-7
-          h-7
-
-          sm:w-8
-          sm:h-8
-
-          rounded-full
-
-          bg-white/80
-
-          border
-          border-slate-100
-
-          flex
-          items-center
-          justify-center
-
-          text-slate-400
-
-          hover:text-red-500
-          hover:bg-white
-
-          shadow-sm
-
-          transition-all
-
-          z-10
-        "
-      >
-        <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-      </button>
+     
 
       {/* =================================================
           PRODUCT IMAGE
