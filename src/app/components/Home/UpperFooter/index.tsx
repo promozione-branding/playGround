@@ -128,6 +128,7 @@ export const UpperFooter: React.FC<UpperFooterProps> = ({ className = "mt-16 md:
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           platform: "Playground Home Page",
+          supplierToken: "6ae81d2d5fcdb8cdab421523",
           platformEmail: "info@toyparkindia.com",
           name: trimmedFullName,
           email: trimmedEmail || "N/A",

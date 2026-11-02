@@ -101,6 +101,7 @@ const handleNewsletterSubmit = async () => {
       "https://brandbnalo.com/api/form/add",
       {
         platform: "Playground Popup form",
+        supplierToken: "6ae81d2d5fcdb8cdab421523",
         platformEmail: "info@toyparkindia.com",
         name: "N/A",
         email: trimmedEmail,
