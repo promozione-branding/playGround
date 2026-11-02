@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import Image from "next/image";
 import axios from "axios";
-
+import { handleCallClick } from "@/lib/tracking";
 import {
   ChevronDown,
   Mail,
@@ -726,15 +726,16 @@ export default function KidzaNavbar() {
                   </span>
                 </a>
 
-                <a
-                  href="tel:+919811117654"
-                  className="flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  <span className="text-xs">
-                    +919811117654
-                  </span>
-                </a>
+<a
+  href="tel:+919811117654"
+  onClick={() => handleCallClick({ source: "Navbar" })}
+  className="flex items-center gap-1 hover:text-white transition-colors"
+>
+  <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
+  <span className="text-xs">
+    +919811117654
+  </span>
+</a>
 
                 <Link href="https://share.google/ZKTuBiSjPJKVsqoIi" className="hidden lg:flex items-center gap-1">
                   <MapPin
@@ -1244,19 +1245,16 @@ export default function KidzaNavbar() {
 
                     <div className="w-px h-4 bg-gray-200" />
 
-                    <a
-                      href="tel:+919811117654"
-                      className="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#62C4D2] transition-colors"
-                    >
-                      <Phone
-                        className="w-3.5 h-3.5"
-                        strokeWidth={2.5}
-                      />
-
-                      <span>
-                        +919811117654
-                      </span>
-                    </a>
+                <a
+  href="tel:+919811117654"
+  onClick={() => handleCallClick({ source: "Navbar" })}
+  className="flex items-center gap-1 hover:text-white transition-colors"
+>
+  <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
+  <span className="text-xs">
+    +919811117654
+  </span>
+</a>
 
                   </div>
 
