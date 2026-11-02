@@ -11,7 +11,7 @@ export default function FloatingContactButtons() {
       <a
         href="tel:+919811117654"
         aria-label="Call 9811117654"
-        onClick={() => handleCallClick({ source: "Floating Button" })}
+        onClick={() => handleCallClick({ source: "Website" })}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#18A6A6] text-white shadow-xl transition-all duration-300 hover:scale-110 sm:h-16 sm:w-16"
       >
         {/* Blinking Ring */}
@@ -26,7 +26,7 @@ export default function FloatingContactButtons() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        onClick={() => handleWhatsappClick({ source: "Floating Button" })}
+        onClick={() => handleWhatsappClick({ source: "Website" })}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:scale-110 sm:h-16 sm:w-16"
       >
         {/* Blinking Ring */}

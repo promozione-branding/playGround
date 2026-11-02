@@ -728,7 +728,7 @@ export default function KidzaNavbar() {
 
 <a
   href="tel:+919811117654"
-  onClick={() => handleCallClick({ source: "Navbar" })}
+  onClick={() => handleCallClick({ source: "Website" })}
   className="flex items-center gap-1 hover:text-white transition-colors"
 >
   <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
@@ -1247,7 +1247,7 @@ export default function KidzaNavbar() {
 
                 <a
   href="tel:+919811117654"
-  onClick={() => handleCallClick({ source: "Navbar" })}
+  onClick={() => handleCallClick({ source: "Website" })}
   className="flex items-center gap-1 hover:text-white transition-colors"
 >
   <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
