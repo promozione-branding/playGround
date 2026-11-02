@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
+import { handleWhatsappClick } from "@/lib/tracking";
 import Link from "next/link";
 
 import {
@@ -118,7 +118,7 @@ export default function SingleProduct({
 
   const productImages =
     product.images &&
-    product.images.length > 0
+      product.images.length > 0
       ? product.images
       : [];
 
@@ -138,7 +138,11 @@ export default function SingleProduct({
     `https://wa.me/919811117654?text=${encodeURIComponent(
       whatsappMessage
     )}`;
-
+  const onWhatsappClick = () =>
+    handleWhatsappClick({
+      obj: { name: product.productName },
+      source: "Product Page",
+    });
   /* =======================================================
      IMAGE ERROR
   ======================================================= */
@@ -261,18 +265,16 @@ export default function SingleProduct({
                       onClick={() =>
                         setActiveImage(index)
                       }
-                      className={`flex h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-xl p-2 transition-all sm:h-20 sm:w-20 ${
-                        activeImage === index
-                          ? "scale-105 border border-[#00C4B5] bg-[#FFE66D]/30"
-                          : "bg-gray-50 hover:bg-gray-100"
-                      }`}
+                      className={`flex h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-xl p-2 transition-all sm:h-20 sm:w-20 ${activeImage === index
+                        ? "scale-105 border border-[#00C4B5] bg-[#FFE66D]/30"
+                        : "bg-gray-50 hover:bg-gray-100"
+                        }`}
                     >
 
                       <img
                         src={image.url}
-                        alt={`${product.productName} thumbnail ${
-                          index + 1
-                        }`}
+                        alt={`${product.productName} thumbnail ${index + 1
+                          }`}
                         className="h-full w-full object-contain"
                         onError={
                           handleImageError
@@ -425,6 +427,7 @@ export default function SingleProduct({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={onWhatsappClick}
                   className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-[#20bd5a] sm:py-4 sm:text-base"
                 >
                   <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -462,11 +465,10 @@ export default function SingleProduct({
 
                         <div
                           key={`${spec.key}-${index}`}
-                          className={`grid grid-cols-2 px-4 py-3.5 font-medium sm:px-6 sm:py-4 ${
-                            index % 2 !== 0
-                              ? "bg-white/50"
-                              : ""
-                          }`}
+                          className={`grid grid-cols-2 px-4 py-3.5 font-medium sm:px-6 sm:py-4 ${index % 2 !== 0
+                            ? "bg-white/50"
+                            : ""
+                            }`}
                         >
 
                           <span className="font-bold text-[#334155]">
@@ -620,6 +622,7 @@ export default function SingleProduct({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={onWhatsappClick}
                 className="flex w-full items-center justify-center rounded-xl bg-[#25D366] px-4 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[#20bd5a] sm:text-sm"
               >
                 WhatsApp Us

@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import ContactForm from '@/app/components/ContactForm';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
@@ -95,10 +94,8 @@ export default function ContactPage() {
           <div className="lg:col-span-8">
             <ContactForm />
           </div>
-
         </div>
       </section>
-
     </main>
   );
 }
